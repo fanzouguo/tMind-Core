@@ -3,20 +3,21 @@
 	"version": "1.0.0",
 	"description": "This project is automatic created by tMind-CLI for tFrameV9 of smpoo Co. in 2021-03-13 07:02:42.668",
 	"private": true,
+	"main": "lib/index.js",
+	"typings": "lib/index.d.ts",
 	"scripts": {
-	"dev": "yarn lint && vue-cli-service serve",
-	"build": "yarn lint && vue-cli-service build --modern --report",
-	"pkg": "vue-cli-service build --report",
+	"clean": "shx rm -rf lib",
+	"ts2js": "tsc",
+	"dev": "tsc-node --files ./.debug/index.ts",
+	"preview": "yarn lint && tsc -p ./.debug && node ./.debug/index.js",
+	"build": "yarn lint && yarn clean && yarn ts2js && cross-env NODE_ENV=prod",
 	"test:unit": "vue-cli-service test:unit",
 	"test:e2e": "vue-cli-service test:e2e",
-	"lint": "vue-cli-service lint",
-	"prebuild": "node ./app.dev/preBuild.js",
-	"postbuild": "node ./app.dev/postBuild.js",
 	"lint": "eslint src --ext .ts"
 },
 	"repository": {
 		"type": "git",
-		"url": ""
+		"url": "git@github.com:fanzouguo/tMind-Core.git"
 	},
 	"keywords": [
 		"Smpoo",
@@ -25,9 +26,9 @@
 	"author": "上海深普软件.Co.David",
 	"license": "MIT",
 	"bugs": {
-		"url": ""
+		"url": "https://github.com/fanzouguo/tMind-Core/issues"
 	},
-	"homepage": "www.smpoo.com",
+	"homepage": "https://github.com/fanzouguo/tMind-Core#readme",
 	"dependencies": {
     "core-js": "~3.9.1"
 	},

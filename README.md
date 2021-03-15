@@ -1,4 +1,4 @@
-# mpa
+# tMind-Core
 
 ## 项目根仓库中，采用 YARN 管理依赖包，全局依赖，请使用 PNPM 或 YARN gloable add ...，尽量不使用 npm
 
@@ -38,5 +38,5 @@ yarn lint
 ```
 
 ### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+See [About more](https://www.smpoo.com).
 
