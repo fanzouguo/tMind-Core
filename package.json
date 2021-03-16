@@ -2,17 +2,15 @@
 	"name": "tmind-core",
 	"version": "1.0.0",
 	"description": "This project is automatic created by tMind-CLI for tFrameV9 of smpoo Co. in 2021-03-13 07:02:42.668",
-	"private": true,
+	"private": false,
 	"main": "lib/index.js",
 	"typings": "lib/index.d.ts",
 	"scripts": {
-	"clean": "shx rm -rf lib",
+	"clean": "shx rm -rf lib .debug/lib",
 	"ts2js": "tsc",
 	"dev": "tsc-node --files ./.debug/index.ts",
 	"preview": "yarn lint && tsc -p ./.debug && node ./.debug/index.js",
-	"build": "yarn lint && yarn clean && yarn ts2js && cross-env NODE_ENV=prod",
-	"test:unit": "vue-cli-service test:unit",
-	"test:e2e": "vue-cli-service test:e2e",
+	"build": "yarn lint && yarn clean && yarn ts2js && cross-env NODE_ENV=prod ",
 	"lint": "eslint src --ext .ts"
 },
 	"repository": {

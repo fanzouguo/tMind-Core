@@ -1,5 +1,6 @@
+/* eslint-disable no-undef */
+
 export default class Tmind {
-	#currtype = 3;
 	public name = '333';
 	constructor() {
 		this.name = '222';

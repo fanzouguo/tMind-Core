@@ -1,6 +1,6 @@
-.debug/*
-.vscode/*
-examples
+.debug
+.vscode
+example
 node_modules
 packages
 public
