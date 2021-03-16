@@ -1,43 +1,42 @@
 {
-	"name": "tmind-core",
-	"version": "1.0.0",
-	"description": "This project is automatic created by tMind-CLI for tFrameV9 of smpoo Co. in 2021-03-13 07:02:42.668",
-	"private": false,
-	"main": "lib/index.js",
-	"typings": "lib/index.d.ts",
-	"scripts": {
-	"clean": "shx rm -rf lib .debug/lib",
-	"ts2js": "tsc",
-	"dev": "tsc-node --files ./.debug/index.ts",
-	"preview": "yarn lint && tsc -p ./.debug && node ./.debug/index.js",
-	"build": "yarn lint && yarn clean && yarn ts2js && cross-env NODE_ENV=prod ",
-	"lint": "eslint src --ext .ts"
-},
-	"repository": {
-		"type": "git",
-		"url": "git@github.com:fanzouguo/tMind-Core.git"
-	},
-	"keywords": [
-		"Smpoo",
-		"tFrame"
-	],
-	"author": "上海深普软件.Co.David",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/fanzouguo/tMind-Core/issues"
-	},
-	"homepage": "https://github.com/fanzouguo/tMind-Core#readme",
-	"dependencies": {
+  "name": "tmind-core",
+  "version": "1.0.3",
+  "description": "This project is automatic created by tMind-CLI for tFrameV9 of smpoo Co. in 2021-03-13 07:02:42.668",
+  "private": false,
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "clean": "shx rm -rf lib .debug/dist",
+    "dev": "ts-node --files ./.debug/index.ts",
+    "build": "yarn lint && yarn clean && tsc && node ./.debug/preBuild.js && cross-env NODE_ENV=prod rollup -c ./rollup.config.js && node ./.debug/postBuild.js",
+    "lint": "eslint src --ext .ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:fanzouguo/tMind-Core.git"
+  },
+  "keywords": [
+    "Smpoo",
+    "tFrame"
+  ],
+  "author": "上海深普软件.Co.David",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fanzouguo/tMind-Core/issues"
+  },
+  "homepage": "https://github.com/fanzouguo/tMind-Core#readme",
+  "dependencies": {
     "core-js": "~3.9.1"
-	},
-	"devDependencies": {
-		"eslint": "~6.8.0",
+  },
+  "devDependencies": {
+    "eslint": "~6.8.0",
     "eslint-plugin-import": "~2.20.2",
     "eslint-plugin-node": "~11.1.0",
     "eslint-plugin-promise": "~4.2.1",
     "eslint-plugin-standard": "~4.0.0",
     "typescript": "~4.2.2",
     "ts-node": "~9.1.1"
-	},
-  "createAt": "2021-03-13 07:02:42.668"
+  },
+  "createAt": "2021-03-13 07:02:42.668",
+  "lastBuild": "2021-03-17 03:17:02.662"
 }

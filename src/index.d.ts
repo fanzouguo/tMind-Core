@@ -1,11 +1,11 @@
-/// <reference path="./global.d.ts" />
+/// <reference path="./@types/global.d.ts" />
 
 /* eslint-disable no-unused-vars */
 declare namespace Tmind {
 	type funcLike = any
 }
 
-declare class ITmind {
+declare class Tmind {
 	public name: string;
 	public type: string;
 }

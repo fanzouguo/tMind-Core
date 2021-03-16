@@ -2,9 +2,11 @@
 /* eslint-disable */
 const resolve = require('rollup-plugin-node-resolve');
 const { babel } = require('@rollup/plugin-babel');
-const commonjs = require('rollup-plugin-commonjs');
-const jsonPlugin = require('@rollup/plugin-json');
 const { terser } = require('rollup-plugin-terser');
+const dts = require('rollup-plugin-dts').default;
+// const commonjs = require('rollup-plugin-commonjs');
+// const jsonPlugin = require('@rollup/plugin-json');
+const pkg = require('./package.json');
 
 const { getPathSpec } = require('./.debug/getPath');
 const getDate = require('./.debug/getDate');
@@ -19,29 +21,43 @@ const banner = `/*!
 * LastBuild: ${getDate()}
 */`;
 
-export default {
+export default [{
 	// 入口文件
-	input: getPathSpec(basePath, '.debug', 'lib', 'index.js'),
+	// input: getPathSpec(basePath, 'src/index.ts'),
+	input: getPathSpec(basePath, '.debug/dist/index.js'),
 	// 出口文件
 	output: {
-		file: getPathSpec(basePath, 'lib', 'index.js'),
+		// file: getPathSpec(basePath, 'lib', 'index.js'),
+		file: getPathSpec(basePath, pkg.main),
 		format: 'umd',
-		name: 'tmind',
+		name: 'Tmind',
 		banner
 	},
 	// // 作用：指出应将哪些模块视为外部模块，否则会被打包进最终的代码里
 	external: [],
 	plugins: [
 		babel({
+			exclude: 'node_modules/**',
 			babelHelpers: 'bundled'
-		})
+		}),
 		// commonjs(),
-		// resolve({
-		// 	customResolveOptions: {
-		// 		moduleDirectory: 'node_modules'
-		// 	}
-		// }),
+		resolve({
+			customResolveOptions: {
+				moduleDirectory: 'node_modules'
+			}
+		}),
 		// jsonPlugin(),
-		// terser()
+		terser()
 	]
-};
+},
+// 生成 .d.ts 类型声明文件
+{
+	// input: getPathSpec(basePath, 'src/index.ts'),
+	input: getPathSpec(basePath, '.debug/dist/index.js'),
+	output: {
+		file: getPathSpec(basePath, pkg.typings),
+		// format: 'es'
+		format: 'umd'
+	},
+	plugins: [dts()]
+}];
