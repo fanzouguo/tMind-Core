@@ -1,5 +1,4 @@
 declare class Tmind {
-    name: string;
-    constructor();
 }
+
 export default Tmind;

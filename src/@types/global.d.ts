@@ -20,4 +20,8 @@ declare global {
 		name: string,
 		[index: string]: string | number | boolean | string[] | number[] | boolean[]
 	}
+
+	declare interface Date {
+		formatA(fmt?: string): string;
+	}
 }

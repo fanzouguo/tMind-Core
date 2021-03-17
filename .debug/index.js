@@ -17,5 +17,10 @@ console.log(aaa);
 // getEcho('aaa');
 // aaa.echo();
 // aaa.echo('aaa');
+// const y = new?
+// console.log(y);
+const k = new Date();
+console.log(k.formatA('yyyy'));
+console.log(globalThis.Date);
 
 console.log('\n\n\n---------------------------------------------------------------------\n当前运行在 dev 模式下，执行的是 TS 脚本');
