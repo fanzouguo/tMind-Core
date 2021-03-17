@@ -1,15 +1,13 @@
-/// <refrence path="./package/date.ts" />
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
-import coreExtend from './extend/index';
-
-coreExtend.init();
+import Tdate from './package/date';
 
 class Tmind {
 	name: string;
 	constructor() {
-		this.name = 'aa';
+		this.name = 'This is a class';
 	}
 }
 
-export default Tmind;
+export default {
+	Tmind,
+	Tdate
+};

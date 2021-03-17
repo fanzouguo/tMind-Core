@@ -1,4 +1,6 @@
 /* eslint-disable no-unused-vars */
+import global from '../types/index';
+
 interface datePattern {
 	yyyy: string,
 	yy: string,
@@ -50,9 +52,9 @@ const __fmtVal__ = (dateVal?: dateLike, fmt?: string): string => {
 	});
 };
 
-class TDate {
-	static toCode = (): string => __fmtVal__(new Date(), 'yyyymmddhhmissms');
-	static format = __fmtVal__
-}
+export default {
+	toCode: (): string => __fmtVal__(new Date(), 'yyyymmddhhmissms'),
+	format: __fmtVal__
+};
 
-export default TDate;
+// export default TDate;

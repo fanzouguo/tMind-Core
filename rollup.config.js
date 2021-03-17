@@ -4,15 +4,13 @@ const resolve = require('rollup-plugin-node-resolve');
 const { babel } = require('@rollup/plugin-babel');
 const { terser } = require('rollup-plugin-terser');
 const dts = require('rollup-plugin-dts').default;
-// const commonjs = require('rollup-plugin-commonjs');
-// const jsonPlugin = require('@rollup/plugin-json');
+const ts = require('rollup-plugin-typescript2');
+const commonjs = require('rollup-plugin-commonjs');
 const pkg = require('./package.json');
 const isProd = (process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production');
-
 const { getPathSpec } = require('./.debug/getPath');
 const getDate = require('./.debug/getDate');
 const basePath = process.cwd();
-
 const banner = `/*!
 * tMind-Cli v1.0.0
 * (c) 2021-2022  Smpoo soft Co. Shanghai China
@@ -21,63 +19,68 @@ const banner = `/*!
 * CreateDate: 2021-03-05
 * LastBuild: ${getDate()}
 */`;
+// 模块包名称
+const BASE_NAME = 'Tmind';
 
-const TsConf = {
+const extensions = [
+	'.js',
+	'.ts'
+];
+
+// TS 配置插件
+const tsPlugin = ts({
+	// 导入本地ts配置
+	tsconfig: getPathSpec(basePath, 'tsconfig.json'),
+	extensions
+});
+
+// 通用插件组配置
+const plugins = [
+	babel({
+		exclude: 'node_modules/**',
+		babelHelpers: 'bundled'
+	}),
+	commonjs(),
+	resolve({
+		customResolveOptions: {
+			moduleDirectory: 'node_modules'
+		}
+	}),
+	tsPlugin
+];
+
+// 基础 TS文件 配置
+const baseConfTs = {
 	// 入口文件
-	// input: getPathSpec(basePath, 'src/index.ts'),
-	input: getPathSpec(basePath, '.debug/dist/index.js'),
-	// 出口文件
-	output: {
-		// file: getPathSpec(basePath, 'lib', 'index.js'),
-		file: getPathSpec(basePath, pkg.main),
-		format: 'umd',
-		name: 'Tmind'
-	},
+	input: getPathSpec(basePath, 'src/index.ts'),
+	plugins,
 	// // 作用：指出应将哪些模块视为外部模块，否则会被打包进最终的代码里
 	external: []
 };
 
-const DtsConf = {
-	// input: getPathSpec(basePath, 'src/index.ts'),
-	input: getPathSpec(basePath, '.debug/dist/index.d.ts'),
-	output: {
-		file: getPathSpec(basePath, pkg.typings),
-		format: 'es'
-		// format: 'umd'
-	},
-	plugins: [dts()]
-};
+const outputConf = [{
+	// 通用模块使用
+	file: pkg.main,
+	format: 'umd'
+}, {
+	// ES模块使用
+	file: pkg.module,
+	format: 'es'
+}];
 
 if (isProd) {
-	TsConf.output.banner = banner;
-	TsConf.plugins = [
-		babel({
-			exclude: 'node_modules/**',
-			babelHelpers: 'bundled'
-		}),
-		// commonjs(),
-		resolve({
-			customResolveOptions: {
-				moduleDirectory: 'node_modules'
-			}
-		}),
-		// jsonPlugin(),
-		terser()
-	]
-	DtsConf.output.banner = banner;
-} else {
-	TsConf.plugins = [
-		babel({
-			exclude: 'node_modules/**',
-			babelHelpers: 'bundled'
-		}),
-		// commonjs(),
-		resolve({
-			customResolveOptions: {
-				moduleDirectory: 'node_modules'
-			}
-		})
-	]
+	baseConfTs.plugins.push(terser());
 }
 
-export default [TsConf, DtsConf];
+export default outputConf.map(v => {
+	if (isProd) {
+		baseConfTs.plugins.push(terser());
+		v.banner = banner;
+	}
+	return Object.assign({}, baseConfTs, {
+		output: {
+			name: BASE_NAME,
+			...v
+		}
+	});
+});

@@ -1,16 +1,17 @@
 {
   "name": "tmind-core",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "This project is automatic created by tMind-Core for tFrameV9 of smpoo Co. in 2021-03-13 07:02:42.668",
   "private": false,
   "main": "lib/index.js",
+  "module": "lib/index.esm.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "clean": "shx rm -rf lib .debug/dist",
-    "prePkg": "yarn lint && yarn clean && tsc",
-    "pkg": "rollup -c ./rollup.config.js",
+    "clean": "shx rm -rf lib",
+    "prePkg": "yarn lint && yarn clean",
+    "pkg": "rollup -c rollup.config.js",
     "try": "nodemon -w ./.debug/index.js node ./.debug/index.js",
-    "dev": "yarn prePkg && cross-env NODE_ENV=dev yarn pkg",
+    "dev": "yarn prePkg && cross-env NODE_ENV=dev yarn pkg -w",
     "build": "yarn prePkg && node ./.debug/preBuild.js && cross-env NODE_ENV=prod  yarn pkg && node ./.debug/postBuild.js",
     "lint": "eslint src --ext .ts"
   },
@@ -41,5 +42,5 @@
     "ts-node": "~9.1.1"
   },
   "createAt": "2021-03-13 07:02:42.668",
-  "lastBuild": "2021-03-18 01:32:58.357"
+  "lastBuild": "2021-03-18 04:17:59.851"
 }
