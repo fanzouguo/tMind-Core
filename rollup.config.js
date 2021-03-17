@@ -19,8 +19,6 @@ const banner = `/*!
 * CreateDate: 2021-03-05
 * LastBuild: ${getDate()}
 */`;
-// 模块包名称
-const BASE_NAME = 'Tmind';
 
 const extensions = [
 	'.js',
@@ -79,7 +77,7 @@ export default outputConf.map(v => {
 	}
 	return Object.assign({}, baseConfTs, {
 		output: {
-			name: BASE_NAME,
+			name: pkg.name,
 			...v
 		}
 	});
