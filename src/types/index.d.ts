@@ -27,9 +27,3 @@ declare global {
 
 declare module Tmind {
 }
-
-declare namespace Tdate {
-	function toCode(dataVal: dateLike, fmt: string): string;
-
-	function format(dataVal: dateLike, fmt: string): string;
-}

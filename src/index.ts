@@ -1,4 +1,4 @@
-import Tdate from './package/date';
+import tdate from './package/date';
 
 class Tmind {
 	name: string;
@@ -9,5 +9,5 @@ class Tmind {
 
 export default {
 	Tmind,
-	Tdate
+	tdate
 };
