@@ -1,5 +1,4 @@
-declare class Tmind implements Tmind {
-    constructor();
+declare class Tmind {
 }
 
 export default Tmind;
