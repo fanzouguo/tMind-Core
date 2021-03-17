@@ -33,12 +33,15 @@ const _tsConf = {
 		format: 'umd',
 		name: 'Tmind'
 	},
+	banner,
 	// // 作用：指出应将哪些模块视为外部模块，否则会被打包进最终的代码里
 	external: []
 };
 
+console.clear();
+console.log(isProd);
+console.log('isProdisProdisProdisProdisProdisProdisProdisProdisProdisProdisProdisProdisProdisProdisProdisProdisProdisProdisProd');
 if (isProd) {
-	_tsConf.banner = banner;
 	_tsConf.plugins = [
 		babel({
 			exclude: 'node_modules/**',
@@ -78,6 +81,7 @@ const _outConf = [_tsConf,
 		format: 'es'
 		// format: 'umd'
 	},
+	banner,
 	plugins: [dts()]
 }];
 
