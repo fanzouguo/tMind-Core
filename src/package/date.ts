@@ -91,10 +91,11 @@ const __fmtVal__ = function (val: Date, fmt?: string): string {
  * @returns 若正确，则返回原值，否则抛出异常
  */
 const __checkDate__ = (val: Date): ITdate => {
-	const _b = val.toString() === 'Invalid Date';
-	if (!_b) {
+	if (!(val.toString() === 'Invalid Date')) {
 		return new Tdate(val);
 	} else {
+		// console.error('Get invalid param for fuction tdate. This parma can be null/undefind or datetime string, also can be number just < 8640000000000000'); // eslint-disable-line
+		// throw new Date();
 		throw new Error('Get invalid param for fuction tdate. This parma can be null/undefind or datetime string, also can be number just < 8640000000000000');
 	}
 };
