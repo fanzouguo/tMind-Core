@@ -14,12 +14,9 @@ console.clear();
 // console.log(MSG_TYPE);
 console.log('Tmind');
 console.log(x.name);
-console.log(Tmind);
 // echo('aaaaa', 'aaaa', 'INFO');
 console.log(typeof echo);
 console.log('typeof echo');
-echo('aaaa', '测试', 'INFO');
-echo('aaaa', '测试', 'WARN');
 echo('aaaa', '测试', 'ERR');
 
 const aaa = tdate(1616025793855).formatBh();

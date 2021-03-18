@@ -1,5 +1,4 @@
 interface ITdate {
-    val: Date;
     toCode: (fmt: string) => string;
     format: (fmt: string) => string;
     formatCn: () => string;

@@ -2,8 +2,6 @@
 import global from '../@types/index';
 
 interface ITdate {
-	// 实例代表的日期/时间值，Date格式
-	val: Date;
 	toCode: (fmt: string) => string;
 
 	/** 将指定日期按照提供的模式匹配字符串格式化
@@ -102,7 +100,7 @@ const __checkDate__ = (val: Date): ITdate => {
 };
 
 class Tdate implements ITdate {
-	val: Date;
+	private val: Date;
 	constructor(initVal: Date) {
 		this.val = initVal;
 	}

@@ -6,14 +6,6 @@ declare global {
 	// 可作为 Boolean 传参的类型
 	type boolLike = boolean | string | number | null | undefined;
 
-	// 日志信息枚举
-	const enum MSG_TYPE {
-		INFO = 'INFO',
-		SUCC = 'SUCC',
-		WARN = 'WARN',
-		ERR = 'ERR'
-	}
-
 	interface IObj<T> {
 		[index: string]: T;
 	}

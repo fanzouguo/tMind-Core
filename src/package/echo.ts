@@ -1,7 +1,17 @@
 /* eslint-disable no-unused-vars */
 import global from '../@types/index';
 
+type MSG_TYPE = '' | 'INFO' | 'WARN' | 'ERR' | undefined | null;
+
 // const originStr: string = '4S0ZOlOll0I06T77OlOll0I06TR1OlOll0I0666SOlOll0I08R6ROlOll0I04SR6OlOll0I06709OlOll0I09650OlOll0I0516XOlOll0I053R8';
+
+// 日志信息枚举
+// const enum MSG_TYPE {
+//   INFO = 'INFO',
+//   SUCC = 'SUCC',
+//   WARN = 'WARN',
+//   ERR = 'ERR'
+// }
 
 const color: IObj<string[]> = {
   black: ['\x1B[30m', '\x1B[39m'],
@@ -55,7 +65,7 @@ const msgFunc: IObj<unknown> = {
 
 function echo(msg: string | Error, title?: string, type?: MSG_TYPE): void {
   const _currType = `${type}`.toUpperCase();
-  const _func = type ? (msgFunc[_currType] || msgFunc[MSG_TYPE.INFO]) : msgFunc[MSG_TYPE.INFO];
+  const _func = type ? (msgFunc[_currType] || msgFunc['INFO']) : msgFunc['INFO'];
   if (typeof _func === 'function') {
     if (globalThis.window) { // eslint-disable-line
       const [a, b, c, d, e] = msgColorBrowser[_currType] || ['', '', '', '', ''];
