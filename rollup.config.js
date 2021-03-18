@@ -60,6 +60,10 @@ const outputConf = [{
 	// 通用模块使用
 	file: pkg.main,
 	format: 'umd'
+}, {
+	// ES模块使用
+	file: pkg.module,
+	format: 'es'
 }];
 
 if (isProd) {
@@ -73,7 +77,7 @@ export default outputConf.map(v => {
 	}
 	return Object.assign({}, baseConfTs, {
 		output: {
-			name: pkg.name,
+			name: 'tmind',
 			...v
 		}
 	});
