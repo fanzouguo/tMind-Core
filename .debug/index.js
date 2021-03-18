@@ -1,4 +1,5 @@
-const { Tmind, tdate, echo } = require('tmind-core');
+// const { Tmind, tdate, echo } = require('tmind-core');
+const { Tmind, tdate, echo } = require('../lib/index');
 // import * as Tmind from '../src/index';
 
 const x = new Tmind();
@@ -14,9 +15,15 @@ console.clear();
 console.log('Tmind');
 console.log(x.name);
 console.log(Tmind);
+// echo('aaaaa', 'aaaa', 'INFO');
+console.log(typeof echo);
+console.log('typeof echo');
+echo('aaaa', '测试', 'INFO');
+echo('aaaa', '测试', 'WARN');
+echo('aaaa', '测试', 'ERR');
 
 const aaa = tdate(1616025793855).formatBh();
-console.log(echo);
+// console.log(echo);
 // echo('aaaa');
 // echo('测试信息', '测试', 'INFO');
 // console.log(tdate);

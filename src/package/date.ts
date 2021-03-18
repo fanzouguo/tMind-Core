@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import global from '../types/index';
+import global from '../@types/index';
 
 interface ITdate {
 	// 实例代表的日期/时间值，Date格式

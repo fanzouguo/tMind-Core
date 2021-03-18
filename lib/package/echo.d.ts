@@ -1,1 +1,2 @@
-export default function echo(msg: string | Error, title?: string, type?: MSG_TYPE): void;
+declare function echo(msg: string | Error, title?: string, type?: MSG_TYPE): void;
+export default echo;

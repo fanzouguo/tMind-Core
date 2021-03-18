@@ -1,10 +1,12 @@
 // @ts-nocheck
 /* eslint-disable */
+// import rollupPluginDts from 'rollup-plugin-dts';
+// import dts from "rollup-plugin-dts";
 const resolve = require('rollup-plugin-node-resolve');
 const { babel } = require('@rollup/plugin-babel');
 const { terser } = require('rollup-plugin-terser');
-const dts = require('rollup-plugin-dts').default;
-const ts = require('rollup-plugin-typescript2');
+// const { dts } = require('rollup-plugin-dts');
+const tsPlugin = require('rollup-plugin-typescript2');
 const commonjs = require('rollup-plugin-commonjs');
 const pkg = require('./package.json');
 const isProd = (process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production');
@@ -25,13 +27,6 @@ const extensions = [
 	'.ts'
 ];
 
-// TS 配置插件
-const tsPlugin = ts({
-	// 导入本地ts配置
-	tsconfig: getPathSpec(basePath, 'tsconfig.json'),
-	extensions
-});
-
 // 通用插件组配置
 const plugins = [
 	babel({
@@ -44,7 +39,16 @@ const plugins = [
 			moduleDirectory: 'node_modules'
 		}
 	}),
-	tsPlugin
+	tsPlugin({
+		// 导入本地ts配置
+		tsconfig: getPathSpec(basePath, 'tsconfig.json'),
+		tsconfigOverride: {
+			compilerOptions: {
+				module: 'ESNext'
+			}
+		},
+		extensions
+	})
 ];
 
 // 基础 TS文件 配置
@@ -66,11 +70,7 @@ const outputConf = [{
 	format: 'es'
 }];
 
-if (isProd) {
-	baseConfTs.plugins.push(terser());
-}
-
-export default outputConf.map(v => {
+const TsConf = outputConf.map(v => {
 	if (isProd) {
 		baseConfTs.plugins.push(terser());
 		v.banner = banner;
@@ -82,3 +82,13 @@ export default outputConf.map(v => {
 		}
 	});
 });
+
+// const DtsConf = {
+// 	input: getPathSpec(basePath, 'src/@types/index.d.ts'),
+// 	output: [{ file: 'lib/index.d.ts', format: 'es' }],
+// 	plugins: [dts()],
+// };
+
+// TsConf.push(DtsConf);
+
+export default TsConf;
