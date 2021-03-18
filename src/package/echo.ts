@@ -38,7 +38,7 @@ const msgFunc: IObj<unknown> = {
 };
 
 export default function echo(msg: string | Error, title: string = '', type: MSG_TYPE = MSG_TYPE.INFO): void {
-  const _func = type ? (msgFunc[type] || msgFunc[MSG_TYPE.INFO]) : msgFunc[MSG_TYPE.INFO];
+  const _func = type ? (msgFunc[`${type}`.toUpperCase()] || msgFunc[MSG_TYPE.INFO]) : msgFunc[MSG_TYPE.INFO];
   if (typeof _func === 'function') {
     if (window) { // eslint-disable-line
       const [a, b, c, d, e] = msgColorBrowser[type] || ['', '', '', '', ''];

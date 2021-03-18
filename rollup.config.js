@@ -60,10 +60,6 @@ const outputConf = [{
 	// 通用模块使用
 	file: pkg.main,
 	format: 'umd'
-}, {
-	// ES模块使用
-	file: pkg.module,
-	format: 'es'
 }];
 
 if (isProd) {

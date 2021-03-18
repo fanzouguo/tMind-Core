@@ -9,9 +9,12 @@
 <body>
 	<div>aaaa</div>
 </body>
-<script src="../lib/index.js"></script>
-<script>
-	console.log(Tmind);
-	Tmind.echo('aaaa', '测试', 'ERR');
+<!-- <script src="../lib/index.js"></script> -->
+<script type="module">
+	import { tdate } from '../lib/index.esm.js';
+	// console.log(Tmind);
+	const x = tdate().formatLunar();
+	console.log(x);
+	// Tmind.echo('aaaa', '测试', 'ERR');
 </script>
 </html>

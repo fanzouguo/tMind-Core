@@ -1,4 +1,4 @@
-const { Tmind, tdate } = require('tmind-core');
+const { Tmind, tdate, echo } = require('tmind-core');
 // import * as Tmind from '../src/index';
 
 const x = new Tmind();
@@ -16,7 +16,9 @@ console.log(x.name);
 console.log(Tmind);
 
 const aaa = tdate(1616025793855).formatBh();
-console.log(aaa);
+console.log(echo);
+// echo('aaaa');
+// echo('测试信息', '测试', 'INFO');
 // console.log(tdate);
 // console.log(tdate.format(new Date(), 'yyyy-mm-dd@hh-mi-ss-ms'));
 // console.log(tdate.toCode());
