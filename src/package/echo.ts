@@ -48,12 +48,12 @@ const msgColorBrowser: IObj<string[]> = {
   ERR: ['错误', color.redBGLight[0], color.redBGLight[1], color.red[0], color.red[1]]
 };
 
-const msgFunc: IObj<unknown> = {
-  INFO: console.log, // eslint-disable-line
-  SUCC: console.log, // eslint-disable-line
-  WARN: console.warn, // eslint-disable-line
-  ERR: console.error, // eslint-disable-line
-};
+// const msgFunc: IObj<unknown> = {
+//   INFO: console.log, // eslint-disable-line
+//   SUCC: console.log, // eslint-disable-line
+//   WARN: console.warn, // eslint-disable-line
+//   ERR: console.error, // eslint-disable-line
+// };
 
 // export default (): void => {
 // 	const _rigthSymbol: string = process.env.VUE_APP_RIGHT_SYMBOL || '';
@@ -63,17 +63,37 @@ const msgFunc: IObj<unknown> = {
 // 	console.log(_arr.join('\n')); // eslint-disable-line
 // };
 
+// function echo222(msg: string | Error, title?: string, type?: MSG_TYPE): void {
+//   /* eslint-disable no-console */
+//   const _currType = `${type}`.toUpperCase();
+//   // const _func = type ? (msgFunc[_currType] || msgFunc['INFO']) : msgFunc['INFO'];
+//   const _func: any = (execer: any, str: string) => execer(str);
+//   _func(console.log, 'aaaa');
+
+//   // const _func: void = (type && (((type === 'ERR') && console.error) || ((type === 'WARN') && console.warn) || console.log)) || console.log;
+//   if (typeof _func === 'function') {
+//     if (globalThis.window) { // eslint-disable-line
+//       const [a, b, c, d, e] = msgColorBrowser[_currType] || ['', '', '', '', ''];
+//       _func(`${b} ${title || a} ${c} ${d} ${msg} ${e}`);
+//     } else {
+//       const [a, b, c, d, e] = msgColor[_currType] || ['', '', '', '', ''];
+//       _func(`${b} ${title || a} ${c} ${d} ${msg} ${e}`);
+//     }
+//   }
+// }
+
+
 function echo(msg: string | Error, title?: string, type?: MSG_TYPE): void {
   const _currType = `${type}`.toUpperCase();
-  const _func = type ? (msgFunc[_currType] || msgFunc['INFO']) : msgFunc['INFO'];
-  if (typeof _func === 'function') {
-    if (globalThis.window) { // eslint-disable-line
-      const [a, b, c, d, e] = msgColorBrowser[_currType] || ['', '', '', '', ''];
-      _func(`${b} ${title || a} ${c} ${d} ${msg} ${e}`);
-    } else {
-      const [a, b, c, d, e] = msgColor[_currType] || ['', '', '', '', ''];
-      _func(`${b} ${title || a} ${c} ${d} ${msg} ${e}`);
-    }
+  const _func: any = (execer: any, str: string) => execer(str);
+  const [a, b, c, d, e] = globalThis.window ? (msgColorBrowser[_currType] || ['', '', '', '', '']) : (msgColor[_currType] || ['', '', '', '', '']); // eslint-disable-line
+  if (typeof msg === 'string') {
+    const _currMsg = `${b} ${title || a} ${c} ${d} ${msg} ${e}`;
+    /* eslint-disable no-console */
+    const _execer = (type && (((type === 'ERR') && console.error) || ((type === 'WARN') && console.warn) || console.log)) || console.log;
+    _func(_execer, _currMsg);
+  } else if (msg instanceof Error) {
+    console.error(msg);
   }
 }
 

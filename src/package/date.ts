@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import global from '../@types/index';
+// import echo from './echo';
 
 interface ITdate {
 	toCode: (fmt: string) => string;
@@ -94,9 +95,9 @@ const __checkDate__ = (val: Date): ITdate => {
 	if (!(val.toString() === 'Invalid Date')) {
 		return new Tdate(val);
 	} else {
-		// console.error('Get invalid param for fuction tdate. This parma can be null/undefind or datetime string, also can be number just < 8640000000000000'); // eslint-disable-line
-		// throw new Date();
-		throw new Error('Get invalid param for fuction tdate. This parma can be null/undefind or datetime string, also can be number just < 8640000000000000');
+		// echo('Get invalid param for fuction tdate. \nThis parma can be null/undefind or datetime string, \nalso can be number between -8640000000000000 AND < 8640000000000000.\nThis function already return now as default.', '非法参数', 'ERR'); // eslint-disable-line
+		// return new Tdate(new Date());
+		throw new Error('Get invalid param for fuction tdate. \nThis parma can be null/undefind or datetime string, \nalso can be number between -8640000000000000 AND < 8640000000000000.\nThis function already return now as default.');
 	}
 };
 

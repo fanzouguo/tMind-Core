@@ -22,7 +22,7 @@ console.log('typeof echo');
 // console.log(tdate('hh:mi:ss yyyy-mm-dd'));
 // console.log(x2);
 // echo('aaaa', 'bbbb', 'ERR');
-// tdate('aaaa');
+console.log(tdate('aaaa').formatBh());
 // const aaa = tdate(1616025793855).formatBh();
 // console.log(echo);
 // echo('aaaa');

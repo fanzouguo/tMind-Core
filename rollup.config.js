@@ -1,11 +1,8 @@
 // @ts-nocheck
 /* eslint-disable */
-// import rollupPluginDts from 'rollup-plugin-dts';
-// import dts from "rollup-plugin-dts";
 const resolve = require('rollup-plugin-node-resolve');
 const { babel } = require('@rollup/plugin-babel');
 const { terser } = require('rollup-plugin-terser');
-// const { dts } = require('rollup-plugin-dts');
 const tsPlugin = require('rollup-plugin-typescript2');
 const commonjs = require('rollup-plugin-commonjs');
 const pkg = require('./package.json');
@@ -82,13 +79,5 @@ const TsConf = outputConf.map(v => {
 		}
 	});
 });
-
-// const DtsConf = {
-// 	input: getPathSpec(basePath, 'src/@types/index.d.ts'),
-// 	output: [{ file: 'lib/index.d.ts', format: 'es' }],
-// 	plugins: [dts()],
-// };
-
-// TsConf.push(DtsConf);
 
 export default TsConf;
