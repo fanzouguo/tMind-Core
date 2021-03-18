@@ -1,4 +1,5 @@
 import tdate from './package/date';
+import echo from './package/echo';
 
 class Tmind {
 	name: string;
@@ -9,5 +10,6 @@ class Tmind {
 
 export default {
 	Tmind,
-	tdate
+	tdate,
+	echo
 };

@@ -20,6 +20,11 @@ declare global {
 		[index: string]: T;
 	}
 
+	// 策略模式的对象结构定义
+	interface IObjPlicy<K> {
+		[index: keyof K]: any;
+	}
+
 	interface IObjKv {
 		[index: string]: string;
 	}
