@@ -1,4 +1,4 @@
-const { Tmind, Tdate } = require('../lib/index');
+const { Tmind, tdate } = require('../lib/index');
 // import * as Tmind from '../src/index';
 
 const x = new Tmind();
@@ -14,9 +14,13 @@ console.clear();
 console.log('Tmind');
 console.log(x.name);
 console.log(Tmind);
-console.log(Tdate);
-console.log(Tdate.format(new Date(), 'yyyy-mm-dd@hh-mi-ss-ms'));
-console.log(Tdate.toCode());
+
+const aaa = tdate(1616025793855).format('yyyy-mm-dd hh:mi:ss.ms');
+console.log(aaa);
+// console.log(tdate);
+// console.log(tdate.format(new Date(), 'yyyy-mm-dd@hh-mi-ss-ms'));
+// console.log(tdate.toCode());
+// new Date().format('yyyy-mm');
 // echo('测试消息', '消息', MSG_TYPE.ERR);
 // getEcho('aaa');
 // aaa.echo();

@@ -2,9 +2,41 @@
 import global from '../types/index';
 
 interface ITdate {
+	// 实例代表的日期/时间值，Date格式
 	val: Date;
 	toCode: (fmt: string) => string;
+
+	/** 将指定日期按照提供的模式匹配字符串格式化
+	 *
+	 * @param {*} fmt 用于格式化的模式匹配字符串，为空时默认为 'yyyy-mm-dd'
+	 * @returns 已格式化的时间 / 日期 字符串（阿拉伯数字形式）
+	 */
 	format: (fmt: string) => string;
+
+	/** 将指定日期按照提供的模式匹配字符串格式化为中文汉字输出
+	 *
+	 * @returns 已格式化的时间 / 日期 字符串（中文汉字形式）
+	 */
+	formatCn: () => string;
+
+	/** 将指定日期格式化为农历表示法
+	 *
+	 * @param {boolean} skipYear 是否省略年份信息
+	 * @returns 已格式化的农历日期
+	 */
+	formatLunar: (skipYear: boolLike) => string;
+
+	/** 将指定日期格式化为佛历表示法
+	 * @returns 已格式化的佛历日期
+	 */
+	formatBh: () => string;
+
+	/** 按照指定语言环境字符串标签格式化日期（语言环境字符串标签参考：Intl.DateTimeFormat 的 参数）
+	 *
+	 * @param {*} languageTag 语言环境字符串，默认为 加拿大法文格式：YYYY-MM-DD
+	 * @returns 已格式化的字符串
+	 */
+	formatWorld: (languageTag: string | null | undefined) => string;
 }
 
 interface datePattern {
@@ -77,8 +109,55 @@ class Tdate implements ITdate {
 	toCode = (fmt: string): string => {
 		return __fmtVal__.call(this, this.val, 'yyyymmddhhmissms');
 	};
+
+	/** 将指定日期按照提供的模式匹配字符串格式化
+	 *
+	 * @param {*} fmt 用于格式化的模式匹配字符串，为空时默认为 'yyyy-mm-dd'
+	 * @returns 已格式化的时间 / 日期 字符串（阿拉伯数字形式）
+	 */
 	format = (fmt: string): string => {
 		return __fmtVal__.call(this, this.val, fmt || 'yyyy-mm-dd');
+	};
+
+	/** 将指定日期按照提供的模式匹配字符串格式化为中文汉字输出
+	 *
+	 * @returns 已格式化的时间 / 日期 字符串（中文汉字形式）
+	 */
+	formatCn = (): string => {
+		// TODO: 暂未实现日期中文化
+		return '';
+	};
+
+	/** 将指定日期格式化为农历表示法
+	 *
+	 * @param {boolean} skipYear 是否省略年份信息
+	 * @returns 已格式化的农历日期
+	 */
+	formatLunar = (skipYear: boolLike = true): string => {
+		const _val: string = Intl.DateTimeFormat('zh-u-ca-chinese-nu-latn').format(this.val);
+		if (!skipYear) {
+			return _val;
+		} else {
+			const _arr: string[] = _val.split('年');
+			return _arr[1] || '';
+		}
+	};
+
+	/** 将指定日期格式化为佛历表示法
+	 * @returns 已格式化的佛历日期
+	 */
+	formatBh = (): string => {
+		return Intl.DateTimeFormat('zh-chinese-u-ca-buddhist').format(this.val).replace(/-/, '年').replace(/-/, '月');
+	};
+
+
+	/** 按照指定语言环境字符串标签格式化日期（语言环境字符串标签参考：Intl.DateTimeFormat 的 参数）
+	 *
+	 * @param {*} languageTag 语言环境字符串，默认为 加拿大法文格式：YYYY-MM-DD
+	 * @returns 已格式化的字符串
+	 */
+	formatWorld = (languageTag: string | null | undefined): string => {
+		return Intl.DateTimeFormat(languageTag || 'fr-ca').format(this.val);
 	};
 }
 
@@ -89,23 +168,23 @@ function tdate(val: number[]): ITdate;
 function tdate(val: null): ITdate;
 function tdate(val?: unknown): ITdate {
 	const _tp = typeof val;
-		switch (_tp) {
-			case 'string':
-				return __checkDate__(new Date(val as string));
-			case 'number':
-				return __checkDate__(new Date(val as number));
-			case 'undefined':
+	switch (_tp) {
+		case 'string':
+			return __checkDate__(new Date(val as string));
+		case 'number':
+			return __checkDate__(new Date(val as number));
+		case 'undefined':
+			return new Tdate(new Date());
+		default:
+			if (Array.isArray(val)) {
+				const [a, b, ...otherVal] = val;
+				return __checkDate__(new Date(a, b, ...otherVal as number[]));
+			} else if (val === null) {
 				return new Tdate(new Date());
-			default:
-				if (Array.isArray(val)) {
-					const [a, b, ...otherVal] = val;
-					return __checkDate__(new Date(a, b, ...otherVal as number[]));
-				} else if (val === null) {
-					return new Tdate(new Date());
-				} else {
-					return __checkDate__(new Date('invalid'));
-				}
-		}
+			} else {
+				return __checkDate__(new Date('invalid'));
+			}
+	}
 }
 
 export default tdate;
