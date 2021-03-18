@@ -8,7 +8,7 @@ class Tmind {
 	}
 }
 
-export default {
+export {
 	Tmind,
 	tdate,
 	echo
