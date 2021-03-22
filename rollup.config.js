@@ -32,6 +32,7 @@ const plugins = [
 	}),
 	commonjs(),
 	resolve({
+		cwd: 'babelrc',
 		customResolveOptions: {
 			moduleDirectory: 'node_modules'
 		}

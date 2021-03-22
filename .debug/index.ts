@@ -1,4 +1,4 @@
-import { echo, Tmind, tdate } from '../lib/index';
+import { tEcho, Tmind, tDate } from '../lib/index';
 
-tdate().format('yyyy-hh-dd');
-echo('aaaaa', 'title', 'ERR');
+tDate().format('yyyy-hh-dd');
+tEcho('aaaaa', 'title', 'ERR');
