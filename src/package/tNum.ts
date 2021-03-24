@@ -95,10 +95,19 @@ const numToCNY = function (val: number): string {
 	}).replace(/零+/g, '零'), _arr2.join('')].join('');
 };
 
+/** 判断数字是否为奇数
+ * @param val
+ * @returns
+ */
+const numIsOdd = function (val: number): boolean {
+	return !!((val & 1) !== 0);
+};
+
 export {
 	numToPrice,
 	numToSplit,
 	numToArr,
 	numToRound,
-	numToCNY
+	numToCNY,
+	numIsOdd
 };

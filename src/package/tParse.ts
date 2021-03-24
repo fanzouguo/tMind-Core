@@ -11,6 +11,14 @@ const __str2u__ = (str: string): number[] => str.split('').map(v => v.charCodeAt
  */
 const __u2Str__ = (val: string | number[], sep: string = '-'): string => String.fromCharCode(...(Array.isArray(val) ? val : val.split(sep).map(v => +v)));
 
+const getCompany = () => {
+	return {
+		compay: ('上海深普软件有限公司'),
+		appCopy: (`Copyright © 2015 - ${new Date().getFullYear()} 深普 SMPOO.com 版权所有`),
+		website: ('www.smpoo.com')
+	};
+};
+
 /** 格式转换器
  */
 const tParse = {
@@ -35,7 +43,8 @@ const tParse = {
 		wechatAliase: function (): string {
 			return __u2Str__(`${this}`, '-');
 		}
-	}
+	},
+	companyInfo: getCompany()
 };
 
 export default tParse;

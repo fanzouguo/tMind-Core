@@ -7,5 +7,10 @@ declare const tParse: {
         uniCode2Str: (val: string | number[], sep?: string) => string;
         wechatAliase: () => string;
     };
+    companyInfo: {
+        compay: string;
+        appCopy: string;
+        website: string;
+    };
 };
 export default tParse;

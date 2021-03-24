@@ -1,5 +1,8 @@
 /* eslint-disable no-unused-vars */
 declare global {
+	// 信息记录类型
+	type MSG_TYPE = '' | 'INFO' | 'SUCC' | 'WARN' | 'ERR' | undefined | null;
+
 	// 可作为日期传参的类型
 	type dateLike = string | number | number[] | Date | null | undefined;
 
@@ -191,7 +194,12 @@ declare global {
 		 * @param val 要转换的金额
 		 * @returns
 		 */
-		toCNY(): string
+		toCNY(): string;
+		/** 判断数字是否为奇数
+		 * @param val
+		 * @returns
+		 */
+		isOdd(val: number): boolean;
 	}
 
 	interface Array extends Array {

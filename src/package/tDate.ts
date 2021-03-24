@@ -1,5 +1,5 @@
 import global from '../@types/index'; /* eslint-disable-line */
-import { Tutil } from '../class/tutil';
+import { Tutil } from '../class/Tutil';
 
 const DICT_ANIMAL = '鼠牛虎兔龙蛇马羊猴鸡狗猪';
 const DICT_SIGN = '摩羯宝瓶双鱼白羊金牛双子巨蟹狮子处女天秤天蝎射手';

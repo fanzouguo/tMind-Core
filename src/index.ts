@@ -2,10 +2,10 @@ import * as _tDate from './package/tDate';
 import { bline, tEcho as _tEcho } from './package/tEcho';
 import tParse from './package/tParse';
 import { __len__, __lenfrom0__, __left__, __right__, __mid__, __like__, __upFirst__, __camelCase__ } from './package/tStr';
-import { numToPrice, numToSplit, numToArr, numToCNY, numToRound } from './package/tNum';
+import { numToPrice, numToSplit, numToArr, numToCNY, numToRound, numIsOdd } from './package/tNum';
 import { arrInsert, arrMoveItem } from './package/tArr';
 import { deepClone } from './package/tObj';
-import { Tutil as _Tutil } from './class/tutil';
+import { Tutil as _Tutil } from './class/Tutil';
 
 if (_Tutil.inBrowser) {
 	bline();
@@ -48,6 +48,9 @@ Number.prototype.toRound = function (digit?: number, type?: 'normal' | 'bank' | 
 Number.prototype.toCNY = function (): string {
 	return numToCNY.call(this, this.valueOf());
 };
+Number.prototype.isOdd = function (): boolean {
+	return numIsOdd.call(this, this.valueOf());
+};
 
 Array.prototype.insertTo = function(destIndex: number = 1, ...newItem: any[]): void {
 	arrInsert.call(this, this, destIndex, ...newItem);
@@ -63,3 +66,4 @@ Object.prototype.deepClone = function (): any {
 export const Tutil = _Tutil;
 export const tdate = _tDate.tdate;
 export const tEcho = _tEcho;
+export const smpoo = tParse.companyInfo;
