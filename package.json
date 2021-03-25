@@ -4,6 +4,8 @@
   "description": "This project is automatic created by tMind-Core for tFrameV9 of smpoo Co. in 2021-03-13 07:02:42.668",
   "private": false,
   "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "type": "commonjs",
   "types": "lib/index.d.ts",
   "scripts": {
     "clean": "shx rm -rf lib",
@@ -41,5 +43,5 @@
     "ts-node": "~9.1.1"
   },
   "createAt": "2021-03-13 07:02:42.668",
-  "lastBuild": "2021-03-25 19:42:51.50"
+  "lastBuild": "2021-03-25 19:50:27.313"
 }
