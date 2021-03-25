@@ -9,7 +9,7 @@ import { Tutil as _Tutil } from './class/Tutil';
 
 if (_Tutil.inBrowser) {
 	bline();
-	globalThis.window.onerror = function (err, url, l)	{ /* eslint-disable-line */
+	window.onerror = function (err, url, l)	{ /* eslint-disable-line */
 		return false;
 	};
 } else if (_Tutil.inSvr) {

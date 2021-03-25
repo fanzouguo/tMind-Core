@@ -1,6 +1,6 @@
 {
   "name": "tmind-core",
-  "version": "2.1.38",
+  "version": "2.1.39",
   "description": "This project is automatic created by tMind-Core for tFrameV9 of smpoo Co. in 2021-03-13 07:02:42.668",
   "private": false,
   "main": "lib/index.js",
@@ -43,5 +43,5 @@
     "ts-node": "~9.1.1"
   },
   "createAt": "2021-03-13 07:02:42.668",
-  "lastBuild": "2021-03-25 19:55:59.689"
+  "lastBuild": "2021-03-25 20:16:17.881"
 }
