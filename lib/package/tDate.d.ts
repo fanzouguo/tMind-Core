@@ -1,0 +1,31 @@
+export declare class Tdate {
+    private val;
+    constructor(initVal: Date);
+    isLeap: () => boolean;
+    format: (fmt?: string | undefined) => string;
+    formatBh: () => string;
+    formatCn: (withYear?: boolean, withTime?: boolean | undefined) => string;
+    formatLunar: (skipYear?: boolLike) => string;
+    formatWorld: (languageTag: string | null | undefined) => string;
+    getAbs: () => number;
+    getDaysMonth: () => number;
+    getDaysYear: () => number;
+    getWeek: (local?: "zh" | "en" | undefined) => string | number;
+    getWeekOfMonth: (local?: "zh" | "en" | undefined) => string | number;
+    getWeekOfYear: (local?: "zh" | "en" | undefined) => string | number;
+    getQuarter: (local?: "zh" | "en" | undefined) => string | number;
+    getTiangan: () => string;
+    getSolar: () => string;
+    getSign: () => string;
+    getAnimal: () => string;
+    getOffset: (diffNum: number, diffType?: "day" | "week" | "month" | "year" | undefined) => string;
+    getDiff: (dateVal: Date | Tdate | string | number, outputType?: "day" | "week" | "month" | "year" | "ms" | "second" | "minute" | "hour" | undefined) => number;
+    toNumber: (notTimestamp?: boolean, fmt?: string | undefined) => number;
+    toJson: (local?: "zh" | "en" | undefined) => IObj<number | boolean | string>;
+    toArr: (includTime?: boolean | undefined) => number[];
+}
+export declare function tdate(): Tdate;
+export declare function tdate(val: string): Tdate;
+export declare function tdate(val: number): Tdate;
+export declare function tdate(y: number, m: number, d?: number | undefined, h?: number | undefined, mi?: number | undefined, s?: number | undefined, ms?: number | undefined): Tdate;
+export declare function tdate(val: null): Tdate;
