@@ -55,16 +55,16 @@ const __checkDate__ = (val: Date): Tdate => {
 };
 
 export class Tdate {
-	#val: Date;
+	private val: Date;
 	constructor(initVal: Date) {
-		this.#val = initVal;
+		this.val = initVal;
 	}
 
 	/** 判断当前实例所代表的日期是否为闰年
 	 * @returns 输入布尔值，Ture代表是，False代表否
 	 */
 	isLeap = (): boolean => {
-		const y: number = this.#val.getFullYear();
+		const y: number = this.val.getFullYear();
 		return y % 4 === 0 && y % 100 !== 0 || y % 400 === 0;
 	};
 
@@ -73,14 +73,14 @@ export class Tdate {
 	 * @returns 已格式化的时间 / 日期 字符串（阿拉伯数字形式）
 	 */
 	format = (fmt?: string): string => {
-		return __fmtVal__.call(this, this.#val, fmt || 'yyyy-mm-dd');
+		return __fmtVal__.call(this, this.val, fmt || 'yyyy-mm-dd');
 	};
 
 	/** 将指定日期格式化为佛历表示法
 	 * @returns 已格式化的佛历日期
 	 */
 	formatBh = (): string => {
-		return Intl.DateTimeFormat('zh-chinese-u-ca-buddhist').format(this.#val).replace(/-/, '年').replace(/-/, '月');
+		return Intl.DateTimeFormat('zh-chinese-u-ca-buddhist').format(this.val).replace(/-/, '年').replace(/-/, '月');
 	};
 
 	/** 将指定日期按照提供的模式匹配字符串格式化为中文汉字输出
@@ -98,7 +98,7 @@ export class Tdate {
 			second: 'numeric',
 			hour12: false,
 			timeZone: 'Asia/Shanghai'
-		}).format(this.#val).split(/\s+/);
+		}).format(this.val).split(/\s+/);
 		const [y, m, d] = a.split('/');
 		const rplc = (str: string) => str.replace(/^〇〇$/, '零').replace(/^〇/, '').replace(/〇$/, '十');
 		const _dtPart = withYear ? `${y}年${rplc(m)}月${rplc(d)}日` : `${rplc(m)}月${rplc(d)}日`;
@@ -115,7 +115,7 @@ export class Tdate {
 	 * @returns 已格式化的农历日期
 	 */
 	formatLunar = (skipYear: boolLike = true): string => {
-		const _val: string = Intl.DateTimeFormat('zh-u-ca-chinese-nu-latn').format(this.#val);
+		const _val: string = Intl.DateTimeFormat('zh-u-ca-chinese-nu-latn').format(this.val);
 		if (!skipYear) {
 			return _val;
 		} else {
@@ -129,7 +129,7 @@ export class Tdate {
 	 * @returns 已格式化的字符串
 	 */
 	formatWorld = (languageTag: string | null | undefined): string => {
-		return Intl.DateTimeFormat(languageTag || 'fr-ca').format(this.#val);
+		return Intl.DateTimeFormat(languageTag || 'fr-ca').format(this.val);
 	};
 
 	/** 获取时间戳的最大绝对值。
@@ -143,14 +143,14 @@ export class Tdate {
 	/** 获取实例日期所在年份中，指定月份的总天数
 	 */
 	getDaysMonth = (): number => {
-		return new Date(this.#val.getFullYear(), +this.format('mm'), 0).getDate();
+		return new Date(this.val.getFullYear(), +this.format('mm'), 0).getDate();
 	};
 
 	/** 获取实例日期所在年份的总天数
 	 * @returns
 	 */
 	getDaysYear = (): number => {
-		return 337 + new Date(this.#val.getFullYear(), 2, 0).getDate();
+		return 337 + new Date(this.val.getFullYear(), 2, 0).getDate();
 	};
 
 	/** 获取实例日期的周信息
@@ -158,7 +158,7 @@ export class Tdate {
 	 * @returns 若传入参数为空，则输出阿拉伯数字代表的周（本周第几天，周一为1，周日为7），若传入参数不为空，则返回字符化的周信息。
 	 */
 	getWeek = (local?: 'zh' | 'en'): string | number => {
-		const w: number = this.#val.getDay();
+		const w: number = this.val.getDay();
 		const str = local || 'zh';
 		if (typeof local === 'undefined') {
 			return w || 7;
@@ -172,7 +172,7 @@ export class Tdate {
 	 * @returns 若传入参数为空，则输出阿拉伯数字代表的月内周次序号，起始为1，若传入参数不为空，则返回字符化的周信息。
 	 */
 	getWeekOfMonth = (local?: 'zh' | 'en'): string | number => {
-		const w = Math.ceil((this.#val.getDate() + 6 - this.#val.getDay()) / 7);
+		const w = Math.ceil((this.val.getDate() + 6 - this.val.getDay()) / 7);
 		if (typeof local !== 'undefined') {
 			return NUM_TO_STR[w];
 		} else {
@@ -185,7 +185,7 @@ export class Tdate {
 	 * @returns 若传入参数为空，则输出阿拉伯数字代表的年内周次序号，起始为1，若传入参数不为空，则返回字符化的周信息。
 	 */
 	getWeekOfYear = (local?: 'zh' | 'en'): string | number => {
-		const w = Math.ceil((this.#val.getDate() + 6 - this.#val.getDay()) / 7);
+		const w = Math.ceil((this.val.getDate() + 6 - this.val.getDay()) / 7);
 		if (typeof local !== 'undefined') {
 			return `${w}`.split('').map(v => NUM_TO_STR[+v]).join('');
 		} else {
@@ -198,7 +198,7 @@ export class Tdate {
 	 * @returns 若传入参数为空，则输出阿拉伯数字代表的季度序号，起始为1，若传入 zh ，则将数字中文字符化
 	 */
 	getQuarter = (local?: 'zh' | 'en'): string | number => {
-		const m = this.#val.getMonth() + 1;
+		const m = this.val.getMonth() + 1;
 		const q = ((m < 4) && 1) || ((m < 7) && 2) || ((m < 10) && 3) || 4;
 		if (typeof local !== 'undefined') {
 			return `${NUM_TO_STR[q]}季度`;
@@ -210,7 +210,7 @@ export class Tdate {
 	/** 获取实例日期对应的天干纪年法
 	 */
 	getTiangan = (): string => {
-		const i = this.#val.getFullYear() - 1900 + 36;
+		const i = this.val.getFullYear() - 1900 + 36;
 		return DICT_GZ[0].charAt(i % 10) + DICT_GZ[1].charAt(i % 12);
 	};
 
@@ -265,7 +265,7 @@ export class Tdate {
 
 	/** 获取实例日期所对应的属性
 	 */
-	getAnimal = (): string => DICT_ANIMAL.charAt((this.#val.getFullYear() - 4) % 12);
+	getAnimal = (): string => DICT_ANIMAL.charAt((this.val.getFullYear() - 4) % 12);
 
 	/** 获取相对于实例日期，指定单位数量（天、周、月、年）之前或之后的日期值
 	 *
@@ -282,7 +282,7 @@ export class Tdate {
 			} else if (diffType === 'year') {
 				val *= 365;
 			}
-			return Intl.DateTimeFormat('fr-ca').format(new Date(this.#val.getTime() + val));
+			return Intl.DateTimeFormat('fr-ca').format(new Date(this.val.getTime() + val));
 		} else {
 			return this.format();
 		}
@@ -296,10 +296,10 @@ export class Tdate {
 	 */
 	getDiff = (dateVal: Date | Tdate | string | number, outputType?: 'ms' | 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year'): number => {
 		if (typeof dateVal !== 'undefined') {
-			const num1: number = this.#val.getTime();
+			const num1: number = this.val.getTime();
 			const tp = typeof dateVal;
 			// @ts-ignore
-			const num2 = ((tp === 'number') && dateVal) || (((dateVal instanceof Date && dateVal) || (typeof dateVal === 'string' && new Date(dateVal)) || dateVal.#val || this.#val).getTime());
+			const num2 = ((tp === 'number') && dateVal) || (((dateVal instanceof Date && dateVal) || (typeof dateVal === 'string' && new Date(dateVal)) || dateVal.val || this.val).getTime());
 			const diffVal = num2 - num1;
 			const diffValDay = Math.round((num2 - num1) / 1000 / 60 / 60 / 24);
 			const getNum = (val: number, len: number = 1): number => +val.toFixed(len);
@@ -340,7 +340,7 @@ export class Tdate {
 				throw new Error('Get invalid param of tdate.toNumber.\nIn this function\'s param string, you should with the pattern string like tdate.format only.');
 			}
 		} else {
-			return this.#val.getTime();
+			return this.val.getTime();
 		}
 	};
 

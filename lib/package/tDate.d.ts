@@ -1,5 +1,5 @@
 export declare class Tdate {
-    #private;
+    private val;
     constructor(initVal: Date);
     isLeap: () => boolean;
     format: (fmt?: string | undefined) => string;
