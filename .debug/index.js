@@ -1,10 +1,28 @@
 // const { Tmind, tDate, tEcho } = require('tmind-core');
 // const { Tutil, tDate, tEcho, tVerifi } = require('../lib/index');
-const tMind = require('../lib/index');
+const { smpoo } = require('../lib/index');
 
 console.clear();
 const nnn = 234;
-console.log(nnn.isOdd());
+// console.log(`公司：${compay.join('-')}`);
+// console.log(`版权：${appCopy.join('-')}`);
+// console.log(`网址：${website.join('-')}`);
+
+
+//  const __str2u__ = (str) => str.split('').map(v => v.charCodeAt(0));
+// //  const __u2Str__ = (val, sep = '-') => String.fromCharCode(...(Array.isArray(val) ? val : val.split(sep).map(v => +v)));
+//  let x1 = 'Copyright © 2015 - ';
+//  let x2 = new Date().getFullYear();
+//  let x3 = ' 深普 SMPOO.com 版权所有';
+
+// console.log(x1.split('').map(v => v.charCodeAt(0)).join('-'));
+// console.log(`${x2}`.split('').map(v => v.charCodeAt(0)).join('-'));
+// console.log(x3.split('').map(v => v.charCodeAt(0)).join('-'));
+console.log(smpoo);
+
+//  console.log(__str2u__(x1));
+//  console.log(__str2u__(x2));
+//  console.log(__str2u__(x3));
 
 
 // const testFunc = function (obj, def) {

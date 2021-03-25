@@ -4,7 +4,7 @@ import tParse from './package/tParse';
 import { __len__, __lenfrom0__, __left__, __right__, __mid__, __like__, __upFirst__, __camelCase__ } from './package/tStr';
 import { numToPrice, numToSplit, numToArr, numToCNY, numToRound, numIsOdd } from './package/tNum';
 import { arrInsert, arrMoveItem } from './package/tArr';
-import { deepClone } from './package/tObj';
+// import { deepClone } from './package/tObj';
 import { Tutil as _Tutil } from './class/Tutil';
 
 if (_Tutil.inBrowser) {
@@ -59,9 +59,9 @@ Array.prototype.moveTo = function(fromIdx: number,  destIdx: number, itemCount: 
 	arrMoveItem.call(this, this, fromIdx, destIdx, itemCount, orderField);
 };
 
-Object.prototype.deepClone = function (): any {
-	return deepClone.call(this, this);
-};
+// Object.prototype.dClone = function (): any {
+// 	return deepClone.call(this, this);
+// };
 
 export const Tutil = _Tutil;
 export const tdate = _tDate.tdate;

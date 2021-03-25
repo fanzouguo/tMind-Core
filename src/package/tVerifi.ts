@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import global from '../@types/index'; /* eslint-disable-line */
+const __specialLetter__ = `[\`~!@#$^&*()=|{}':;',\\[\\].<>《》/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]`; // eslint-disable-line
 
 const DEFAULT_OPT: IverifiOpt = {
 	trueVal: true,
@@ -68,7 +69,7 @@ class TVerifi implements ItVerifi {
 	strSpaceHas = (opt: IverifiOpt = DEFAULT_OPT): TVerifi => this.preResult(/\s+/.test(this.#val), '包含空格', '不允许包含空格', opt);
 
 	// 包含特殊符号
-	strSpeciaHas = (opt: IverifiOpt = DEFAULT_OPT): TVerifi => this.preResult((new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>《》/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]")).test(this.#val), '包含特殊符号', '不允许包含特殊符号', opt); // eslint-disable-line
+	strSpeciaHas = (opt: IverifiOpt = DEFAULT_OPT): TVerifi => this.preResult((new RegExp(__specialLetter__)).test(this.#val), '包含特殊符号', '不允许包含特殊符号', opt); // eslint-disable-line
 
 	// 包含中文
 	strCnHas = (opt: IverifiOpt = DEFAULT_OPT): TVerifi => this.preResult(/[\u4E00-\u9FA5]/.test(this.#val), '未包含中文', '不允许包含中文', opt);
