@@ -1,5 +1,6 @@
 import global from '../@types/index'; /* eslint-disable-line */
 import { Tutil } from '../class/Tutil';
+import { numToRound } from './tNum';
 
 const DICT_ANIMAL = '鼠牛虎兔龙蛇马羊猴鸡狗猪';
 const DICT_SIGN = '摩羯宝瓶双鱼白羊金牛双子巨蟹狮子处女天秤天蝎射手';
@@ -13,6 +14,10 @@ const WEEK_STR: IObj<string[]> = {
 	zh: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
 	en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 };
+// 缓存年内各月天数（2月份为0，需要实时计算）
+const DAYS_MONTH = [31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+// 缓存一天中的毫秒数
+const MS_DAY = 24 * 60 * 60 * 1000;
 
 const NUM_TO_STR = Tutil.NUM_TO_STR;
 
@@ -63,10 +68,222 @@ export class Tdate {
 	/** 判断当前实例所代表的日期是否为闰年
 	 * @returns 输入布尔值，Ture代表是，False代表否
 	 */
-	isLeap = (): boolean => {
+	 get isLeap(): boolean {
 		const y: number = this.val.getFullYear();
 		return y % 4 === 0 && y % 100 !== 0 || y % 400 === 0;
-	};
+	}
+
+	/** 获取时间戳的最大绝对值。
+	 *  时间戳的有效范围应该是正负（绝对值）区间
+	 * @returns 代表区间范围的绝对值（正负绝对值相同）
+	 */
+	get abs(): number {
+		return MIN_MAX;
+	}
+
+	/** 获取实例日期所在年份
+	 * @returns 输出阿拉伯数字格式
+	 */
+	 get year(): number {
+		return +this.format('yyyy');
+	}
+
+	/** 获取实例日期所在月份
+	 * @returns 输出阿拉伯数字格式
+	 */
+	 get month(): number {
+		return +this.format('mm');
+	}
+
+	/** 获取实例日期的公历号数
+	 * @returns 输出阿拉伯数字格式
+	 */
+	 get day(): number {
+		return +this.format('dd');
+	}
+
+	/** 获取实例日期的小时
+	 * @returns 输出阿拉伯数字格式
+	 */
+	 get hour(): number {
+		return +this.format('hh');
+	}
+
+	/** 获取实例日期的分钟
+	 * @returns 输出阿拉伯数字格式
+	 */
+	 get minute(): number {
+		return +this.format('mi');
+	}
+
+	/** 获取实例日期的秒数
+	 * @returns 输出阿拉伯数字格式
+	 */
+	 get second(): number {
+		return +this.format('ss');
+	}
+
+	/** 获取实例日期的毫秒数
+	 * @returns 输出阿拉伯数字格式
+	 */
+	 get millisecond(): number {
+		return +this.format('ms');
+	}
+
+	/** 获取实例日期是周几
+	 * @returns 输出阿拉伯数字代表的周（本周第几天，周一为1，周日为7）
+	 */
+	get week(): number {
+		return this.val.getDay() || 7;
+	}
+
+	/** 获取实例日期的所在季度
+	 * @returns 输出阿拉伯数字代表的季度序号，起始为1
+	 */
+	get quarter(): number {
+		const m = this.val.getMonth() + 1;
+		return ((m < 4) && 1) || ((m < 7) && 2) || ((m < 10) && 3) || 4;
+	}
+
+	/** 获取实例日期对应的节气
+	 * @returns
+	 */
+	get solar(): string {
+		const [year, month, day] = this.toArr();
+		let y = +year;
+		let m = +month - 1;
+		let d = +day;
+		const sTermInfo = new Array(0, 21208, 42467, 63836, 85337, 107014, 128867, 150921, 173149, 195551, 218072, 240693, 263343, 285989, 308563, 331033, 353350, 375494, 397447, 419210, 440795, 462224, 483532, 504758);
+		const solarTerm = new Array('小寒', '大寒', '立春', '雨水', '惊蛰', '春分', '清明', '谷雨', '立夏', '小满', '芒种', '夏至', '小暑', '大暑', '立秋', '处暑', '白露', '秋分', '寒露', '霜降', '立冬', '小雪', '大雪', '冬至');
+		let solarTerms = '';
+		while (solarTerms == '') {
+			let tmp1 = new Date((31556925974.7 * (y - 1900) + sTermInfo[m * 2 + 1] * 60000) + Date.UTC(1900, 0, 6, 2, 5));
+			let tmp2 = tmp1.getUTCDate();
+			if (tmp2 == d) solarTerms = solarTerm[m * 2 + 1];
+			tmp1 = new Date((31556925974.7 * (y - 1900) + sTermInfo[m * 2] * 60000) + Date.UTC(1900, 0, 6, 2, 5));
+			tmp2 = tmp1.getUTCDate(); if (tmp2 == d) solarTerms = solarTerm[m * 2];
+			if (d > 1) {
+				d = d - 1;
+			} else {
+				m = m - 1;
+				if (m < 0) {
+					y = y - 1; m = 11;
+				}
+				d = 31;
+			}
+		}
+		return solarTerms;
+	}
+
+	/** 获取实例日期所对应的星座
+	 */
+	get sign(): string {
+		const Zone = new Array(1222, 122, 222, 321, 421, 522, 622, 722, 822, 922, 1022, 1122, 1222);
+		const [year, month, day] = this.toArr(); // eslint-disable-line
+		const m = month;
+		const d = day;
+		if ((100 * m + d) >= Zone[0] || (100 * m + d) < Zone[1]) {
+			var i = 0;
+		} else {
+			for (var i = 1; i < 12; i++) {
+				if ((100 * m + d) >= Zone[i] && (100 * m + d) < Zone[i + 1]) {
+					break;
+				}
+			}
+		}
+		return DICT_SIGN.substring(2 * i, 2 * i + 2);
+	}
+
+	/** 获取实例日期所对应的属性
+	 */
+	get animal(): string {
+		return DICT_ANIMAL.charAt((this.val.getFullYear() - 4) % 12);
+	}
+
+	/** 获取实例日期是所在季度的第几天
+	 * @returns 输出阿拉伯数字代表的周（起始为1）
+	 */
+	get indexOfQuarter(): number {
+		return -1 * this.getDiff(new Date(`${this.year}-${[1, 4, 7, 10][this.quarter - 1]}-1 00:00:00.000`), 'day');
+	}
+
+	/** 获取实例日期是所在年份的第几天
+	 * @returns 输出阿拉伯数字代表的周（起始为1）
+	 */
+	get indexOfYear(): number {
+		return numToRound((this.toNumber() - new Date(`${this.year}-1-1 00:00:00.000`).getTime()) / MS_DAY, 0, 'carry');
+	}
+
+	/** 获取实例日期所在月份的总天数
+	 */
+	get daysOfMonth(): number {
+		return new Date(this.val.getFullYear(), +this.format('mm'), 0).getDate();
+	}
+
+	/** 获取实例日期所在季度的总天数
+	 */
+	get daysOfQuarter(): number {
+		const daysOfMonth2 = new Date(this.year, 2, 0).getDate();
+		return [[0, 1, 2], [3, 4, 5], [6, 7, 8], [9, 10, 11]][this.quarter - 1].map(v => DAYS_MONTH[v] || daysOfMonth2).reduce((pre, curr) => {
+			return pre + curr;
+		}, 0);
+	}
+
+	/** 获取实例日期所在年份的总天数
+	 * @returns
+	 */
+	get daysOfYear(): number {
+		return 337 + new Date(this.val.getFullYear(), 2, 0).getDate();
+	}
+
+	/** 获取实例日期相比所在周的百分比占比
+	 * @returns
+	 */
+	get ratioOfWeek(): number {
+		return numToRound(this.week / 7, 1);
+	}
+
+	/** 获取实例日期相比所在月的百分比占比
+	 * @returns
+	 */
+	get ratioOfMonth(): number {
+		return numToRound(this.day / this.daysOfMonth, 1);
+	}
+
+	/** 获取实例日期相比所在季度的百分比占比
+	 * @returns
+	 */
+	get ratioOfQuarter(): number {
+		return numToRound(this.indexOfQuarter / this.daysOfQuarter, 1);
+	}
+
+	/** 获取实例日期相比所在年份的百分比占比
+	 * @returns
+	 */
+	get ratioOfYear(): number {
+		return numToRound(this.indexOfYear / this.daysOfYear, 3);
+	}
+
+	/** 获取实例日期对应的天干纪年法
+	 */
+	get tiangan(): string {
+		const i = this.val.getFullYear() - 1900 + 36;
+		return DICT_GZ[0].charAt(i % 10) + DICT_GZ[1].charAt(i % 12);
+	}
+
+	/** 获取实例日期属于本月第几周
+	 * @returns 输出阿拉伯数字代表的月内周次序号，起始为1
+	 */
+	get weekOfMonth(): number {
+		return Math.ceil((this.val.getDate() + 6 - this.val.getDay()) / 7);
+	}
+
+	/** 获取实例日期属于当年第几周
+	 * @returns 输出阿拉伯数字代表的年内周次序号，起始为1
+	 */
+	get weekOfYear(): number {
+		return Math.ceil((this.val.getDate() + 6 - this.val.getDay()) / 7);
+	}
 
 	/** 将指定日期按照提供的模式匹配字符串格式化
 	 * @param {*} fmt 用于格式化的模式匹配字符串，为空时默认为 'yyyy-mm-dd'
@@ -76,19 +293,12 @@ export class Tdate {
 		return __fmtVal__.call(this, this.val, fmt || 'yyyy-mm-dd');
 	};
 
-	/** 将指定日期格式化为佛历表示法
-	 * @returns 已格式化的佛历日期
-	 */
-	formatBh = (): string => {
-		return Intl.DateTimeFormat('zh-chinese-u-ca-buddhist').format(this.val).replace(/-/, '年').replace(/-/, '月');
-	};
-
 	/** 将指定日期按照提供的模式匹配字符串格式化为中文汉字输出
 	 * @param {*} withYear 是否输出年份，默认为否
 	 * @param {*} withTime 是否输出时间信息
 	 * @returns 已格式化的时间 / 日期 字符串（中文汉字形式）
 	 */
-	formatCn = (withYear: boolean = false, withTime?: boolean): string => {
+	formatAsCn = (withYear: boolean = false, withTime?: boolean): string => {
 		const [a, b] = Intl.DateTimeFormat('zh-u-nu-hanidec', {
 			year: 'numeric',
 			month: '2-digit',
@@ -114,7 +324,7 @@ export class Tdate {
 	 * @param {boolean} skipYear 是否省略年份信息
 	 * @returns 已格式化的农历日期
 	 */
-	formatLunar = (skipYear: boolLike = true): string => {
+	formatAsLunar = (skipYear: boolLike = true): string => {
 		const _val: string = Intl.DateTimeFormat('zh-u-ca-chinese-nu-latn').format(this.val);
 		if (!skipYear) {
 			return _val;
@@ -124,33 +334,19 @@ export class Tdate {
 		}
 	};
 
+	/** 获取实例日期的佛历表示法
+	 * @returns 已格式化的佛历日期
+	 */
+	formatAsBh = (): string => {
+		return Intl.DateTimeFormat('zh-chinese-u-ca-buddhist').format(this.val).replace(/-/, '年').replace(/-/, '月');
+	}
+
 	/** 按照指定语言环境字符串标签格式化日期（语言环境字符串标签参考：Intl.DateTimeFormat 的 参数）
 	 * @param {*} languageTag 语言环境字符串，默认为 加拿大法文格式：YYYY-MM-DD
 	 * @returns 已格式化的字符串
 	 */
-	formatWorld = (languageTag: string | null | undefined): string => {
+	formatAsWorld = (languageTag: string | null | undefined): string => {
 		return Intl.DateTimeFormat(languageTag || 'fr-ca').format(this.val);
-	};
-
-	/** 获取时间戳的最大绝对值。
-	 *  时间戳的有效范围应该是正负（绝对值）区间
-	 * @returns 代表区间范围的绝对值（正负绝对值相同）
-	 */
-	getAbs = (): number => {
-		return MIN_MAX;
-	};
-
-	/** 获取实例日期所在年份中，指定月份的总天数
-	 */
-	getDaysMonth = (): number => {
-		return new Date(this.val.getFullYear(), +this.format('mm'), 0).getDate();
-	};
-
-	/** 获取实例日期所在年份的总天数
-	 * @returns
-	 */
-	getDaysYear = (): number => {
-		return 337 + new Date(this.val.getFullYear(), 2, 0).getDate();
 	};
 
 	/** 获取实例日期的周信息
@@ -185,12 +381,7 @@ export class Tdate {
 	 * @returns 若传入参数为空，则输出阿拉伯数字代表的年内周次序号，起始为1，若传入参数不为空，则返回字符化的周信息。
 	 */
 	getWeekOfYear = (local?: 'zh' | 'en'): string | number => {
-		const w = Math.ceil((this.val.getDate() + 6 - this.val.getDay()) / 7);
-		if (typeof local !== 'undefined') {
-			return `${w}`.split('').map(v => NUM_TO_STR[+v]).join('');
-		} else {
-			return w;
-		}
+		return numToRound((this.indexOfYear - (7 - (new Date(`${this.year}-1-1`).getDay() || 7))) / 7, 0, 'carry') + 1;
 	};
 
 	/** 获取实例日期的所在季度
@@ -207,66 +398,6 @@ export class Tdate {
 		}
 	};
 
-	/** 获取实例日期对应的天干纪年法
-	 */
-	getTiangan = (): string => {
-		const i = this.val.getFullYear() - 1900 + 36;
-		return DICT_GZ[0].charAt(i % 10) + DICT_GZ[1].charAt(i % 12);
-	};
-
-	/** 获取实例日期对应的节气
-	 * @returns
-	 */
-	getSolar = (): string => {
-		const [year, month, day] = this.toArr();
-		let y = +year;
-		let m = +month - 1;
-		let d = +day;
-		const sTermInfo = new Array(0, 21208, 42467, 63836, 85337, 107014, 128867, 150921, 173149, 195551, 218072, 240693, 263343, 285989, 308563, 331033, 353350, 375494, 397447, 419210, 440795, 462224, 483532, 504758);
-		const solarTerm = new Array('小寒', '大寒', '立春', '雨水', '惊蛰', '春分', '清明', '谷雨', '立夏', '小满', '芒种', '夏至', '小暑', '大暑', '立秋', '处暑', '白露', '秋分', '寒露', '霜降', '立冬', '小雪', '大雪', '冬至');
-		let solarTerms = '';
-		while (solarTerms == '') {
-			let tmp1 = new Date((31556925974.7 * (y - 1900) + sTermInfo[m * 2 + 1] * 60000) + Date.UTC(1900, 0, 6, 2, 5));
-			let tmp2 = tmp1.getUTCDate();
-			if (tmp2 == d) solarTerms = solarTerm[m * 2 + 1];
-			tmp1 = new Date((31556925974.7 * (y - 1900) + sTermInfo[m * 2] * 60000) + Date.UTC(1900, 0, 6, 2, 5));
-			tmp2 = tmp1.getUTCDate(); if (tmp2 == d) solarTerms = solarTerm[m * 2];
-			if (d > 1) {
-				d = d - 1;
-			} else {
-				m = m - 1;
-				if (m < 0) {
-					y = y - 1; m = 11;
-				}
-				d = 31;
-			}
-		}
-		return solarTerms;
-	};
-
-	/** 获取实例日期所对应的星座
-	 */
-	getSign = (): string => {
-		const Zone = new Array(1222, 122, 222, 321, 421, 522, 622, 722, 822, 922, 1022, 1122, 1222);
-		const [year, month, day] = this.toArr(); // eslint-disable-line
-		const m = month;
-		const d = day;
-		if ((100 * m + d) >= Zone[0] || (100 * m + d) < Zone[1]) {
-			var i = 0;
-		} else {
-			for (var i = 1; i < 12; i++) {
-				if ((100 * m + d) >= Zone[i] && (100 * m + d) < Zone[i + 1]) {
-					break;
-				}
-			}
-		}
-		return DICT_SIGN.substring(2 * i, 2 * i + 2);
-	};
-
-	/** 获取实例日期所对应的属性
-	 */
-	getAnimal = (): string => DICT_ANIMAL.charAt((this.val.getFullYear() - 4) % 12);
-
 	/** 获取相对于实例日期，指定单位数量（天、周、月、年）之前或之后的日期值
 	 *
 	 * @param diffNum 与实例日期间相差的数量（默认单位为天），为正则返回日期在实例日期之后，反之则在实例日期之前
@@ -274,7 +405,7 @@ export class Tdate {
 	 */
 	getOffset = (diffNum: number, diffType?: 'day' | 'week' | 'month' | 'year'): string => {
 		if (typeof diffNum !== 'undefined') {
-			let val = diffNum * 24 * 60 * 60 * 1000;
+			let val = diffNum * MS_DAY;
 			if (diffType === 'week') {
 				val *= 7;
 			} else if (diffType === 'month') {
@@ -362,9 +493,9 @@ export class Tdate {
 			weekOfMonth: this.getWeekOfMonth(local),
 			weekOfYear: this.getWeekOfYear(local),
 			quarter: this.getQuarter(local),
-			isLeap: this.isLeap(),
-			lunar: this.formatLunar(),
-			buddhist: this.formatBh()
+			isLeap: this.isLeap,
+			lunar: this.formatAsLunar(),
+			buddhist: this.formatAsBh()
 		};
 	};
 

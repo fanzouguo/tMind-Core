@@ -1,9 +1,9 @@
 // const { Tmind, tDate, tEcho } = require('tmind-core');
 // const { Tutil, tDate, tEcho, tVerifi } = require('../lib/index');
-const { smpoo } = require('../lib/index');
+const { tdate } = require('../lib/index');
 
 console.clear();
-const nnn = 234;
+const x = tdate('2021-3-28');
 // console.log(`公司：${compay.join('-')}`);
 // console.log(`版权：${appCopy.join('-')}`);
 // console.log(`网址：${website.join('-')}`);
@@ -18,8 +18,31 @@ const nnn = 234;
 // console.log(x1.split('').map(v => v.charCodeAt(0)).join('-'));
 // console.log(`${x2}`.split('').map(v => v.charCodeAt(0)).join('-'));
 // console.log(x3.split('').map(v => v.charCodeAt(0)).join('-'));
-console.log(smpoo);
+console.log(x);
+console.log(x.isLeap, 'isLeap');
+console.log(x.abs, 'abs');
+console.log(x.daysOfMonth, 'daysOfMonth');
+console.log(x.daysOfQuarter, 'daysOfQuarter');
+console.log(x.daysOfYear, 'daysOfYear');
+console.log(x.tiangan, 'tiangan');
+console.log(x.week, 'week');
+console.log(x.weekOfMonth, 'weekOfMonth');
+console.log(x.weekOfYear, 'weekOfYear');
+console.log(x.quarter, 'quarter');
+console.log(x.solar, 'solar');
+console.log(x.sign, 'sign');
+console.log(x.animal, 'animal');
+console.log(x.indexOfQuarter, 'indexOfQuarter');
+console.log(x.indexOfYear, 'indexOfYear');
+console.log(x.ratioOfWeek, 'ratioOfWeek');
+console.log(x.ratioOfMonth, 'ratioOfMonth');
+console.log(x.ratioOfQuarter, 'ratioOfQuarter');
+console.log(x.ratioOfYear, 'ratioOfYear');
 
+console.log(x.getWeekOfMonth(), 'weekOfMonth');
+console.log(x.getWeekOfYear(), 'weekOfYear');
+
+console.log(x.format('dd'));
 //  console.log(__str2u__(x1));
 //  console.log(__str2u__(x2));
 //  console.log(__str2u__(x3));
