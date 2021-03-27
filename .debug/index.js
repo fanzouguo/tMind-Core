@@ -1,8 +1,15 @@
 // const { Tmind, tDate, tEcho } = require('tmind-core');
 // const { Tutil, tDate, tEcho, tVerifi } = require('../lib/index');
 const { tdate } = require('../lib/index');
+// const { tdate, tParse } = require('../lib/index');
 
 console.clear();
+const str1 = '方寸有间';
+const str2 = '智思无限';
+/* eslint-disable */
+console.log(str1.encode.str2UniCode(str1));
+console.log(str2.encode.str2UniCode(str2));
+
 const x = tdate('2021-3-28');
 // console.log(`公司：${compay.join('-')}`);
 // console.log(`版权：${appCopy.join('-')}`);

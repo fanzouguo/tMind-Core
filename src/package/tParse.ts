@@ -1,3 +1,4 @@
+import { Iencode, Idecode } from '../@types/tParse'; /* eslint-disable-line */
 import { bline } from './tEcho';
 
 /** 将传入字符串编码为 uniCode 数组
@@ -26,31 +27,37 @@ const __companyInfo__ = () => {
 	};
 };
 
+const encode: Iencode = {
+	// 字符串转换为
+	toUniCode: __str2u__,
+	/** 转码微信昵称
+	 * @param val
+	 * @returns
+	 */
+	wechatNick: function(): string {
+		return __str2u__(`${this}`).join('-');
+	}
+};
+
+const decode: Idecode = {
+	/** 解码代表字符串的 uniCode 数组，或 uniCode数组元素拼接的字符串
+	 */
+	toStr: __u2Str__,
+	/** 将转码后的数据解析出微信昵称
+	 * @returns
+	 */
+	wechatNick: function (): string {
+		return __u2Str__(`${this}`, '-');
+	}
+};
+
 /** 格式转换器
  */
 const tParse = {
-	encode: {
-		// 字符串转换为
-		str2UniCode: __str2u__,
-		/** 转码微信昵称
-		 * @param val
-		 * @returns
-		 */
-		wechatAliase: function(): string {
-			return __str2u__(`${this}`).join('-');
-		}
-	},
-	decode: {
-		/** 解码代表字符串的 uniCode 数组，或 uniCode数组元素拼接的字符串
-		 */
-		uniCode2Str: __u2Str__,
-		/** 将转码后的数据解析出微信昵称
-		 * @returns
-		 */
-		wechatAliase: function (): string {
-			return __u2Str__(`${this}`, '-');
-		}
-	},
+	/** 将字符串编码为 uniCode格式
+	 */
+	encode,
+	decode,
 	companyInfo: __companyInfo__
 };
 

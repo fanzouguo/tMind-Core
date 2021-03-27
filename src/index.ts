@@ -1,3 +1,5 @@
+/// <reference path="./@types/index.d.ts" />
+
 import * as _tDate from './package/tDate';
 import { bline, tEcho as _tEcho } from './package/tEcho';
 import tParse from './package/tParse';
@@ -30,8 +32,7 @@ String.prototype.mid = __mid__;
 String.prototype.like = __like__;
 String.prototype.upFirst = __upFirst__;
 String.prototype.camelCase = __camelCase__;
-String.prototype.wxAliaseEncode = tParse.encode.wechatAliase;
-String.prototype.wxAliaseDecode = tParse.decode.wechatAliase;
+String.prototype.encode = tParse.encode;
 
 Number.prototype.toPrice = function (typeStr: 'CNY' | 'USD' = 'CNY'): string {
 	return numToPrice.call(this, this.valueOf(), typeStr);
@@ -69,5 +70,6 @@ export default {
 	Tutil: _Tutil,
 	tdate: _tDate.tdate,
 	tEcho: _tEcho,
+	tParse,
 	smpoo: tParse.companyInfo
 };

@@ -1,4 +1,5 @@
-/* eslint-disable no-unused-vars */
+import { Iencode, Idecode } from './tParse';
+
 declare global {
 	// 信息记录类型
 	type MSG_TYPE = '' | 'INFO' | 'SUCC' | 'WARN' | 'ERR' | undefined | null;
@@ -153,15 +154,20 @@ declare global {
 		/** 转换为小驼峰
 		 */
 		toCamelCase(): string;
-		/** 转码微信昵称
-		 * @param val
-		 * @returns
+		/** 将字符串编码为 uniCode格式
 		 */
-		wxAliaseEncode(): string;
-		/** 将转码后的数据解析出微信昵称
-		 * @returns
+		encode: Iencode;
+		/** 解码代表字符串的 uniCode 数组，或 uniCode数组元素拼接的字符串
 		 */
-		wxAliaseDecode(): string;
+		// /** 转码微信昵称
+		//  * @param val
+		//  * @returns
+		//  */
+		// wxAliaseEncode(): string;
+		// /** 将转码后的数据解析出微信昵称
+		//  * @returns
+		//  */
+		// wxAliaseDecode(): string;
 	}
 
 	interface Number extends Number {

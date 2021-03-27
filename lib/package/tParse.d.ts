@@ -1,13 +1,8 @@
+import { Iencode, Idecode } from '../@types/tParse';
 import { bline } from './tEcho';
 declare const tParse: {
-    encode: {
-        str2UniCode: (str: string) => number[];
-        wechatAliase: () => string;
-    };
-    decode: {
-        uniCode2Str: (val: string | number[], sep?: string) => string;
-        wechatAliase: () => string;
-    };
+    encode: Iencode;
+    decode: Idecode;
     companyInfo: () => {
         compay: string;
         appCopy: string;
