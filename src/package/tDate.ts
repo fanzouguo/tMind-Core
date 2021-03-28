@@ -194,7 +194,7 @@ export class Tdate {
 		return DICT_SIGN.substring(2 * i, 2 * i + 2);
 	}
 
-	/** 获取实例日期所对应的属性
+	/** 获取实例日期所对应的属相
 	 */
 	get animal(): string {
 		return DICT_ANIMAL.charAt((this.val.getFullYear() - 4) % 12);
