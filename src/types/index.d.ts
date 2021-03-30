@@ -1,6 +1,7 @@
 declare global {
 	export interface String {
 		format(str: string): string;
+		toGet(str: string): string;
 	}
 }
 

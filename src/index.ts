@@ -12,8 +12,12 @@ const _tEcho_ = (msg: tmind.tMsg): void => {
 const _tFunc_ = (val: string | number): string => `${val}`;
 const _tTest = (str: string): void => { };
 
-String.prototype.format = function(str: string) {
-	return `${str}-fmt`;
+String.prototype.format = function() {
+	return `${this}-fmt is a result from function.`;
+};
+
+String.prototype.toGet = function() {
+	return `${this}-Get.`;
 };
 
 // export default {
