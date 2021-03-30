@@ -11,13 +11,6 @@
 	"parserOptions": {
 		"ecmaVersion": 2020
 	},
-	"globals": {
-		"dateLike": true,
-		"boolLike": true,
-		"MSG_TYPE": true,
-		"IObj": true,
-		"IKv": true
-	},
 	// 规则配置写在这里
 	"rules": {
 		// 要求或禁止 var 声明中的初始化(初值)
@@ -100,13 +93,6 @@
 		],
 		"env": {
 			"jest": true
-		}
-	}, {
-		"files": [
-			"**/*.d.ts"
-		],
-		"rules": {
-			"no-unused-vars": "off"
 		}
 	}]
 }
