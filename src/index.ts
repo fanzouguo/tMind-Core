@@ -10,11 +10,11 @@ const _tEcho_ = (msg: tmind.tMsg): void => {
 };
 
 const _tFunc_ = (val: string | number): string => `${val}`;
-const _tTest = (str: string): void => {};
+const _tTest = (str: string): void => { };
 
-export default {
-	Tutil: _tUtil_,
-	Techo: _tEcho_,
-	Tfunc: _tFunc_,
-	Ttest: _tTest
-};
+// export default {
+export const Tutil = _tUtil_;
+export const Techo = _tEcho_;
+export const Tfunc = _tFunc_;
+export const Ttest = _tTest;
+// };
