@@ -1,4 +1,4 @@
-import { tmind } from './types/global';
+import tmind from './types/index';
 
 const _tUtil_ = (str: string): string => str;
 
@@ -10,7 +10,11 @@ const _tEcho_ = (msg: tmind.tMsg): void => {
 };
 
 const _tFunc_ = (val: string | number): string => `${val}`;
+const _tTest = (str: string): void => {};
 
-export const Tutil = _tUtil_;
-export const Techo = _tEcho_;
-export const Tfunc = _tFunc_;
+export default {
+	Tutil: _tUtil_,
+	Techo: _tEcho_,
+	Tfunc: _tFunc_,
+	Ttest: _tTest
+};
