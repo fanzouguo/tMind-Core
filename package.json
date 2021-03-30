@@ -1,12 +1,12 @@
 {
   "name": "tmind-core",
-  "version": "2.1.51",
+  "version": "2.1.53",
   "description": "This project is automatic created by tMind-Core for tFrameV9 of smpoo Co. in 2021-03-13 07:02:42.668",
   "private": false,
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "type": "commonjs",
-  "typings": "lib/index.d.ts",
+  "typings": "lib/types/index.d.ts",
   "scripts": {
     "clean": "shx rm -rf lib",
     "prePkg": "yarn lint && yarn clean",
@@ -43,5 +43,5 @@
     "ts-node": "~9.1.1"
   },
   "createAt": "2021-03-13 07:02:42.668",
-  "lastBuild": "2021-03-30 15:16:45.388"
+  "lastBuild": "2021-03-30 15:24:50.184"
 }

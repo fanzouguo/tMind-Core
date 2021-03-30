@@ -13,5 +13,5 @@ const _Tutil = (str: msg): string => {
 };
 const _Techo = (val: number): number => val;
 
-export const Tutil = _Tutil;
-export const Techo = _Techo;
+export const Tutila = _Tutil;
+export const Techoa = _Techo;

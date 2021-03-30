@@ -39,7 +39,7 @@ const plugins = [
 	}),
 	tsPlugin({
 		// 导入本地ts配置
-		tsconfig: getPathSpec(basePath, './src/tsconfig.json'),
+		tsconfig: getPathSpec(basePath, 'tsconfig.json'),
 		tsconfigOverride: {
 			compilerOptions: {
 				module: 'ESNext'
