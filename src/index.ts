@@ -12,6 +12,10 @@ const _tEcho_ = (msg: tmind.tMsg): void => {
 const _tFunc_ = (val: string | number): string => `${val}`;
 const _tTest = (str: string): void => { };
 
+String.prototype.format = function(str: string) {
+	return `${str}-fmt`;
+};
+
 // export default {
 export const Tutil = _tUtil_;
 export const Techo = _tEcho_;

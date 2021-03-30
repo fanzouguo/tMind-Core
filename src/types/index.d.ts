@@ -1,8 +1,19 @@
-declare namespace tmind {
-	export type tMsg = 'info' | 'warn' | 'err';
-// }
+declare global {
+	export interface String {
+		format(str: string): string;
+	}
+}
 
-// declare module tmind {
+declare namespace tmind {
+	export type MSG_TYPE = '' | 'INFO' | 'SUCC' | 'WARN' | 'ERR' | undefined | null;
+	export type tMsg = 'info' | 'warn' | 'err';
+
+	export interface IObj<T> {
+		[index: string]: T;
+	}
+}
+
+declare module tmind {
 	function Tutil(str: string): string;
 	function Techo(msg: tmind.tMsg): void;
 	function Tfunc(val: string | number): string;
