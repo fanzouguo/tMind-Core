@@ -1,4 +1,4 @@
-/// <reference types="src/@types" />
+/// <reference types="@types" />
 import * as _tDate from './package/tDate';
 import { bline, tEcho as _tEcho } from './package/tEcho';
 import { Tutil as _Tutil } from './class/Tutil';
