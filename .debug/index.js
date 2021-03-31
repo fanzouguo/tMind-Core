@@ -1,16 +1,19 @@
 // const { Tmind, tDate, tEcho } = require('tmind-core');
 // const { Tutil, tDate, tEcho, tVerifi } = require('../lib/index');
-const { tdate } = require('../lib/index');
+// const { tdate, tCheckType } = require('../lib/index');
+const tmind = require('../lib/index');
+// import * as tmind from '../lib/index';
 // const { tdate, tParse } = require('../lib/index');
 
 console.clear();
-const str1 = '方寸有间';
-const str2 = '智思无限';
-/* eslint-disable */
-console.log(str1.encode.str2UniCode(str1));
-console.log(str2.encode.str2UniCode(str2));
+console.log(tmind);
+// const str1 = '方寸有间';
+// const str2 = '智思无限';
+// /* eslint-disable */
+// console.log(str1.encode.str2UniCode(str1));
+// console.log(str2.encode.str2UniCode(str2));
 
-const x = tdate('2021-3-28');
+// const x = tdate('2021-3-28');
 // console.log(`公司：${compay.join('-')}`);
 // console.log(`版权：${appCopy.join('-')}`);
 // console.log(`网址：${website.join('-')}`);
@@ -25,95 +28,96 @@ const x = tdate('2021-3-28');
 // console.log(x1.split('').map(v => v.charCodeAt(0)).join('-'));
 // console.log(`${x2}`.split('').map(v => v.charCodeAt(0)).join('-'));
 // console.log(x3.split('').map(v => v.charCodeAt(0)).join('-'));
-console.log(x);
-console.log(x.isLeap, 'isLeap');
-console.log(x.abs, 'abs');
-console.log(x.daysOfMonth, 'daysOfMonth');
-console.log(x.daysOfQuarter, 'daysOfQuarter');
-console.log(x.daysOfYear, 'daysOfYear');
-console.log(x.tiangan, 'tiangan');
-console.log(x.week, 'week');
-console.log(x.weekOfMonth, 'weekOfMonth');
-console.log(x.weekOfYear, 'weekOfYear');
-console.log(x.quarter, 'quarter');
-console.log(x.solar, 'solar');
-console.log(x.sign, 'sign');
-console.log(x.animal, 'animal');
-console.log(x.indexOfQuarter, 'indexOfQuarter');
-console.log(x.indexOfYear, 'indexOfYear');
-console.log(x.ratioOfWeek, 'ratioOfWeek');
-console.log(x.ratioOfMonth, 'ratioOfMonth');
-console.log(x.ratioOfQuarter, 'ratioOfQuarter');
-console.log(x.ratioOfYear, 'ratioOfYear');
 
-console.log(x.getWeekOfMonth(), 'weekOfMonth');
-console.log(x.getWeekOfYear(), 'weekOfYear');
+// console.log(x);
+// console.log(x.isLeap, 'isLeap');
+// console.log(x.abs, 'abs');
+// console.log(x.daysOfMonth, 'daysOfMonth');
+// console.log(x.daysOfQuarter, 'daysOfQuarter');
+// console.log(x.daysOfYear, 'daysOfYear');
+// console.log(x.tiangan, 'tiangan');
+// console.log(x.week, 'week');
+// console.log(x.weekOfMonth, 'weekOfMonth');
+// console.log(x.weekOfYear, 'weekOfYear');
+// console.log(x.quarter, 'quarter');
+// console.log(x.solar, 'solar');
+// console.log(x.sign, 'sign');
+// console.log(x.animal, 'animal');
+// console.log(x.indexOfQuarter, 'indexOfQuarter');
+// console.log(x.indexOfYear, 'indexOfYear');
+// console.log(x.ratioOfWeek, 'ratioOfWeek');
+// console.log(x.ratioOfMonth, 'ratioOfMonth');
+// console.log(x.ratioOfQuarter, 'ratioOfQuarter');
+// console.log(x.ratioOfYear, 'ratioOfYear');
 
-console.log(x.format('dd'));
-//  console.log(__str2u__(x1));
-//  console.log(__str2u__(x2));
-//  console.log(__str2u__(x3));
+// console.log(x.getWeekOfMonth(), 'weekOfMonth');
+// console.log(x.getWeekOfYear(), 'weekOfYear');
 
-
-// const testFunc = function (obj, def) {
-// 	def.forEach(v => {
-// 		const [a, ...b] = v;
-// 		try {
-// 			tEcho(`${a}(${b.join(',')})`, a, 'INFO');
-// 			console.log(obj[a].apply(obj, b));
-// 		} catch (err) {
-// 			console.error(err);
-// 		}
-// 	});
-// }
-
-// const _caseTDate = [
-// 	['getAnimal'],
-// 	['format', 'yyyy-dd-mm'],
-//   ['getAbs'],
-//   ['getWeek'],
-//   ['getWeekOfMonth'],
-//   ['getWeekOfYear'],
-//   ['getQuarter'],
-//   ['getDaysMonth'],
-//   ['getDaysYear'],
-//   ['isLeap'],
-//   ['getTiangan'],
-//   ['getSolar'],
-//   ['getSign'],
-//   ['getAnimal'],
-//   ['getOffset', '23', 'day'],
-//   ['getDiff', '2021-03-31'],
-//   ['getDiff', '2021-03-31', 'ms'],
-//   ['getDiff', '2021-03-31', 'second'],
-//   ['getDiff', '2021-03-31', 'minute'],
-//   ['getDiff', '2021-03-31', 'hour'],
-//   ['getDiff', '2021-03-31', 'day'],
-//   ['getDiff', '2021-03-31', 'week'],
-//   ['getDiff', '2021-03-31', 'month'],
-//   ['getDiff', '2021-03-31', 'year'],
-//   ['toNumber'],
-//   ['toNumber', true],
-//   ['toNumber', true, 'hh-mi'],
-//   ['toJson'],
-//   ['toArr'],
-//   ['format'],
-//   ['formatCn'],
-//   ['formatCn', true],
-//   ['formatCn', true, true],
-//   ['formatLunar'],
-//   ['formatBh'],
-//   ['formatWorld']
-// ];
-
-// const x = tDate('2021-10-01 10:03:30');
-// // testFunc(x, _caseTDate);
-// console.log('*************');
+// console.log(x.format('dd'));
+// //  console.log(__str2u__(x1));
+// //  console.log(__str2u__(x2));
+// //  console.log(__str2u__(x3));
 
 
-// console.log('\n\n\n---------------------------------------------------------------------\n当前运行在 dev 模式下，执行的是 JS 脚本');
+// // const testFunc = function (obj, def) {
+// // 	def.forEach(v => {
+// // 		const [a, ...b] = v;
+// // 		try {
+// // 			tEcho(`${a}(${b.join(',')})`, a, 'INFO');
+// // 			console.log(obj[a].apply(obj, b));
+// // 		} catch (err) {
+// // 			console.error(err);
+// // 		}
+// // 	});
+// // }
+
+// // const _caseTDate = [
+// // 	['getAnimal'],
+// // 	['format', 'yyyy-dd-mm'],
+// //   ['getAbs'],
+// //   ['getWeek'],
+// //   ['getWeekOfMonth'],
+// //   ['getWeekOfYear'],
+// //   ['getQuarter'],
+// //   ['getDaysMonth'],
+// //   ['getDaysYear'],
+// //   ['isLeap'],
+// //   ['getTiangan'],
+// //   ['getSolar'],
+// //   ['getSign'],
+// //   ['getAnimal'],
+// //   ['getOffset', '23', 'day'],
+// //   ['getDiff', '2021-03-31'],
+// //   ['getDiff', '2021-03-31', 'ms'],
+// //   ['getDiff', '2021-03-31', 'second'],
+// //   ['getDiff', '2021-03-31', 'minute'],
+// //   ['getDiff', '2021-03-31', 'hour'],
+// //   ['getDiff', '2021-03-31', 'day'],
+// //   ['getDiff', '2021-03-31', 'week'],
+// //   ['getDiff', '2021-03-31', 'month'],
+// //   ['getDiff', '2021-03-31', 'year'],
+// //   ['toNumber'],
+// //   ['toNumber', true],
+// //   ['toNumber', true, 'hh-mi'],
+// //   ['toJson'],
+// //   ['toArr'],
+// //   ['format'],
+// //   ['formatCn'],
+// //   ['formatCn', true],
+// //   ['formatCn', true, true],
+// //   ['formatLunar'],
+// //   ['formatBh'],
+// //   ['formatWorld']
+// // ];
+
+// // const x = tDate('2021-10-01 10:03:30');
+// // // testFunc(x, _caseTDate);
+// // console.log('*************');
 
 
-// const APP_RIGHT_SYMBOL = ['      ___           ___           ___           ___           ___     ', 		'     /\\  \\         /\\__\\         /\\  \\         /\\  \\         /\\  \\    ', 		'    /::\\  \\       /::|  |       /::\\  \\       /::\\  \\       /::\\  \\   ', 		'   /:/\\ \\  \\     /:|:|  |      /:/\\:\\  \\     /:/\\:\\  \\     /:/\\:\\  \\  ', 		'  _\\:\\-\\ \\  \\   /:/|:|__|__   /::\\-\\:\\  \\   /:/  \\:\\  \\   /:/  \\:\\  \\ ', 		' /\\ \\:\\ \\ \\__\\ /:/ |::::\\__\\ /:/\\:\\ \\:\\__\\ /:/__/ \\:\\__\\ /:/__/ \\:\\__\\ ', 		' \\:\\ \\:\\ \\/__/ \\/__/--/:/  / \\/__\\:\\/:/  / \\:\\  \\ /:/  / \\:\\  \\ /:/  / ', 		'  \\:\\ \\:\\__\\         /:/  /       \\::/  /   \\:\\  /:/  /   \\:\\  /:/  / ', 		'   \\:\\/:/  /        /:/  /         \\/__/     \\:\\/:/  /     \\:\\/:/  /  ', 		'    \\::/  /        /:/  /                     \\::/  /       \\::/  /   ', 		'     \\/__/         \\/__/                       \\/__/         \\/__/    ', 		'\n                       上海深普软件有限公司 - www.smpoo.com'];
+// // console.log('\n\n\n---------------------------------------------------------------------\n当前运行在 dev 模式下，执行的是 JS 脚本');
 
-// console.log(APP_RIGHT_SYMBOL.join('\n'));
+
+const APP_RIGHT_SYMBOL = ['      ___           ___           ___           ___           ___     ', 		'     /\\  \\         /\\__\\         /\\  \\         /\\  \\         /\\  \\    ', 		'    /::\\  \\       /::|  |       /::\\  \\       /::\\  \\       /::\\  \\   ', 		'   /:/\\ \\  \\     /:|:|  |      /:/\\:\\  \\     /:/\\:\\  \\     /:/\\:\\  \\  ', 		'  _\\:\\-\\ \\  \\   /:/|:|__|__   /::\\-\\:\\  \\   /:/  \\:\\  \\   /:/  \\:\\  \\ ', 		' /\\ \\:\\ \\ \\__\\ /:/ |::::\\__\\ /:/\\:\\ \\:\\__\\ /:/__/ \\:\\__\\ /:/__/ \\:\\__\\ ', 		' \\:\\ \\:\\ \\/__/ \\/__/--/:/  / \\/__\\:\\/:/  / \\:\\  \\ /:/  / \\:\\  \\ /:/  / ', 		'  \\:\\ \\:\\__\\         /:/  /       \\::/  /   \\:\\  /:/  /   \\:\\  /:/  / ', 		'   \\:\\/:/  /        /:/  /         \\/__/     \\:\\/:/  /     \\:\\/:/  /  ', 		'    \\::/  /        /:/  /                     \\::/  /       \\::/  /   ', 		'     \\/__/         \\/__/                       \\/__/         \\/__/    ', 		'\n                       上海深普软件有限公司 - www.smpoo.com'];
+
+console.log(APP_RIGHT_SYMBOL.join('\n'));

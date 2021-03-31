@@ -1,5 +1,5 @@
 import tmind from '../types/index';
-import _checkType_ from '../package/tCheckType';
+import { tCheckType } from '../package/tCheckType';
 
 function testMoveUp(arr: tmind.IObj<any>[], fromIdx: number,  destIdx: number, itemCount: number, orderField: string): void {
 	const [a, b] = [destIdx, fromIdx];
@@ -61,7 +61,7 @@ function arrMoveItem<T> (arr: T[], fromIdx: number,  destIdx: number, itemCount:
  *  本重载不会改动数组内元素的排列顺序，仅对元素的 orderIdx 字段安装新的顺序重新赋值
  */
 function arrMoveItem(arr: tmind.IObj<any>[], fromIdx: number,  destIdx: number, itemCount: number, orderField: string): void {
-	const _tp = _checkType_(arr[0]);
+	const _tp = tCheckType(arr[0]);
 	if (_tp === tmind.ETYPE.object) {
 		if (fromIdx > destIdx) {
 			testMoveUp(arr, fromIdx,  destIdx, itemCount, orderField);

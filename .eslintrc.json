@@ -1,7 +1,8 @@
 {
 	"root": true,
 	"env": {
-		"node": true
+		"node": true,
+		"jest": true
 	},
 	// 为eslint指定解析器
 	"parser": "@typescript-eslint/parser",

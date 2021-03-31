@@ -8,7 +8,7 @@ import Tutil from './class/Tutil';
 import * as _tdate_ from './package/tDate';
 import * as _tPinyin_ from './package/tPinyin';
 import * as _tVerifi_ from './package/tVerifi';
-import * as _tCheckType_ from './package/tCheckType';
+import { tCheckType as _tCheckType_ } from './package/tCheckType';
 
 String.prototype.len = __len__;
 String.prototype.lenfrom0 = __lenfrom0__;
