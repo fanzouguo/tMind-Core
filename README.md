@@ -48,10 +48,11 @@ yarn test-c
 yarn lint
 ```
 
-> ##### [使用用例](./example/useage.md)
+> ##### [使用用例](./docs/useage.md)
 
 
 
-### Customize configuration
+> #### About
 See [About more](https://www.smpoo.com).
+See [gitHub repo](https://github.com/fanzouguo/tMind-Core.git).
 

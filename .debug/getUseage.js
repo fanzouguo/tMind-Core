@@ -172,6 +172,8 @@ module.exports = async inConsole => {
 	if (inConsole) {
 		console.log(str);
 	} else {
-		fs.writeFileSync(path.resolve(process.cwd(), 'example/useage.md'), str);
+		const docRoot = path.resolve(process.cwd(), 'docs');
+		fs.ensureDirSync(docRoot)
+		fs.writeFileSync(path.resolve(docRoot, 'useage.md'), str);
 	}
 };

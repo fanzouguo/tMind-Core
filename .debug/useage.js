@@ -2,7 +2,6 @@ const { smpoo, TUtil, tEcho, tCheckType, tDate, tVerifi, tPinyin } = require('..
 
 const __tmpEncode__ = TUtil.encode.toUniCode('tFrameV9 平台');
 const __tmpWxNickCode__ = TUtil.encode.wechatNick('微信昵称"特殊字" ℃');
-tEcho(__tmpWxNickCode__, '微信', 'INFO');
 const _currTdate = tDate();
 
 module.exports = {
