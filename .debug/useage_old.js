@@ -1,14 +1,25 @@
-// const { Tmind, tDate, tEcho } = require('tmind-core');
-// const { Tutil, tDate, tEcho, tVerifi } = require('../lib/index');
-// const { tdate, tCheckType } = require('../lib/index');
-const tmind = require('../lib/index');
-// import * as tmind from '../lib/index';
-// const { tdate, tParse } = require('../lib/index');
+/* eslint-disable no-console */
+const { smpoo, TUtil } = require('../lib/index');
+
+const echo = (...param) => {
+	const [a, b, ...c] = param;
+	const _tp = typeof b;
+	if (_tp === 'function') {
+		console.log(`${a}(${c.join(', ')}) output：${b.apply(b, c)}`);
+	} else {
+		console.log(`${a} = `, b);
+	}
+};
 
 console.clear();
-console.log(tmind);
-// const str1 = '方寸有间';
-// const str2 = '智思无限';
+const _objSmpoo = smpoo();
+console.log(_objSmpoo.consoleStr());
+console.log(Object.keys(_objSmpoo));
+echo('TUtil.inBrowser', TUtil.inBrowser);
+echo('TUtil.NUM_TO_STR', TUtil.NUM_TO_STR);
+echo('TUtil.encode.toUniCode', TUtil.encode.toUniCode, 'tFrameV9 平台');
+// echo('TUtil.decode', TUtil.decode.toStr());
+
 // /* eslint-disable */
 // console.log(str1.encode.str2UniCode(str1));
 // console.log(str2.encode.str2UniCode(str2));
@@ -115,9 +126,4 @@ console.log(tmind);
 // // console.log('*************');
 
 
-// // console.log('\n\n\n---------------------------------------------------------------------\n当前运行在 dev 模式下，执行的是 JS 脚本');
-
-
-const APP_RIGHT_SYMBOL = ['      ___           ___           ___           ___           ___     ', 		'     /\\  \\         /\\__\\         /\\  \\         /\\  \\         /\\  \\    ', 		'    /::\\  \\       /::|  |       /::\\  \\       /::\\  \\       /::\\  \\   ', 		'   /:/\\ \\  \\     /:|:|  |      /:/\\:\\  \\     /:/\\:\\  \\     /:/\\:\\  \\  ', 		'  _\\:\\-\\ \\  \\   /:/|:|__|__   /::\\-\\:\\  \\   /:/  \\:\\  \\   /:/  \\:\\  \\ ', 		' /\\ \\:\\ \\ \\__\\ /:/ |::::\\__\\ /:/\\:\\ \\:\\__\\ /:/__/ \\:\\__\\ /:/__/ \\:\\__\\ ', 		' \\:\\ \\:\\ \\/__/ \\/__/--/:/  / \\/__\\:\\/:/  / \\:\\  \\ /:/  / \\:\\  \\ /:/  / ', 		'  \\:\\ \\:\\__\\         /:/  /       \\::/  /   \\:\\  /:/  /   \\:\\  /:/  / ', 		'   \\:\\/:/  /        /:/  /         \\/__/     \\:\\/:/  /     \\:\\/:/  /  ', 		'    \\::/  /        /:/  /                     \\::/  /       \\::/  /   ', 		'     \\/__/         \\/__/                       \\/__/         \\/__/    ', 		'\n                       上海深普软件有限公司 - www.smpoo.com'];
-
-console.log(APP_RIGHT_SYMBOL.join('\n'));
+console.log('\n\n\n---------------------------------------------------------------------\n当前运行在 dev 模式下，执行的是 JS 脚本');

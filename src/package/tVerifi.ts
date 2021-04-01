@@ -16,6 +16,7 @@ class TVerifi implements tmind.ItVerifi {
 	/** 构造类
 	 *
 	 * @param val 要校验的字符串或数字
+	 * @param alias 用于校验（成功或失败）时，规则提示的别称
 	 * @param fullCheck 对于链式调用，是否全链校验，而不论中间是否已存在校验失败。默认为否，即一旦任何一链失败，则立即终止校验
 	 */
 	constructor(val: string | number, alias?: string, fullCheck?: boolean) {
@@ -132,6 +133,12 @@ class TVerifi implements tmind.ItVerifi {
 	carNum = (opt: tmind.IverifiOpt = DEFAULT_OPT): TVerifi => this.preResult(/^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1}$/.test(this.val), '不是有效的车牌号', '不允许类似车牌号的数据', opt);
 }
 
-export function tVerifi (val: string | number, alias?: string, fullCheck?: boolean): tmind.ItVerifi {
+/** 校验函数
+ *
+ * @param val 要校验的字符串或数字
+ * @param alias 用于校验（成功或失败）时，规则提示的别称
+ * @param fullCheck 对于链式调用，是否全链校验，而不论中间是否已存在校验失败。默认为否，即一旦任何一链失败，则立即终止校验
+ */
+export function tVerifi(val: string | number, alias?: string, fullCheck?: boolean): tmind.ItVerifi {
 	return new TVerifi(val, alias, fullCheck);
 }

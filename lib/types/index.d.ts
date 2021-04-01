@@ -601,6 +601,13 @@ declare module tmind {
 	export function tdate(val: null): Tdate;
 	export function tdate(val?: unknown): Tdate
 
+
+	/** 校验函数
+	 *
+	 * @param val 要校验的字符串或数字
+	 * @param alias 用于校验（成功或失败）时，规则提示的别称
+	 * @param fullCheck 对于链式调用，是否全链校验，而不论中间是否已存在校验失败。默认为否，即一旦任何一链失败，则立即终止校验
+	 */
 	export function tVerifi(val: string | number, alias?: string, fullCheck?: boolean): tmind.ItVerifi;
 
 	export const tPinyin = tmind.Itpinying;

@@ -5,9 +5,9 @@ import { bline, techo as _techo_ } from './package/tEcho';
 // import { deepClone } from './baseType/tObj';
 import { encode, companyInfo } from './package/tParse';
 import Tutil from './class/Tutil';
-import * as _tdate_ from './package/tDate';
+import { tdate as _tdate_ } from './package/tDate';
 import * as _tPinyin_ from './package/tPinyin';
-import * as _tVerifi_ from './package/tVerifi';
+import { tVerifi as _tVerifi_ } from './package/tVerifi';
 import { tCheckType as _tCheckType_ } from './package/tCheckType';
 
 String.prototype.len = __len__;

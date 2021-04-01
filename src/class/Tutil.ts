@@ -12,7 +12,6 @@ class Tutil {
 	};
 	static encode: tmind.Iencode = encode;
 	static decode: tmind.Idecode = decode;
-	constructor() {}
 }
 
 export default Tutil;
