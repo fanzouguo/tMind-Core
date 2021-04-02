@@ -535,7 +535,6 @@ declare module tmind {
 	export function tdate(y: number, m: number, d?: number | undefined, h?: number | undefined, mi?: number | undefined, s?: number | undefined, ms?: number | undefined): Tdate;
 	export function tdate(val: null): Tdate;
 	export function tdate(val?: unknown): Tdate;
-	export const tPinyin = tmind.Itpinying;
 	export namespace tPinyin {
 		/** 依据传入中文数组的首字母分组
 		 *
