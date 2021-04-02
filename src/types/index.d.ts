@@ -553,7 +553,7 @@ declare module tmind {
 	export function tdate(val?: unknown): Tdate;
 	export const tPinyin = tmind.Itpinying;
 
-	export namespace TVerifi {
+	export namespace tVerifi {
 		/** 获取系统支持的校验规则及规则别名的键值对（键值对中的规则别名仅为中性描述，不包含任何允许或禁止意向）
 		 */
 		export function getRules(): tmind.IObj<string>;
