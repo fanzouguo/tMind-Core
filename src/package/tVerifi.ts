@@ -100,6 +100,7 @@ class TVerifi implements tmind.TVerifi {
 	}
 }
 
+
 /** 有效性校验函数
  *
  * @param val 要校验的值，支持校验的值类型为：（string | number | boolean | null | undefined）
@@ -111,14 +112,10 @@ class TVerifi implements tmind.TVerifi {
  * 									若设为 false，则链式校验中，任何一环校验失败，立即结束校验
  * @returns
  */
-export default function tverifi(val?: tmind.verifiAble, immediately?: boolean, alias?: string, fullCheck?: boolean): TVerifi | typeof tmind.TVerifi | boolean {
+export default function tverifi(val?: tmind.verifiAble, alias?: string, fullCheck?: boolean): TVerifi | typeof tmind.TVerifi {
 	if (typeof val === 'undefined') {
 		return TVerifi;
 	} else {
-		if (immediately) {
-			return new TVerifi(val, alias, fullCheck).isOk;
-		} else {
-			return new TVerifi(val, alias, fullCheck);
-		}
+		return new TVerifi(val, alias, fullCheck);
 	}
 }
