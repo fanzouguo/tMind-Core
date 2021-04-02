@@ -56,7 +56,7 @@ const RULES: tmind.IObj<rullItem> = {
 // 	}
 // };
 
-class TVerifi implements tmind.ItVerifi {
+class TVerifi implements tmind.TVerifi {
 	#val: tmind.verifiAble;
 	#alias: string;
 	#fullCheck: boolean;
@@ -95,7 +95,7 @@ class TVerifi implements tmind.ItVerifi {
 		return _obj;
 	}
 
-	isNum = (opt: tmind.IverifiOpt): tmind.ItVerifi => {
+	isNum = (opt: tmind.IverifiOpt): tmind.TVerifi => {
 		return this;
 	}
 }
@@ -111,7 +111,7 @@ class TVerifi implements tmind.ItVerifi {
  * 									若设为 false，则链式校验中，任何一环校验失败，立即结束校验
  * @returns
  */
-export default function tverifi(val?: tmind.verifiAble, immediately?: boolean, alias?: string, fullCheck?: boolean): typeof TVerifi | tmind.ItVerifi | boolean {
+export default function tverifi(val?: tmind.verifiAble, immediately?: boolean, alias?: string, fullCheck?: boolean): TVerifi | typeof tmind.TVerifi | boolean {
 	if (typeof val === 'undefined') {
 		return TVerifi;
 	} else {
