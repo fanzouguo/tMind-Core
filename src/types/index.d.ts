@@ -633,7 +633,7 @@ declare module tmind {
  * 									若设为 false，则链式校验中，任何一环校验失败，立即结束校验
  * @returns
  */
-	export function tVerifi(val: tmind.verifiAble, immediately?: boolean, alias?: string, fullCheck?: boolean): tmind.ItVerifi | boolean;
+	export function tVerifi(val?: tmind.verifiAble, immediately?: boolean, alias?: string, fullCheck?: boolean): tmind.ItVerifi | boolean;
 
 	export const tPinyin = tmind.Itpinying;
 }
