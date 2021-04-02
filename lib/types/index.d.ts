@@ -167,79 +167,80 @@ declare namespace tmind {
 	}
 
 	export interface ItVerifi {
-		/** 判断参数是否为有效进制的数字或形似数字的字符
-		 *
-		 * @param val 要判断的参数
-		 * @param numType 要判断的参数，默认判断十进制
-		 * @returns 若符合，则返回 True，反之亦反
-		 */
-		isNum: (opt: IverifiOpt) => ItVerifi,
+		isOk: boolean;
+		// /** 判断参数是否为有效进制的数字或形似数字的字符
+		//  *
+		//  * @param val 要判断的参数
+		//  * @param numType 要判断的参数，默认判断十进制
+		//  * @returns 若符合，则返回 True，反之亦反
+		//  */
+		// isNum: (opt: IverifiOpt) => ItVerifi,
 
-		// 包含空格
-		strSpaceHas: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // 包含空格
+		// strSpaceHas: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// 包含特殊符号
-		strSpeciaHas: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // 包含特殊符号
+		// strSpeciaHas: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// 包含中文
-		strCnHas: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // 包含中文
+		// strCnHas: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// 纯英文字母
-		strEnOnly: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // 纯英文字母
+		// strEnOnly: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// 用户名，4到16位（字母，数字，下划线，减号）
-		userName: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // 用户名，4到16位（字母，数字，下划线，减号）
+		// userName: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// 密码强度，最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符
-		uPwd: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // 密码强度，最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符
+		// uPwd: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// 数字
-		num: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // 数字
+		// num: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// 整数
-		numInt: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // 整数
+		// numInt: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// 正数
-		numPos: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // 正数
+		// numPos: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// 负数
-		numNag: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // 负数
+		// numNag: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// 正整数
-		numIntPos: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // 正整数
+		// numIntPos: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// 负整数
-		numIntNag: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // 负整数
+		// numIntNag: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// Email
-		email: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // Email
+		// email: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// 手机号
-		mobile: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // 手机号
+		// mobile: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// 固定电话
-		telphone: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // 固定电话
+		// telphone: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// 身份证号（18位）
-		idCard: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // 身份证号（18位）
+		// idCard: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// URL
-		url: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // URL
+		// url: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// ipv4地址
-		ip: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // ipv4地址
+		// ip: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// RGB Hex颜色
-		rgbHex: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // RGB Hex颜色
+		// rgbHex: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// 日期时间
-		date: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // 日期时间
+		// date: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// 微信号，6至20位，以字母开头，字母，数字，减号，下划线
-		wechatNo: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // 微信号，6至20位，以字母开头，字母，数字，减号，下划线
+		// wechatNo: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 
-		// 车牌号
-		carNum: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
+		// // 车牌号
+		// carNum: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
 	}
 
 	export interface Isort {

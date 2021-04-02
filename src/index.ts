@@ -7,7 +7,8 @@ import { encode, companyInfo } from './package/tParse';
 import Tutil from './class/Tutil';
 import { tdate as _tdate_ } from './package/tDate';
 import * as _tPinyin_ from './package/tPinyin';
-import { tVerifi as _tVerifi_ } from './package/tVerifi';
+// import { tVerifi as _tVerifi_ } from './package/tVerifi';
+import tverifi from './package/tVerifi';
 import { tCheckType as _tCheckType_ } from './package/tCheckType';
 
 String.prototype.len = __len__;
@@ -67,5 +68,5 @@ export const TUtil = Tutil;
 export const tCheckType = _tCheckType_;
 export const tEcho = _techo_;
 export const tDate = _tdate_;
-export const tVerifi = _tVerifi_;
+export const tVerifi = tverifi;
 export const tPinyin = _tPinyin_;
