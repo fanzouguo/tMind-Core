@@ -592,13 +592,13 @@ declare module tmind {
 		/** 校验参数
 		 */
 		export interface Irule {
-			/** 正则断言为匹配时的值
-			 *  默认为 TRUE，若设为 FALSE，设为断言匹配，但需拒绝
-			 */
-			trueVal: boolean,
 			/** 支持的校验模版
 			 */
 			patten: tmind.VERIFI_RULE,
+			/** 正则断言为匹配时的值
+			 *  默认为 TRUE，若设为 FALSE，设为断言匹配，但需拒绝
+			 */
+			trueVal?: boolean,
 			/** 校验规则中要求的最小长度
 			 */
 			minLen?: number,

@@ -58,9 +58,17 @@ class TVerifi implements tmind.TVerifi {
 	constructor(val: tmind.verifiAble, fullCheck?: boolean, ...rules: tmind.tVerifi.Irule[]) {
 		this.#val = val;
 		this.#isOk = false;
-		this.#fullCheck = fullCheck ? true : false;
-		this.#reason = rules;
+		this.#fullCheck = fullCheck ?? false;
 		this.#checked = false;
+		this.#reason = [];
+		for (const v of rules) {
+			if (v.patten) {
+				v.trueVal = typeof v.trueVal === 'undefined' ? true : v.trueVal;
+				v.isOk = false;
+				v.reason = '';
+				this.#reason.push(v);
+			}
+		}
 	}
 
 	/** 获取当前实例校验结果
