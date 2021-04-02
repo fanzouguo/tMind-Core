@@ -2,11 +2,11 @@ import tmind from '../types/index';
 
 type rullItem = {
 	title: string,
-	func: (val: tmind.verifiAble, opt: tmind.IverifiOpt) => boolean
+	func: (val: tmind.verifiAble, opt: tmind.tVerifi.Irule) => boolean
 };
 
 // 默认校验参数
-// const DEFAULT_OPT: tmind.IverifiOpt = {
+// const DEFAULT_OPT: tmind.tVerifi.Irule = {
 // 	trueVal: true,
 // 	numType: '10'
 // };
@@ -24,7 +24,7 @@ const pattern = {
 const RULES: tmind.IObj<rullItem> = {
 	isNum: {
 		title: '为纯数字',
-		func: (val: tmind.verifiAble, opt: tmind.IverifiOpt): boolean => {
+		func: (val: tmind.verifiAble, opt: tmind.tVerifi.Irule): boolean => {
 			const _tp = typeof val;
 			if (_tp === 'number' || _tp === 'string') {
 				if (opt.numType === '2') return pattern['2'].test(`${val}`);
@@ -40,47 +40,45 @@ const RULES: tmind.IObj<rullItem> = {
 	},
 	hasSpace: {
 		title: '是否包含空格',
-		func: (val: tmind.verifiAble, opt: tmind.IverifiOpt): boolean => (typeof val === 'string') && /\s+/.test(`${val}`)
+		func: (val: tmind.verifiAble, opt: tmind.tVerifi.Irule): boolean => (typeof val === 'string') && /\s+/.test(`${val}`)
 	},
 	hasSpecial: {
 		title: '是否包含特殊字符',
-		func: (val: tmind.verifiAble, opt: tmind.IverifiOpt): boolean => (typeof val === 'string')
+		func: (val: tmind.verifiAble, opt: tmind.tVerifi.Irule): boolean => (typeof val === 'string')
 	}
 };
 
-// const typeAllow = (val: tmind.verifiAble, allowType: keyof typeof tmind.verifiAble): boolean => {
-// 	if (typeof val in typeof tmind.verifiAble) {
-
-// 	} else {
-// 		return false;
-// 	}
-// };
-
 class TVerifi implements tmind.TVerifi {
 	#val: tmind.verifiAble;
-	#alias: string;
+	#isOk: boolean;
 	#fullCheck: boolean;
-	#break: boolean;
-	#reason: string[];
-	#checkOk: boolean;
-	#typeAllow: (allowType: keyof tmind.verifiAble) => boolean;
+	#reason: tmind.tVerifi.Irule[];
+	#checked: boolean;
 
-	constructor(val: tmind.verifiAble, alias?: string, fullCheck?: boolean) {
+	constructor(val: tmind.verifiAble, fullCheck?: boolean, ...rules: tmind.tVerifi.Irule[]) {
 		this.#val = val;
-		this.#alias = alias || '';
-		this.#break = false;
-		this.#reason = [];
-		this.#fullCheck = !!(fullCheck);
-		this.#checkOk = false;
-		this.#typeAllow = (allowType: keyof tmind.verifiAble): boolean => {
-			return (typeof val) in allowType;
-		};
+		this.#isOk = false;
+		this.#fullCheck = fullCheck ? true : false;
+		this.#reason = rules;
+		this.#checked = false;
 	}
 
 	/** 获取当前实例校验结果
 	 */
 	get isOk(): boolean {
-		return this.#checkOk;
+		if (!this.#checked) {
+			for (const v of this.#reason) {
+				const b = RULES[v.patten].func(this.#val, v);
+				v.isOk = b;
+				v.reason = '';
+				this.#isOk = this.#isOk && b;
+				if (!this.#fullCheck && !b) {
+					break;
+				}
+			}
+			this.#checked = true;
+		}
+		return this.#isOk;
 	}
 
 	/** 获取系统支持的校验规则及规则别名的键值对（键值对中的规则别名仅为中性描述，不包含任何允许或禁止意向）
@@ -95,7 +93,7 @@ class TVerifi implements tmind.TVerifi {
 		return _obj;
 	}
 
-	isNum = (opt: tmind.IverifiOpt): tmind.TVerifi => {
+	isNum = (opt: tmind.tVerifi.Irule): tmind.TVerifi => {
 		return this;
 	}
 }
@@ -104,16 +102,13 @@ class TVerifi implements tmind.TVerifi {
 	/** 获取系统支持的校验规则及规则别名的键值对（键值对中的规则别名仅为中性描述，不包含任何允许或禁止意向）
 	 */
 	export const getRules = TVerifi.getRules;
-	/** 有效性校验函数
+	/** 执行有效性校验
 	 * @param val 要校验的值，支持校验的值类型为：（string | number | boolean | null | undefined）
-	 * @param immediately 立即返回校验结论，如果设为 true，则返回布尔类型的校验结论，
-	 * 										设为否则支持链式校验，但需在链尾通过 isOk 属性来判断真假（除非在链尾最后一环的规则参数中也将immediately设为true）
-	 * @param alias 校验规则的别名，用于校验报告中的用户友好化提示
-	 * @param fullCheck 是否需要全链完整校验，
-	 * 									若设为 true，则在链式校验时，不论中间环节是否校验成功，均完整执行各环节校验，并将各环节的校验结果记录到校验报告中
-	 * 									若设为 false，则链式校验中，任何一环校验失败，立即结束校验
+	 * @param fullCheck 链式校验过程中，是否强制全链遍历
+	 *  			若为 false，则任何一环校验失败，则立即终止校验
+	 * @param rules 校验规则组
 	 * @returns
 	 */
-	export function exec(val: tmind.verifiAble, alias?: string, fullCheck?: boolean): tmind.TVerifi {
-		return new TVerifi(val, alias, fullCheck);
+	export function check(val: tmind.verifiAble, fullCheck?: boolean, ...rules: tmind.tVerifi.Irule[]): boolean {
+		return (new TVerifi(val, fullCheck, ...rules)).isOk;
 	}

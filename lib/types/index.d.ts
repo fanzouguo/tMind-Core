@@ -118,69 +118,94 @@ declare global {
 	}
 }
 
+
+type IObj1<T> = {
+	[P in keyof T]: T[P];
+}
+
+type IObj2<T> = {
+	[P in keyof T]: any;
+}
+
 declare namespace tmind {
-	export type MSG_TYPE = '' | 'INFO' | 'SUCC' | 'WARN' | 'ERR' | undefined | null;
+	/** 全局输出信息类型
+	 */
+	export declare type MSG_TYPE = '' | 'INFO' | 'SUCC' | 'WARN' | 'ERR' | undefined | null;
 
-	// 可作为日期传参的类型
-	type dateLike = string | number | number[] | Date | null | undefined;
+	/** 可作为日期传参的代类型
+	 */
+	 export declare type dateLike = string | number | number[] | Date | null | undefined;
 
-	// 可作为 Boolean 传参的类型
-	export type boolLike = boolean | string | number | null | undefined;
+	/** 可作为 Boolean 传参的类型
+	 */
+	export declare type boolLike = boolean | string | number | null | undefined;
 
-	// 支持校验的数据类型
-	type verifiAble = string | number | boolean | null | undefined;
+	/** 支持校验的数据类型
+	 */
+	 export declare type verifiAble = string | number | boolean | null | undefined;
 
-	export interface IObj<T> {
+	export declare type VERIFI_RULE = 'isNum' | 'hasSpace' | 'hasSpecial';
+
+	/** 键值类型接口
+	 *  以键可以是任意字符串，值为T
+	 */
+	export declare interface IObj<T> {
 		[index: string]: T;
 	}
 
-	export type IObj<T> = IObj1<T> | IObj2<T>;
+	/** 键值类型接口
+	 *  键为 T 的键，值为 (T 的值 或任意值)
+	 */
+	export declare type IObj<T> = IObj1<T> | IObj2<T>
 
-	export type IObj1<T> = {
-		[P in keyof T]: T[P];
-	}
-
-	export type IObj2<T> = {
-		[P in keyof T]: any;
-	}
-
-	export type IObjKt<K, T> = {
+	/** 键值类型接口
+	 *  键为 K 的键，值为 T
+	 */
+	export declare type IObjKt<K, T> = {
 		[P in keyof K]: T;
 	}
 
+	/** 编码接口
+	 */
 	export interface Iencode {
+		// 字符串转换为 unicode 数组
 		toUniCode: (str: string) => number[],
+		/** 转码微信昵称
+		 * @param val 微信昵称字符串
+		 * @returns
+		 */
 		wechatNick: () => string
 	}
 
 	export interface Idecode {
+		/** 解码代表字符串的 uniCode 数组，或 uniCode数组元素拼接的字符串
+		 */
 		toStr: (val: string | number[], sep: string) => string,
+		/** 将转码后的数据解析出微信昵称
+		 * @returns
+		 */
 		wechatNick: () => string
 	}
 
 	export interface Iparse {
+		/** 将字符串编码为 uniCode格式 */
 		encode: Iencode,
+		/** 将uniCode 格式信息解码回字符串 */
 		decode: Idecode
 	}
 
-	export interface IverifiOpt {
-		/** 正则断言为匹配时的值
-		 *  默认为 TRUE，若设为 FALSE，设为断言匹配，但需拒绝
-		 */
-		trueVal: boolean,
-		/** 校验规则中要求的最小长度
-		 */
-		minLen?: number,
-		/** 校验规则中允许的最大长度
-		 */
-		maxLen?: number,
-		/** 进制类型判断的可选范围
-		 */
-		numType?: '2' | '8' | '10' | '16' | '26'
-	}
-
 	export interface Isort {
+		/** 数组 sort 方法的升序回调函数
+		 *
+		 * @param a
+		 * @param b
+		 */
 		sortASC: typeof tmind.sortASC,
+		/** 数组 sort 方法的降序回调函数
+		 *
+		 * @param a
+		 * @param b
+		 */
 		sortDESC: typeof tmind.sortDESC
 	}
 
@@ -225,6 +250,9 @@ declare namespace tmind {
 		weakset = 'weakset'
 	}
 
+	/** 日志接口
+	 *
+	 */
 	export namespace tLog {
 		/** 日志发生点
 		 */
@@ -276,10 +304,19 @@ declare namespace tmind {
 }
 
 declare module tmind {
+	/** tMind-Core 工具类
+	 */
 	export class Tutil {
+		/** 判断当前运行环境是否为浏览器
+		 */
 		static inBrowser: boolean;
+		/** 判断当前运行环境是否为 nodeJs ServerLike
+		 */
 		static inSvr: boolean;
+		/** 0~9 的阿拉伯数字中文大写
+		 */
 		static NUM_TO_STR: string[];
+
 		static sort: tmind.Isort;
 		static encode: tmind.IObj<tmind.Iencode>;
 		static decode: tmind.IObj<tmind.Idecode>;
@@ -505,7 +542,7 @@ declare module tmind {
 	}
 
 	export declare class TVerifi {
-		constructor(val: tmind.verifiAble, alias?: string, fullCheck?: boolean);
+		constructor(val: tmind.verifiAble, fullCheck?: boolean, ...rules: tmind.tVerifi.Irule[]);
 		/** 获取当前实例校验结果
 		 */
 		get isOk(): boolean;
@@ -515,7 +552,7 @@ declare module tmind {
 		 */
 		static getRules(): tmind.IObj<string>;
 
-		isNum(opt: tmind.IverifiOpt): tmind.TVerifi;
+		isNum(opt: tmind.Irule): tmind.TVerifi;
 	}
 
 	export function smpoo(): tmind.IsmpooInfo;
@@ -552,21 +589,43 @@ declare module tmind {
 	}
 
 	export namespace tVerifi {
+		/** 校验参数
+		 */
+		export interface Irule {
+			/** 正则断言为匹配时的值
+			 *  默认为 TRUE，若设为 FALSE，设为断言匹配，但需拒绝
+			 */
+			trueVal: boolean,
+			/** 支持的校验模版
+			 */
+			patten: tmind.VERIFI_RULE,
+			/** 校验规则中要求的最小长度
+			 */
+			minLen?: number,
+			/** 校验规则中允许的最大长度
+			 */
+			maxLen?: number,
+			/** 进制类型判断的可选范围
+			 */
+			numType?: '2' | '8' | '10' | '16' | '26',
+			/** 校验结论
+			 */
+			isOk?: boolean,
+			/** 校验报告
+			 */
+			reason?: ''
+		}
 		/** 获取系统支持的校验规则及规则别名的键值对（键值对中的规则别名仅为中性描述，不包含任何允许或禁止意向）
 		 */
 		export function getRules(): tmind.IObj<string>;
-		/** 有效性校验函数
+		/** 执行有效性校验
 		 * @param val 要校验的值，支持校验的值类型为：（string | number | boolean | null | undefined）
-		 * @param immediately 立即返回校验结论，如果设为 true，则返回布尔类型的校验结论，
-		 * 										设为否则支持链式校验，但需在链尾通过 isOk 属性来判断真假（除非在链尾最后一环的规则参数中也将immediately设为true）
-		 * @param alias 校验规则的别名，用于校验报告中的用户友好化提示
-		 * @param fullCheck 是否需要全链完整校验，
-		 * 									若设为 true，则在链式校验时，不论中间环节是否校验成功，均完整执行各环节校验，并将各环节的校验结果记录到校验报告中
-		 * 									若设为 false，则链式校验中，任何一环校验失败，立即结束校验
+		 * @param fullCheck 链式校验过程中，是否强制全链遍历
+		 *  			若为 false，则任何一环校验失败，则立即终止校验
+		 * @param rules 校验规则组
 		 * @returns
 		 */
-		export function exec(val: tmind.verifiAble, alias?: string, fullCheck?: boolean): tmind.TVerifi;
-
+		export function check(val: tmind.verifiAble, fullCheck?: boolean, ...rules: tmind.tVerifi.Irule[]): boolean;
 	}
 }
 

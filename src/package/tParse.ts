@@ -28,10 +28,10 @@ const __companyInfo__ = () => {
 };
 
 const encode: tmind.Iencode = {
-	// 字符串转换为
+	// 字符串转换为 unicode 数组
 	toUniCode: __str2u__,
 	/** 转码微信昵称
-	 * @param val
+	 * @param val 微信昵称字符串
 	 * @returns
 	 */
 	wechatNick: function(): string {

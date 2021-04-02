@@ -7,7 +7,7 @@ import { encode, companyInfo } from './package/tParse';
 import Tutil from './class/Tutil';
 import { tdate as _tdate_ } from './package/tDate';
 import { getFirstLetter, groupByFirstLetter } from './package/tPinyin';
-import { getRules, exec } from './package/tVerifi';
+import { getRules, check } from './package/tVerifi';
 import { tCheckType as _tCheckType_ } from './package/tCheckType';
 
 String.prototype.len = __len__;
@@ -73,5 +73,5 @@ export const tPinyin = {
 };
 export const tVerifi = {
 	getRules,
-	exec
+	check
 };
