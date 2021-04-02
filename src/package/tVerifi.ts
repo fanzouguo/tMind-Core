@@ -101,10 +101,9 @@ class TVerifi implements tmind.TVerifi {
 }
 
 
-export default {
 	/** 获取系统支持的校验规则及规则别名的键值对（键值对中的规则别名仅为中性描述，不包含任何允许或禁止意向）
 	 */
-	getRules: TVerifi.getRules,
+	export const getRules = TVerifi.getRules;
 	/** 有效性校验函数
 	 * @param val 要校验的值，支持校验的值类型为：（string | number | boolean | null | undefined）
 	 * @param immediately 立即返回校验结论，如果设为 true，则返回布尔类型的校验结论，
@@ -115,7 +114,6 @@ export default {
 	 * 									若设为 false，则链式校验中，任何一环校验失败，立即结束校验
 	 * @returns
 	 */
-	exec(val: tmind.verifiAble, alias?: string, fullCheck?: boolean): tmind.TVerifi {
+	export function exec(val: tmind.verifiAble, alias?: string, fullCheck?: boolean): tmind.TVerifi {
 		return new TVerifi(val, alias, fullCheck);
 	}
-};

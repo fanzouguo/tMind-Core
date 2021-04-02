@@ -6,8 +6,8 @@ import { bline, techo as _techo_ } from './package/tEcho';
 import { encode, companyInfo } from './package/tParse';
 import Tutil from './class/Tutil';
 import { tdate as _tdate_ } from './package/tDate';
-import * as _tPinyin_ from './package/tPinyin';
-import _tVerifi_ from './package/tVerifi';
+import { getFirstLetter, groupByFirstLetter } from './package/tPinyin';
+import { getRules, exec } from './package/tVerifi';
 import { tCheckType as _tCheckType_ } from './package/tCheckType';
 
 String.prototype.len = __len__;
@@ -67,7 +67,11 @@ export const TUtil = Tutil;
 export const tCheckType = _tCheckType_;
 export const tEcho = _techo_;
 export const tDate = _tdate_;
-export const tPinyin = _tPinyin_;
+export const tPinyin = {
+	getFirstLetter,
+	groupByFirstLetter
+};
 export const tVerifi = {
-	..._tVerifi_
+	getRules,
+	exec
 };

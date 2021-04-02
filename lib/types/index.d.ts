@@ -193,22 +193,6 @@ declare namespace tmind {
 		consoleStr: void
 	}
 
-	export interface Itpinying {
-		/** 依据传入中文数组的首字母分组
-		 *
-		 * @param arr 要进行分组的中文数组
-		 * @param fullLetter 若为True，则即时某个字母标签下没有匹配的文字，也返回空数组
-		 * @returns 按照26个英文字母分组的结果集
-		 */
-		groupByFirstLetter: (arr: string[], fullLetter: boolean) => IObj<string[]>;
-
-		/** 获取传入文字的首字母
-		 * @param word 要获取首字母的字符串
-		 * @returns
-		 */
-		getFirstLetter: (word: string) => string
-	}
-
 	/** 类型字面量枚举
 	 */
 	export declare const enum ETYPE {
@@ -552,6 +536,21 @@ declare module tmind {
 	export function tdate(val: null): Tdate;
 	export function tdate(val?: unknown): Tdate;
 	export const tPinyin = tmind.Itpinying;
+	export namespace tPinyin {
+		/** 依据传入中文数组的首字母分组
+		 *
+		 * @param arr 要进行分组的中文数组
+		 * @param fullLetter 若为True，则即时某个字母标签下没有匹配的文字，也返回空数组
+		 * @returns 按照26个英文字母分组的结果集
+		 */
+		export function groupByFirstLetter(arr: string[], fullLetter: boolean): tmind.IObj<string[]>;
+
+		/** 获取传入文字的首字母
+		 * @param word 要获取首字母的字符串
+		 * @returns
+		 */
+		export function getFirstLetter(word: string): string;
+	}
 
 	export namespace tVerifi {
 		/** 获取系统支持的校验规则及规则别名的键值对（键值对中的规则别名仅为中性描述，不包含任何允许或禁止意向）
@@ -567,7 +566,7 @@ declare module tmind {
 		 * 									若设为 false，则链式校验中，任何一环校验失败，立即结束校验
 		 * @returns
 		 */
-		export function tVerifi(val: tmind.verifiAble, alias?: string, fullCheck?: boolean): tmind.TVerifi;
+		export function exec(val: tmind.verifiAble, alias?: string, fullCheck?: boolean): tmind.TVerifi;
 
 	}
 }
