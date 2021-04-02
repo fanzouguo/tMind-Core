@@ -116,7 +116,7 @@ module.exports = {
 			['tDate().toArr', _currTdate.toArr, true]
 		],
 		[
-			[`tVerifi(333, '字符串校验').isNum().isOk`, tVerifi(333, '字符串校验').isNum().isOk]
+			[`tVerifi().getRules`, tVerifi().getRules]
 		],
 		[
 			[`tPinyin.groupByFirstLetter`, tPinyin.groupByFirstLetter, ['可', '测', '啊', '深']],

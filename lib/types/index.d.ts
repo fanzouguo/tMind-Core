@@ -127,12 +127,25 @@ declare namespace tmind {
 	// 可作为 Boolean 传参的类型
 	export type boolLike = boolean | string | number | null | undefined;
 
+	// 支持校验的数据类型
+	type verifiAble = string | number | boolean | null | undefined;
+
 	export interface IObj<T> {
 		[index: string]: T;
 	}
 
-	export interface IObjKy<T> {
-		[P: keyof T]: T[P]; /* eslint-disable-line */
+	export type IObj<T> = IObj1<T> | IObj2<T>;
+
+	export type IObj1<T> = {
+		[P in keyof T]: T[P];
+	}
+
+	export type IObj2<T> = {
+		[P in keyof T]: any;
+	}
+
+	export type IObjKt<K, T> = {
+		[P in keyof K]: T;
 	}
 
 	export interface Iencode {
@@ -168,13 +181,19 @@ declare namespace tmind {
 
 	export interface ItVerifi {
 		isOk: boolean;
-		// /** 判断参数是否为有效进制的数字或形似数字的字符
-		//  *
-		//  * @param val 要判断的参数
-		//  * @param numType 要判断的参数，默认判断十进制
-		//  * @returns 若符合，则返回 True，反之亦反
+
+		// /** 获取系统支持的校验规则及规则别名的键值对（键值对中的规则别名仅为中性描述，不包含任何允许或禁止意向）
+		//  * @returns
 		//  */
-		// isNum: (opt: IverifiOpt) => ItVerifi,
+		// static getRules: () => tmind.IObj<string>;
+
+		/** 判断参数是否为有效进制的数字或形似数字的字符
+		 *
+		 * @param val 要判断的参数
+		 * @param numType 要判断的参数，默认判断十进制
+		 * @returns 若符合，则返回 True，反之亦反
+		 */
+		isNum: (opt: IverifiOpt) => ItVerifi;
 
 		// // 包含空格
 		// strSpaceHas: (opt: IverifiOpt = DEFAULT_OPT) => ItVerifi
@@ -603,13 +622,18 @@ declare module tmind {
 	export function tdate(val?: unknown): Tdate
 
 
-	/** 校验函数
-	 *
-	 * @param val 要校验的字符串或数字
-	 * @param alias 用于校验（成功或失败）时，规则提示的别称
-	 * @param fullCheck 对于链式调用，是否全链校验，而不论中间是否已存在校验失败。默认为否，即一旦任何一链失败，则立即终止校验
-	 */
-	export function tVerifi(val: string | number, alias?: string, fullCheck?: boolean): tmind.ItVerifi;
+/** 有效性校验函数
+ *
+ * @param val 要校验的值，支持校验的值类型为：（string | number | boolean | null | undefined）
+ * @param immediately 立即返回校验结论，如果设为 true，则返回布尔类型的校验结论，
+ * 										设为否则支持链式校验，但需在链尾通过 isOk 属性来判断真假（除非在链尾最后一环的规则参数中也将immediately设为true）
+ * @param alias 校验规则的别名，仅当immediately参数为 false 时有效，用于校验报告中的用户友好化提示
+ * @param fullCheck 是否需要全链完整校验，仅当immediately参数为 false 时有效，
+ * 									若设为 true，则在链式校验时，不论中间环节是否校验成功，均完整执行各环节校验，并将各环节的校验结果记录到校验报告中
+ * 									若设为 false，则链式校验中，任何一环校验失败，立即结束校验
+ * @returns
+ */
+	export function tVerifi(val: tmind.verifiAble, immediately?: boolean, alias?: string, fullCheck?: boolean): tmind.ItVerifi | boolean;
 
 	export const tPinyin = tmind.Itpinying;
 }

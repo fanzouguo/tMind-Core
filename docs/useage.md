@@ -7,7 +7,7 @@
 ##### [TUtil.encode.toUniCode](#TUtil.encode.toUniCode)
 ##### [tCheckType](#tCheckType)
 ##### [tDate](#tDate)
-##### [tVerifi(333, '字符串校验').isNum().isOk](#tVerifi(333, '字符串校验').isNum().isOk)
+##### [tVerifi().getRules](#tVerifi().getRules)
 ##### [tPinyin.groupByFirstLetter](#tPinyin.groupByFirstLetter)
 
 
@@ -33,7 +33,7 @@
     ```
     ```
     TUtil.encode.wechatNick([ 116, 70, 114, 97, 109, 101, 86, 57, 32, 24179, 21488 ], '微信昵称"特殊字" ℃');
-    // '102-117-110-99-116-105-111-110-40-41-123-114-101-116-117-114-110-32-102-40-96-36-123-116-104-105-115-125-96-41-46-106-111-105-110-40-34-45-34-41-125'
+    // '102-117-110-99-116-105-111-110-32-40-41-32-123-13-10-9-32-32-32-32-32-32-32-32-114-101-116-117-114-110-32-95-95-115-116-114-50-117-95-95-40-96-36-123-116-104-105-115-125-96-41-46-106-111-105-110-40-39-45-39-41-59-13-10-9-32-32-32-32-125'
     ```
 	> ###### 说明：参数 [sep] 仅当 toStr的首个参数为字符串时有效，用于指定分隔该字符串的符号。
     ```
@@ -58,7 +58,7 @@
     // 'boolean'
     ```
     ```
-    tCheckType("2021-04-01T20:59:59.588Z");
+    tCheckType("2021-04-02T07:56:09.305Z");
     // 'date'
     ```
     ```
@@ -104,40 +104,40 @@
     ```
 1.	### <span id="tDate">tDate</span><span style="margin-left: 24px; font-size: 12px">[返回目录](#toc)</span>
 	> ###### 说明：完整格式化字符串为：yyyy-mm-dd hh:mi:ss.ms [年-月-日 时:分:秒.毫秒]
-以下用例假设当前时间为：'2021-04-02 04:59:59.587'
+以下用例假设当前时间为：'2021-04-02 15:56:09.304'
     ```
     tDate();
-    // {"val":"2021-04-01T20:59:59.591Z"}
+    // {}
     ```
 	> ###### 说明：完整格式化字符串为：yyyy-mm-dd hh:mi:ss.ms [年-月-日 时:分:秒.毫秒]
-以下用例假设当前时间为：'2021-04-02 04:59:59.587'
+以下用例假设当前时间为：'2021-04-02 15:56:09.304'
     ```
     tDate('2020-12-31');
-    // {"val":"2020-12-31T00:00:00.000Z"}
+    // {}
     ```
 	> ###### 说明：完整格式化字符串为：yyyy-mm-dd hh:mi:ss.ms [年-月-日 时:分:秒.毫秒]
-以下用例假设当前时间为：'2021-04-02 04:59:59.587'
+以下用例假设当前时间为：'2021-04-02 15:56:09.304'
     ```
     tDate(1609372800000);
-    // {"val":"2020-12-31T00:00:00.000Z"}
+    // {}
     ```
 	> ###### 说明：完整格式化字符串为：yyyy-mm-dd hh:mi:ss.ms [年-月-日 时:分:秒.毫秒]
-以下用例假设当前时间为：'2021-04-02 04:59:59.587'
+以下用例假设当前时间为：'2021-04-02 15:56:09.304'
     ```
     tDate(2021, 4);
-    // {"val":"2021-04-29T16:00:00.000Z"}
+    // {}
     ```
 	> ###### 说明：完整格式化字符串为：yyyy-mm-dd hh:mi:ss.ms [年-月-日 时:分:秒.毫秒]
-以下用例假设当前时间为：'2021-04-02 04:59:59.587'
+以下用例假设当前时间为：'2021-04-02 15:56:09.304'
     ```
     tDate(2021, 4, 2);
-    // {"val":"2021-05-01T16:00:00.000Z"}
+    // {}
     ```
 	> ###### 说明：完整格式化字符串为：yyyy-mm-dd hh:mi:ss.ms [年-月-日 时:分:秒.毫秒]
-以下用例假设当前时间为：'2021-04-02 04:59:59.587'
+以下用例假设当前时间为：'2021-04-02 15:56:09.304'
     ```
     tDate(2021, 4, 2, 12, 0, 0);
-    // {"val":"2021-05-02T04:00:00.000Z"}
+    // {}
     ```
     ```
     tDate().isLeap = false
@@ -155,10 +155,10 @@
     tDate().day = 2
     ```
     ```
-    tDate().hour = 4
+    tDate().hour = 15
     ```
     ```
-    tDate().millisecond = 587
+    tDate().millisecond = 304
     ```
     ```
     tDate().week = 5
@@ -176,7 +176,7 @@
     tDate().animal = '牛'
     ```
     ```
-    tDate().indexOfQuarter = 1
+    tDate().indexOfQuarter = 2
     ```
     ```
     tDate().indexOfYear = 92
@@ -221,7 +221,7 @@
     ```
     ```
     tDate().format('yyyy-mm-dd hh:mi:ss.ms');
-    // '2021-04-02 04:59:59.587'
+    // '2021-04-02 15:56:09.304'
     ```
     ```
     tDate().formatAsCn();
@@ -233,11 +233,11 @@
     ```
     ```
     tDate().formatAsCn(true, true);
-    // '二〇二一年四月二日 四:五九:五九'
+    // '二〇二一年四月二日 一五:五六:九'
     ```
     ```
     tDate().formatAsCn(false, true);
-    // '四月二日 四:五九:五九'
+    // '四月二日 一五:五六:九'
     ```
     ```
     tDate().formatAsLunar();
@@ -337,19 +337,19 @@
     ```
     ```
     tDate().getDiff('2020-12-31', 'ms');
-    // -7937999587
+    // -7977369304
     ```
     ```
     tDate().getDiff('2020-12-31', 'second');
-    // -7937999
+    // -7977369
     ```
     ```
     tDate().getDiff('2020-12-31', 'minute');
-    // -132299
+    // -132956
     ```
     ```
     tDate().getDiff('2020-12-31', 'hour');
-    // -2205
+    // -2215.9
     ```
     ```
     tDate().getDiff('2020-12-31', 'day');
@@ -370,12 +370,12 @@
 	> ###### 说明：仅当首个参数为 True 时，可以自定义数字模板
     ```
     tDate().toNumber();
-    // 1617310799587
+    // 1617350169304
     ```
 	> ###### 说明：仅当首个参数为 True 时，可以自定义数字模板
     ```
     tDate().toNumber(true);
-    // 20210402045959588
+    // 20210402155609304
     ```
 	> ###### 说明：仅当首个参数为 True 时，可以自定义数字模板
     ```
@@ -384,15 +384,15 @@
     ```
     ```
     tDate().toJson();
-    // {"year":2021,"month":4,"day":2,"hour":4,"minutes":59,"second":59,"millisecond":587,"week":5,"weekOfMonth":1,"weekOfYear":14,"quarter":2,"isLeap":false,"lunar":"二月21","buddhist":"佛历2564年4月2"}
+    // {"year":2021,"month":4,"day":2,"hour":15,"minutes":56,"second":9,"millisecond":304,"week":5,"weekOfMonth":1,"weekOfYear":14,"quarter":2,"isLeap":false,"lunar":"二月21","buddhist":"佛历2564年4月2"}
     ```
     ```
     tDate().toJson('zh');
-    // {"year":2021,"month":4,"day":2,"hour":4,"minutes":59,"second":59,"millisecond":587,"week":"周五","weekOfMonth":"一","weekOfYear":14,"quarter":"二季度","isLeap":false,"lunar":"二月21","buddhist":"佛历2564年4月2"}
+    // {"year":2021,"month":4,"day":2,"hour":15,"minutes":56,"second":9,"millisecond":304,"week":"周五","weekOfMonth":"一","weekOfYear":14,"quarter":"二季度","isLeap":false,"lunar":"二月21","buddhist":"佛历2564年4月2"}
     ```
     ```
     tDate().toJson('en');
-    // {"year":2021,"month":4,"day":2,"hour":4,"minutes":59,"second":59,"millisecond":587,"week":"Fri","weekOfMonth":"一","weekOfYear":14,"quarter":"二季度","isLeap":false,"lunar":"二月21","buddhist":"佛历2564年4月2"}
+    // {"year":2021,"month":4,"day":2,"hour":15,"minutes":56,"second":9,"millisecond":304,"week":"Fri","weekOfMonth":"一","weekOfYear":14,"quarter":"二季度","isLeap":false,"lunar":"二月21","buddhist":"佛历2564年4月2"}
     ```
     ```
     tDate().toArr();
@@ -400,11 +400,12 @@
     ```
     ```
     tDate().toArr(true);
-    // [ 2021,	4,	2,	4,	59,	59,	587 ]
+    // [ 2021,	4,	2,	15,	56,	9,	304 ]
     ```
-1.	### <span id="tVerifi(333, '字符串校验').isNum().isOk">tVerifi(333, '字符串校验').isNum().isOk</span><span style="margin-left: 24px; font-size: 12px">[返回目录](#toc)</span>
+1.	### <span id="tVerifi().getRules">tVerifi().getRules</span><span style="margin-left: 24px; font-size: 12px">[返回目录](#toc)</span>
     ```
-    tVerifi(333, '字符串校验').isNum().isOk = false
+    tVerifi().getRules();
+    // {"isNum":"为纯数字","hasSpace":"是否包含空格","hasSpecial":"是否包含特殊字符"}
     ```
 1.	### <span id="tPinyin.groupByFirstLetter">tPinyin.groupByFirstLetter</span><span style="margin-left: 24px; font-size: 12px">[返回目录](#toc)</span>
     ```
