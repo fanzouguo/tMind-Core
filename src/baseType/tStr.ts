@@ -1,3 +1,5 @@
+import { IObj } from '../types/index';
+
 /** 返回字符串的长度，等效于 length
  */
 const __len__ = function (): number {
@@ -91,6 +93,25 @@ const __camelCase__ = function(): string {
 	return this.replace(/[-|_|\s+](\w)/g, (a, b) => b.toUpperCase());
 };
 
+/** 将字符串实例转换为JSON对象格式，且忽略转换错误
+ * @returns 输出绝对的JSON对象，若转换错误，则会添加 gotNull或gotWrong字段
+ */
+const __toObj__ = function(): IObj<any> {
+	// @ts-ignore
+	const _str: string = this;
+	if (!_str) return {
+		gotNull: 'The original paramter shouldn\'t be a empty string.'
+	};
+  try {
+    const __token__ = JSON.parse(_str);
+    return __token__;
+  } catch (err) {
+    return {
+			gotWrong: 'The original paramter isn\'t a correct json like string.'
+		};
+  }
+};
+
 // // 数字的进制转换（2，8， 10， 16,26）
 // // 类数字字符串的进制转换（2，8， 10， 16,26）
 
@@ -102,5 +123,6 @@ export {
 	__mid__,
 	__like__,
 	__upFirst__,
-	__camelCase__
+	__camelCase__,
+	__toObj__
 };

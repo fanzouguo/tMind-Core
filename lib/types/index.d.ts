@@ -42,6 +42,10 @@ declare global {
 		/** 转换为小驼峰
 		 */
 		toCamelCase(): string;
+		/** 将字符串实例转换为JSON对象格式，且忽略转换错误
+		 * @returns 输出绝对的JSON对象，若转换错误，则会添加 gotNull或gotWrong字段
+		 */
+		toObj(): tmind.IObj<any>;
 		/** 将字符串编码为 uniCode格式
 		 */
 		encode: tmind.Iencode;

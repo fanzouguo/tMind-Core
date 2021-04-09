@@ -1,4 +1,4 @@
-import { __len__, __lenfrom0__, __left__, __right__, __mid__, __like__, __upFirst__, __camelCase__ } from './baseType/tStr';
+import { __len__, __lenfrom0__, __left__, __right__, __mid__, __like__, __upFirst__, __camelCase__, __toObj__ } from './baseType/tStr';
 import { numToPrice, numToSplit, numToArr, numToCNY, numToRound, numIsOdd } from './baseType/tNum';
 import { arrInsert, arrMoveItem } from './baseType/tArr';
 import { bline, techo as _techo_ } from './package/tEcho';
@@ -18,6 +18,7 @@ String.prototype.mid = __mid__;
 String.prototype.like = __like__;
 String.prototype.upFirst = __upFirst__;
 String.prototype.camelCase = __camelCase__;
+String.prototype.toObj = __toObj__;
 String.prototype.encode = encode;
 
 Number.prototype.toPrice = function (typeStr: 'CNY' | 'USD' = 'CNY'): string {
