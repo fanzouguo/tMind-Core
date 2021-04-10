@@ -571,12 +571,12 @@ declare module tmind {
 	export function tEcho(msg: any, title?: string, type?: tmind.MSG_TYPE): void;
 	export function tClear(): void;
 
-	export function tdate(): Tdate;
-	export function tdate(val: string): Tdate;
-	export function tdate(val: number): Tdate;
-	export function tdate(y: number, m: number, d?: number | undefined, h?: number | undefined, mi?: number | undefined, s?: number | undefined, ms?: number | undefined): Tdate;
-	export function tdate(val: null): Tdate;
-	export function tdate(val?: unknown): Tdate;
+	export function tDate(): Tdate;
+	export function tDate(val: string): Tdate;
+	export function tDate(val: number): Tdate;
+	export function tDate(y: number, m: number, d?: number | undefined, h?: number | undefined, mi?: number | undefined, s?: number | undefined, ms?: number | undefined): Tdate;
+	export function tDate(val: null): Tdate;
+	export function tDate(val?: unknown): Tdate;
 	export namespace tPinyin {
 		/** 依据传入中文数组的首字母分组
 		 *

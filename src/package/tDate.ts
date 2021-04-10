@@ -508,12 +508,12 @@ class Tdate {
 	};
 }
 
-export function tdate(): Tdate;
-export function tdate(val: string): Tdate;
-export function tdate(val: number): Tdate;
-export function tdate(y: number, m: number, d?: number | undefined, h?: number | undefined, mi?: number | undefined, s?: number | undefined, ms?: number | undefined): Tdate;
-export function tdate(val: null): Tdate;
-export function tdate(val?: unknown): Tdate {
+export function tDate(): Tdate;
+export function tDate(val: string): Tdate;
+export function tDate(val: number): Tdate;
+export function tDate(y: number, m: number, d?: number | undefined, h?: number | undefined, mi?: number | undefined, s?: number | undefined, ms?: number | undefined): Tdate;
+export function tDate(val: null): Tdate;
+export function tDate(val?: unknown): Tdate {
 	const _tp = typeof val;
 	switch (_tp) {
 		case 'string':

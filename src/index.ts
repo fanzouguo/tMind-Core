@@ -5,7 +5,7 @@ import { bline, techo as _techo_, tclear as __tclear__ } from './package/tEcho';
 // import { deepClone } from './baseType/tObj';
 import { encode, companyInfo } from './package/tParse';
 import Tutil from './class/Tutil';
-import { tdate as _tdate_ } from './package/tDate';
+import { tDate as _tdate_ } from './package/tDate';
 import { getFirstLetter, groupByFirstLetter } from './package/tPinyin';
 import { getRules, check } from './package/tVerifi';
 import { tCheckType as _tCheckType_ } from './package/tCheckType';
