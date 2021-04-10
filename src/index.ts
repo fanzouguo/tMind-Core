@@ -1,7 +1,7 @@
 import { __len__, __lenfrom0__, __left__, __right__, __mid__, __like__, __upFirst__, __camelCase__, __toObj__ } from './baseType/tStr';
 import { numToPrice, numToSplit, numToArr, numToCNY, numToRound, numIsOdd } from './baseType/tNum';
 import { arrInsert, arrMoveItem } from './baseType/tArr';
-import { bline, techo as _techo_ } from './package/tEcho';
+import { bline, techo as _techo_, tclear as __tclear__ } from './package/tEcho';
 // import { deepClone } from './baseType/tObj';
 import { encode, companyInfo } from './package/tParse';
 import Tutil from './class/Tutil';
@@ -68,6 +68,7 @@ export const TUtil = Tutil;
 export const tCheckType = _tCheckType_;
 export const tEcho = _techo_;
 export const tDate = _tdate_;
+export const tClear = __tclear__;
 export const tPinyin = {
 	getFirstLetter,
 	groupByFirstLetter

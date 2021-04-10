@@ -569,6 +569,7 @@ declare module tmind {
 	export function tCheckType(val: any): string;
 
 	export function tEcho(msg: any, title?: string, type?: tmind.MSG_TYPE): void;
+	export function tClear(): void;
 
 	export function tdate(): Tdate;
 	export function tdate(val: string): Tdate;

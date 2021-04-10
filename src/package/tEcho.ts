@@ -61,3 +61,7 @@ export function techo(msg: any, title?: string, type?: tmind.MSG_TYPE): void {
     console.log(JSON.stringify(msg), null, 2);
   }
 }
+
+export function tclear(): void {
+  console.clear();
+}
