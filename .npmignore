@@ -1,5 +1,6 @@
 .debug
 .vscode
+coverage
 docs
 example
 node_modules
