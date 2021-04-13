@@ -317,7 +317,7 @@ declare module tmind {
 		/** 判断当前运行环境是否为 nodeJs ServerLike
 		 */
 		static inSvr: boolean;
-		/** 0~9 的阿拉伯数字中文大写
+		/** 0~9 的整型数字中文大写
 		 */
 		static NUM_TO_STR: string[];
 
@@ -330,7 +330,7 @@ declare module tmind {
 		private val: Date;
 
 		/** 判断当前实例所代表的日期是否为闰年
-		 * @returns 输入布尔值，Ture代表是，False代表否
+		 * @returns 输出为布尔值，Ture代表是，False代表否
 		 */
 		get isLeap(): boolean;
 
@@ -341,47 +341,47 @@ declare module tmind {
 		get abs(): number;
 
 		/** 获取实例日期所在年份
-		 * @returns 输出阿拉伯数字格式
+		 * @returns 输出为整型数字格式
 		 */
 		get year(): number;
 
 		/** 获取实例日期所在月份
-		 * @returns 输出阿拉伯数字格式
+		 * @returns 输出为整型数字
 		 */
 		get month(): number;
 
 		/** 获取实例日期的公历号数
-		 * @returns 输出阿拉伯数字格式
+		 * @returns 输出为整型数字
 		 */
 		get day(): number;
 
-		/** 获取实例日期的小时
-		 * @returns 输出阿拉伯数字格式
+		/** 获取实例日期的小时值
+		 * @returns 输出为整型数字
 		 */
 		get hour(): number;
 
-		/** 获取实例日期的分钟
-		 * @returns 输出阿拉伯数字格式
+		/** 获取实例日期的分钟值
+		 * @returns 输出为整型数字
 		 */
 		get minute(): number;
 
 		/** 获取实例日期的秒数
-		 * @returns 输出阿拉伯数字格式
+		 * @returns 输出为整型数字
 		 */
 		get second(): number;
 
 		/** 获取实例日期的毫秒数
-		 * @returns 输出阿拉伯数字格式
+		 * @returns 输出为整型数字
 		 */
 		get millisecond(): number;
 
 		/** 获取实例日期是周几
-		 * @returns 输出阿拉伯数字代表的周（本周第几天，周一为1，周日为7）
+		 * @returns 输出整型数字代表的周（本周第几天，周一为1，周日为7）
 		 */
 		get week(): number;
 
 		/** 获取实例日期的所在季度
-		 * @returns 输出阿拉伯数字代表的季度序号，起始为1
+		 * @returns 输出整型数字代表的季度序号，起始为1
 		 */
 		get quarter(): number;
 
@@ -399,12 +399,12 @@ declare module tmind {
 		get animal(): string;
 
 		/** 获取实例日期是所在季度的第几天
-		 * @returns 输出阿拉伯数字代表的周（起始为1）
+		 * @returns 输出整型数字代表的周（起始为1）
 		 */
 		get indexOfQuarter(): number;
 
 		/** 获取实例日期是所在年份的第几天
-		 * @returns 输出阿拉伯数字代表的周（起始为1）
+		 * @returns 输出整型数字代表的周（起始为1）
 		 */
 		get indexOfYear(): number;
 
@@ -446,18 +446,18 @@ declare module tmind {
 		get tiangan(): string;
 
 		/** 获取实例日期属于本月第几周
-		 * @returns 输出阿拉伯数字代表的月内周次序号，起始为1
+		 * @returns 输出整型数字代表的月内周次序号，起始为1
 		 */
 		get weekOfMonth(): number;
 
 		/** 获取实例日期属于当年第几周
-		 * @returns 输出阿拉伯数字代表的年内周次序号，起始为1
+		 * @returns 输出整型数字代表的年内周次序号，起始为1
 		 */
 		get weekOfYear(): number;
 
 		/** 将指定日期按照提供的模式匹配字符串格式化
 		 * @param {*} fmt 用于格式化的模式匹配字符串，为空时默认为 'yyyy-mm-dd'
-		 * @returns 已格式化的时间 / 日期 字符串（阿拉伯数字形式）
+		 * @returns 已格式化的时间 / 日期 字符串（整型数字形式）
 		 */
 		format: (fmt?: string) => string;
 
@@ -487,25 +487,25 @@ declare module tmind {
 
 		/** 获取实例日期的周信息
 		 * @param local [可选]，代表返回数据采用的区域信息
-		 * @returns 若传入参数为空，则输出阿拉伯数字代表的周（本周第几天，周一为1，周日为7），若传入参数不为空，则返回字符化的周信息。
+		 * @returns 若传入参数为空，则输出整型数字代表的周（本周第几天，周一为1，周日为7），若传入参数不为空，则返回字符化的周信息。
 		 */
 		getWeek: (local?: 'zh' | 'en') => string | number;
 
 		/** 获取实例日期属于本月第几周
 		 * @param local [可选]，代表返回数据采用的区域信息
-		 * @returns 若传入参数为空，则输出阿拉伯数字代表的月内周次序号，起始为1，若传入参数不为空，则返回字符化的周信息。
+		 * @returns 若传入参数为空，则输出整型数字代表的月内周次序号，起始为1，若传入参数不为空，则返回字符化的周信息。
 		 */
 		getWeekOfMonth: (local?: 'zh' | 'en') => string | number;
 
 		/** 获取实例日期属于当年第几周
 		 * @param local [可选]，代表返回数据采用的区域信息
-		 * @returns 若传入参数为空，则输出阿拉伯数字代表的年内周次序号，起始为1，若传入参数不为空，则返回字符化的周信息。
+		 * @returns 若传入参数为空，则输出整型数字代表的年内周次序号，起始为1，若传入参数不为空，则返回字符化的周信息。
 		 */
 		getWeekOfYear: (local?: 'zh' | 'en') => string | number;
 
 		/** 获取实例日期的所在季度
 		 * @param local [可选]，代表返回数据采用的区域信息
-		 * @returns 若传入参数为空，则输出阿拉伯数字代表的季度序号，起始为1，若传入 zh ，则将数字中文字符化
+		 * @returns 若传入参数为空，则输出整型数字代表的季度序号，起始为1，若传入 zh ，则将数字中文字符化
 		 */
 		getQuarter: (local?: 'zh' | 'en') => string | number;
 
@@ -516,7 +516,7 @@ declare module tmind {
 		 */
 		getOffset: (diffNum: number, diffType?: 'day' | 'week' | 'month' | 'year') => string;
 
-		/** 比较两个日期数据，并返回相差数量，单位为（天、周、月、年）
+		/** 比较两个日期数据，并返回相差数量，单位为（天、周、月、年、时、分、秒）
 		 *
 		 * @param start 要比较的基准日期
 		 * @param end 要比较的目标日期

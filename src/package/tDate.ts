@@ -77,7 +77,7 @@ class Tdate {
 	 *  时间戳的有效范围应该是正负（绝对值）区间
 	 * @returns 代表区间范围的绝对值（正负绝对值相同）
 	 */
-	get abs(): number {
+	static get abs(): number {
 		return MIN_MAX;
 	}
 
