@@ -1,5 +1,5 @@
 import { __len__, __lenfrom0__, __left__, __right__, __mid__, __like__, __upFirst__, __camelCase__, __toObj__ } from './baseType/tStr';
-import { numToPrice, numToSplit, numToArr, numToCNY, numToRound, numIsOdd } from './baseType/tNum';
+import { numToPrice, numToSplit, numToArr, numToCNY, numToRound, numIsOdd, funcAdd, funcSub, funcMult, funcDiv } from './baseType/tNum';
 import { arrInsert, arrMoveItem } from './baseType/tArr';
 import { bline, techo as _techo_, tclear as __tclear__ } from './package/tEcho';
 // import { deepClone } from './baseType/tObj';
@@ -38,6 +38,18 @@ Number.prototype.toCNY = function (): string {
 };
 Number.prototype.isOdd = function (): boolean {
 	return numIsOdd.call(this, this.valueOf());
+};
+Number.prototype.funcAdd = function (...item: number[]): number {
+	return funcAdd(this.valueOf(), ...item);
+};
+Number.prototype.funcSub = function (...item: number[]): number {
+	return funcSub(this.valueOf(), ...item);
+};
+Number.prototype.funcMult = function (...item: number[]): number {
+	return funcMult(this.valueOf(), ...item);
+};
+Number.prototype.funcDiv = function (...item: number[]): number {
+	return funcDiv(this.valueOf(), ...item);
 };
 
 Array.prototype.insertTo = function (destIndex: number = 1, ...newItem: any[]): void {

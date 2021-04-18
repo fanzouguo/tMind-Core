@@ -1,6 +1,8 @@
 const KEEP_UNIT: string[] = ['万', '亿', '兆', '京', '垓', '杼', '穰', '沟', '涧', '正'];
 const ALIAS_NUM: string[] = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
 const ALIAS_UNIT: string[] = ['元', '拾', '佰', '仟', '万', '拾', '佰', '仟', '亿', '拾', '佰', '仟', '兆', '拾', '佰', '仟', '京', '拾', '佰', '仟', '垓', '拾', '佰', '仟', '杼', '拾', '佰', '仟', '穰', '拾', '佰', '仟', '沟', '拾', '佰', '仟', '涧', '拾', '佰', '仟', '正', '拾', '佰', '仟'];
+// 四则运算种子倍数
+const __SEED__: number = 1000000;
 
 /** 将数字转换为货币显示
  * @param val 要转换的数字
@@ -103,11 +105,78 @@ const numIsOdd = function (val: number): boolean {
 	return !!((val & 1) !== 0);
 };
 
+/** 四则运算加法（累加）
+ *
+ * @param item 要依次累加的值
+ * @returns
+ */
+const funcAdd = (...item: number[]): number => {
+	try {
+		return item.reduce((pre, curr) => {
+			return pre + +curr * __SEED__;
+		}, 0) / __SEED__;
+	} catch (err) {
+		return NaN;
+	}
+};
+
+/** 四则运算减法（累减）
+ *
+ * @param item 要依次累减的值
+ * @returns
+ */
+const funcSub = (...item: number[]): number => {
+	try {
+		const [a, ...b] = item;
+		return b.reduce((pre, curr) => {
+			return pre - +curr * __SEED__;
+		}, +a * __SEED__) / __SEED__;
+	} catch (err) {
+		return NaN;
+	}
+};
+
+/** 四则运算乘法（累乘）
+ *
+ * @param item 要依次累乘的值
+ * @returns
+ */
+const funcMult = (...item: number[]): number => {
+	try {
+		return item.reduce((pre, curr) => {
+			return pre * +curr * __SEED__;
+		}, 1) / __SEED__ ** item.length;
+	} catch (err) {
+		return NaN;
+	}
+};
+
+/** 四则运算除法（累除）
+ *
+ * @param item 要依次累除的值
+ * @returns
+ */
+const funcDiv = (...item: number[]): number => {
+	try {
+		const [a, ...b] = item;
+		if (b.includes(0)) return NaN;
+		return b.reduce((pre, curr) => {
+			return pre / (curr * __SEED__);
+		}, +a * __SEED__);
+	} catch (err) {
+		return NaN;
+	}
+};
+
 export {
 	numToPrice,
 	numToSplit,
 	numToArr,
 	numToRound,
 	numToCNY,
-	numIsOdd
+	numIsOdd,
+	funcAdd,
+	funcSub,
+	funcMult,
+	funcDiv
 };

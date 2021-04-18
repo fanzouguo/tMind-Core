@@ -87,6 +87,30 @@ declare global {
 		 * @returns
 		 */
 		isOdd(val: number): boolean;
+		/** 四则运算加法（累加）
+		 *
+		 * @param item 要依次累加的值
+		 * @returns
+		 */
+		funcAdd(...item: number[]): number;
+		/** 四则运算减法（累减）
+		 *
+		 * @param item 要依次累减的值
+		 * @returns
+		 */
+		funcSub(...item: number[]): number;
+		/** 四则运算乘法（累乘）
+		 *
+		 * @param item 要依次累乘的值
+		 * @returns
+		 */
+		funcMult(...item: number[]): number;
+		/** 四则运算除法（累除）
+		 *
+		 * @param item 要依次累除的值
+		 * @returns
+		 */
+		funcDiv(...item: number[]): number;
 	}
 
 	export interface Array extends Array {
@@ -138,7 +162,7 @@ declare namespace tmind {
 
 	/** 可作为日期传参的代类型
 	 */
-	 export declare type dateLike = string | number | number[] | Date | null | undefined;
+	export declare type dateLike = string | number | number[] | Date | null | undefined;
 
 	/** 可作为 Boolean 传参的类型
 	 */
@@ -146,7 +170,7 @@ declare namespace tmind {
 
 	/** 支持校验的数据类型
 	 */
-	 export declare type verifiAble = string | number | boolean | null | undefined;
+	export declare type verifiAble = string | number | boolean | null | undefined;
 
 	export declare type VERIFI_RULE = 'isNum' | 'hasSpace' | 'hasSpecial';
 
