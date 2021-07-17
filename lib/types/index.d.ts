@@ -146,7 +146,6 @@ declare global {
 	}
 }
 
-
 type IObj1<T> = {
 	[P in keyof T]: T[P];
 }
@@ -156,21 +155,23 @@ type IObj2<T> = {
 }
 
 declare namespace tmind {
+	export declare type nullLike = null | undefined;
+
 	/** 全局输出信息类型
 	 */
-	export declare type MSG_TYPE = '' | 'INFO' | 'SUCC' | 'WARN' | 'ERR' | undefined | null;
+	export declare type MSG_TYPE = '' | 'INFO' | 'SUCC' | 'WARN' | 'ERR' | nullLike;
 
 	/** 可作为日期传参的代类型
 	 */
-	export declare type dateLike = string | number | number[] | Date | null | undefined;
+	export declare type dateLike = string | number | number[] | Date | nullLike;
 
 	/** 可作为 Boolean 传参的类型
 	 */
-	export declare type boolLike = boolean | string | number | null | undefined;
+	export declare type boolLike = boolean | string | number | nullLike;
 
 	/** 支持校验的数据类型
 	 */
-	export declare type verifiAble = string | number | boolean | null | undefined;
+	export declare type verifiAble = string | number | boolean | nullLike;
 
 	export declare type VERIFI_RULE = 'isNum' | 'hasSpace' | 'hasSpecial';
 
@@ -193,10 +194,28 @@ declare namespace tmind {
 		[P in keyof K]: T;
 	}
 
+	/** 基本用户对象接口
+	 */
+	export declare interface Iuser {
+		// 用户ID
+		id: number,
+		// 用户关联ID
+		pid: number,
+		code: string,
+		name: string,
+		gender: number,
+		avator: string,
+		/** 赋权值
+		 */
+		authStr: string
+	}
+
 	/** 编码接口
 	 */
 	export interface Iencode {
-		// 字符串转换为 unicode 数组
+		/** 字符串转换为 unicode 数组
+		 * @param str 待转码的字符串
+		 */
 		toUniCode: (str: string) => number[],
 		/** 转码微信昵称
 		 * @param val 微信昵称字符串
@@ -507,7 +526,7 @@ declare module tmind {
 		 * @param {*} languageTag 语言环境字符串，默认为 加拿大法文格式：YYYY-MM-DD
 		 * @returns 已格式化的字符串
 		 */
-		formatAsWorld: (languageTag: string | null | undefined) => string;
+		formatAsWorld: (languageTag: string | tmind.nullLike) => string;
 
 		/** 获取实例日期的周信息
 		 * @param local [可选]，代表返回数据采用的区域信息
