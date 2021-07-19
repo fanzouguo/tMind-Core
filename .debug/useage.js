@@ -1,7 +1,7 @@
-const { smpoo, TUtil, tEcho, tCheckType, tDate, tVerifi, tPinyin } = require('../lib/index');
+const { smpoo, TUtil, tEcho, tCheckType, tDate, tVerifi, tPinyin } = require('../lib/index.esm');
 
 const __tmpEncode__ = TUtil.encode.toUniCode('tFrameV9 平台');
-const __tmpWxNickCode__ = TUtil.encode.wechatNick('微信昵称"特殊字" ℃');
+// const __tmpWxNickCode__ = TUtil.encode.wechatNick('微信昵称"特殊字" ℃');
 const _currTdate = tDate();
 
 module.exports = {
@@ -41,9 +41,9 @@ module.exports = {
 			['tDate', tDate],
 			['tDate', tDate, '2020-12-31'],
 			['tDate', tDate, 1609372800000],
-			['tDate', tDate, 2021, 04],
-			['tDate', tDate, 2021, 04, 02],
-			['tDate', tDate, 2021, 04, 02, 12, 0, 0],
+			['tDate', tDate, 2021, 4],
+			['tDate', tDate, 2021, 4, 2],
+			['tDate', tDate, 2021, 4, 2, 12, 0, 0],
 			['tDate().isLeap', _currTdate.isLeap],
 			['tDate().abs', _currTdate.abs],
 			['tDate().year', _currTdate.year],

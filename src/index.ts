@@ -1,9 +1,9 @@
-import { __len__, __lenfrom0__, __left__, __right__, __mid__, __like__, __upFirst__, __camelCase__, __toObj__, __toUniCode__, __wechatNick__, __decodeToStr__, __decodeWechatNick__ } from './baseType/tStr';
+import { __len__, __lenfrom0__, __left__, __right__, __mid__, __like__, __upFirst__, __camelCase__, __toObj__ } from './baseType/tStr';
 import { numToPrice, numToSplit, numToArr, numToCNY, numToRound, numIsOdd, funcAdd, funcSub, funcMult, funcDiv } from './baseType/tNum';
 import { arrInsert, arrMoveItem } from './baseType/tArr';
 import { bline, techo as _techo_, tclear as __tclear__ } from './package/tEcho';
 // import { deepClone } from './baseType/tObj';
-import { companyInfo } from './package/tParse';
+import { companyInfo, encode, decode } from './package/tParse';
 import Tutil from './class/Tutil';
 import { tDate as _tdate_ } from './package/tDate';
 import { getFirstLetter, groupByFirstLetter } from './package/tPinyin';
@@ -20,12 +20,24 @@ String.prototype.upFirst = __upFirst__;
 String.prototype.camelCase = __camelCase__;
 String.prototype.toObj = __toObj__;
 String.prototype.encode = {
-	toUniCode: __toUniCode__,
-	wechatNick: __wechatNick__
+	toUniCode: function (): number[] {
+		// @ts-ignore
+		return encode.toUniCode(this);
+	},
+	wechatNick: function (): string {
+		// @ts-ignore
+		return encode.wechatNick(this);
+	}
 };
 String.prototype.decode = {
-	toStr: __decodeToStr__,
-	wechatNick: __decodeWechatNick__
+	toStr: function (splitStr?: string): string {
+		// @ts-ignore
+		return decode.toStr(this, splitStr);
+	},
+	wechatNick: function (): string {
+		// @ts-ignore
+		return decode.wechatNick(this);
+	}
 };
 
 Number.prototype.toPrice = function (typeStr: 'CNY' | 'USD' = 'CNY'): string {

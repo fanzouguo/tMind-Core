@@ -13,7 +13,7 @@ const __str2u__ = (str: string): number[] => str.split('').map(v => v.charCodeAt
  * @param sep 传入参数中val的拼接字符串，默认为半角中横线
  * @returns
  */
-const __u2Str__ = (val: string | number[], sep: string = '-'): string => String.fromCharCode(...(Array.isArray(val) ? val : val.split(sep).map(v => +v)));
+const __u2Str__ = (val: string | number[], sep?: string): string => String.fromCharCode(...(Array.isArray(val) ? val : val.split(sep || '-').map(v => +v)));
 
 const __companyInfo__ = () => {
 	const _copy1: string = '67-111-112-121-114-105-103-104-116-32-169-32-50-48-49-53-32-45-32';
@@ -34,8 +34,8 @@ const encode: tmind.Iencode = {
 	 * @param val 微信昵称字符串
 	 * @returns
 	 */
-	wechatNick: function(): string {
-		return __str2u__(`${this}`).join('-');
+	wechatNick: function(str: string): string {
+		return __str2u__(str).join('-');
 	}
 };
 
@@ -46,8 +46,8 @@ const decode: tmind.Idecode = {
 	/** 将转码后的数据解析出微信昵称
 	 * @returns
 	 */
-	wechatNick: function (): string {
-		return __u2Str__(`${this}`, '-');
+	wechatNick: function (val: string | number[]): string {
+		return __u2Str__(val, '-');
 	}
 };
 

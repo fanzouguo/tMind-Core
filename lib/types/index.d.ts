@@ -53,7 +53,7 @@ declare global {
 			 * @param str 拼接字符串的分隔符
 			 * @returns uniCode数组的拼接样式
 			 */
-			toUniCode(splitStr?: string): string,
+			toUniCode(): number[],
 			/** 将代表微信昵称的字符串编码为 uniCode 格式
 			 */
 			wechatNick(): string
@@ -236,20 +236,24 @@ declare namespace tmind {
 		 */
 		toUniCode: (str: string) => number[],
 		/** 转码微信昵称
-		 * @param val 微信昵称字符串
+		 * @param str 微信昵称字符串
 		 * @returns
 		 */
-		wechatNick: () => string
+		wechatNick: (str: string) => string
 	}
 
 	export interface Idecode {
-		/** 解码代表字符串的 uniCode 数组，或 uniCode数组元素拼接的字符串
+		/** uniCode（字符/数字）数组解析出字符串原文
+		 * @param val 要解析的uniCode（字符/数字）数组
+		 * @param sep 传入参数中val的拼接字符串，默认为半角中横线
+		 * @returns
 		 */
 		toStr: (val: string | number[], sep: string) => string,
 		/** 将转码后的数据解析出微信昵称
+		 * @param val 要解析的uniCode（字符/数字）数组
 		 * @returns
 		 */
-		wechatNick: () => string
+		wechatNick: (val: string | number[]) => string
 	}
 
 	export interface Iparse {
@@ -632,12 +636,12 @@ declare module tmind {
 	export function tEcho(msg: any, title?: string, type?: tmind.MSG_TYPE): void;
 	export function tClear(): void;
 
-	export function tDate(): Tdate;
-	export function tDate(val: string): Tdate;
-	export function tDate(val: number): Tdate;
-	export function tDate(y: number, m: number, d?: number | undefined, h?: number | undefined, mi?: number | undefined, s?: number | undefined, ms?: number | undefined): Tdate;
-	export function tDate(val: null): Tdate;
-	export function tDate(val?: unknown): Tdate;
+	export function tDate(): typeof Tdate;
+	export function tDate(val: string): typeof Tdate;
+	export function tDate(val: number): typeof Tdate;
+	export function tDate(y: number, m: number, d?: number | undefined, h?: number | undefined, mi?: number | undefined, s?: number | undefined, ms?: number | undefined): typeof Tdate;
+	export function tDate(val: null): typeof Tdate;
+	export function tDate(val?: unknown): typeof Tdate;
 	export namespace tPinyin {
 		/** 依据传入中文数组的首字母分组
 		 *
