@@ -20,20 +20,12 @@ String.prototype.upFirst = __upFirst__;
 String.prototype.camelCase = __camelCase__;
 String.prototype.toObj = __toObj__;
 String.prototype.encode = {
-	toUniCode: function (splitStr?: string): string {
-		return __toUniCode__.call(this, splitStr);
-	},
-	wechatNick: function (): string {
-		return __wechatNick__.call(this);
-	}
+	toUniCode: __toUniCode__,
+	wechatNick: __wechatNick__
 };
 String.prototype.decode = {
-	toStr: function (splitStr?: string): string {
-		return __decodeToStr__.call(this, splitStr);
-	},
-	wechatNick: function (): string {
-		return __decodeWechatNick__.call(this);
-	}
+	toStr: __decodeToStr__,
+	wechatNick: __decodeWechatNick__
 };
 
 Number.prototype.toPrice = function (typeStr: 'CNY' | 'USD' = 'CNY'): string {
