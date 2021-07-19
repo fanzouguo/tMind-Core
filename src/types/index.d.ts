@@ -48,7 +48,14 @@ declare global {
 		toObj(): tmind.IObj<any>;
 		/** 将字符串编码为 uniCode格式
 		 */
-		encode: tmind.Iencode;
+		encode: {
+			toUniCode(splitStr?: string): string,
+			wechatNick(): string
+		};
+		decode: {
+			toStr(splitStr?: string): string,
+			wechatNick(): string
+		};
 	}
 
 	export interface Number extends Number {

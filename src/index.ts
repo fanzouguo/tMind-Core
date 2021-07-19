@@ -1,9 +1,9 @@
-import { __len__, __lenfrom0__, __left__, __right__, __mid__, __like__, __upFirst__, __camelCase__, __toObj__ } from './baseType/tStr';
+import { __len__, __lenfrom0__, __left__, __right__, __mid__, __like__, __upFirst__, __camelCase__, __toObj__, __toUniCode__, __wechatNick__, __decodeToStr__, __decodeWechatNick__ } from './baseType/tStr';
 import { numToPrice, numToSplit, numToArr, numToCNY, numToRound, numIsOdd, funcAdd, funcSub, funcMult, funcDiv } from './baseType/tNum';
 import { arrInsert, arrMoveItem } from './baseType/tArr';
 import { bline, techo as _techo_, tclear as __tclear__ } from './package/tEcho';
 // import { deepClone } from './baseType/tObj';
-import { encode, companyInfo } from './package/tParse';
+import { companyInfo } from './package/tParse';
 import Tutil from './class/Tutil';
 import { tDate as _tdate_ } from './package/tDate';
 import { getFirstLetter, groupByFirstLetter } from './package/tPinyin';
@@ -19,7 +19,22 @@ String.prototype.like = __like__;
 String.prototype.upFirst = __upFirst__;
 String.prototype.camelCase = __camelCase__;
 String.prototype.toObj = __toObj__;
-String.prototype.encode = encode;
+String.prototype.encode = {
+	toUniCode: function (splitStr?: string): string {
+		return __toUniCode__.call(this, splitStr);
+	},
+	wechatNick: function (): string {
+		return __wechatNick__.call(this);
+	}
+};
+String.prototype.decode = {
+	toStr: function (splitStr?: string): string {
+		return __decodeToStr__.call(this, splitStr);
+	},
+	wechatNick: function (): string {
+		return __decodeWechatNick__.call(this);
+	}
+};
 
 Number.prototype.toPrice = function (typeStr: 'CNY' | 'USD' = 'CNY'): string {
 	return numToPrice.call(this, this.valueOf(), typeStr);

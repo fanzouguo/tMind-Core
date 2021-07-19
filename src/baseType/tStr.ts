@@ -1,4 +1,5 @@
 import { IObj } from '../types/index';
+import { encode, decode } from '../package/tParse';
 
 /** 返回字符串的长度，等效于 length
  */
@@ -112,6 +113,25 @@ const __toObj__ = function(): IObj<any> {
   }
 };
 
+const __toUniCode__ = function(splitStr?: string): string {
+	// @ts-ignore
+	return encode.toUniCode(this).join(splitStr || '-');
+};
+
+const __wechatNick__ = function(): string {
+	// @ts-ignore
+	return encode.toUniCode(this).join('-');
+};
+
+const __decodeToStr__ = function(splitStr?: string): string {
+	// @ts-ignore
+	return decode.toStr(this, splitStr || '-');
+};
+
+const __decodeWechatNick__ = function(): string {
+	return decode.wechatNick();
+};
+
 // // 数字的进制转换（2，8， 10， 16,26）
 // // 类数字字符串的进制转换（2，8， 10， 16,26）
 
@@ -124,5 +144,9 @@ export {
 	__like__,
 	__upFirst__,
 	__camelCase__,
-	__toObj__
+	__toObj__,
+	__toUniCode__,
+	__wechatNick__,
+	__decodeToStr__,
+	__decodeWechatNick__
 };
