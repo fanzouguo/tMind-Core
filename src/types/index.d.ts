@@ -46,27 +46,21 @@ declare global {
 		 * @returns 输出绝对的JSON对象，若转换错误，则会添加 gotNull或gotWrong字段
 		 */
 		toObj(): tmind.IObj<any>;
-		/** 字符串编码
+		/** 将字符串编码为 uniCode 数组的字符串拼接样式
+		 * @param str 拼接字符串的分隔符
+		 * @returns uniCode数组的拼接样式
 		 */
-		encode: {
-			/** 将字符串编码为 uniCode 数组的字符串拼接样式
-			 * @param str 拼接字符串的分隔符
-			 * @returns uniCode数组的拼接样式
-			 */
-			toUniCode(): number[],
-			/** 将代表微信昵称的字符串编码为 uniCode 格式
-			 */
-			wechatNick(): string
-		};
-		decode: {
-			/** 将已编码的字符串按照指定分隔符解码还原
-			 * @param splitStr 解码所用的分隔符
-			 */
-			toStr(splitStr?: string): string,
-			/** 将代表微信昵称的已编码 uniCode 格式字符串还原为微信昵称
-			 */
-			wechatNick(): string
-		};
+		encodeToUniCode(): number[];
+		/** 将代表微信昵称的字符串编码为 uniCode 格式
+		 */
+		encodeFromWechatNick(): string;
+		/** 将已编码的字符串按照指定分隔符解码还原
+		 * @param splitStr 解码所用的分隔符
+		 */
+		decodeToStr(splitStr?: string): string;
+		/** 将代表微信昵称的已编码 uniCode 格式字符串还原为微信昵称
+		 */
+		decodeToWechatNick(): string;
 	}
 
 	export interface Number extends Number {

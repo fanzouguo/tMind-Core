@@ -19,25 +19,17 @@ String.prototype.like = __like__;
 String.prototype.upFirst = __upFirst__;
 String.prototype.camelCase = __camelCase__;
 String.prototype.toObj = __toObj__;
-String.prototype.encode = {
-	toUniCode: function (): number[] {
-		// @ts-ignore
-		return encode.toUniCode(this);
-	},
-	wechatNick: function (): string {
-		// @ts-ignore
-		return encode.wechatNick(this);
-	}
+String.prototype.encodeToUniCode = function (): number[] {
+	return encode.toUniCode(this.valueOf());
 };
-String.prototype.decode = {
-	toStr: function (splitStr?: string): string {
-		// @ts-ignore
-		return decode.toStr(this, splitStr);
-	},
-	wechatNick: function (): string {
-		// @ts-ignore
-		return decode.wechatNick(this);
-	}
+String.prototype.encodeFromWechatNick = function (): string {
+	return encode.wechatNick(this.valueOf());
+};
+String.prototype.decodeToStr = function (splitStr?: string): string {
+	return decode.toStr(this.valueOf(), splitStr || '-');
+};
+String.prototype.decodeToWechatNick = function (): string {
+	return decode.wechatNick(this.valueOf());
 };
 
 Number.prototype.toPrice = function (typeStr: 'CNY' | 'USD' = 'CNY'): string {
