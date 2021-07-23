@@ -206,6 +206,39 @@ declare namespace tmind {
 		[P in keyof K]: T;
 	}
 
+	/** 用户信息基类
+	 *
+	 */
+	export declare interface IUser {
+		/** 用户ID
+		 */
+		id: number,
+		/** 上级挂载对象ID
+		 */
+		pid: number,
+		/** 用户登录码
+		 */
+		code: string,
+		/** 非中文母语的用户名称
+		 */
+		name: string,
+		/** 用户中文名称
+		 */
+		namezh: string,
+		/** 用户昵称
+		 */
+		nickName: string
+		/** 用户昵称
+		 */
+		gender: number,
+		/** 头像地址
+		 */
+		avator: string,
+		/** 赋权值
+		 */
+		authStr: string
+	}
+
 	/** 编码接口
 	 */
 	export interface Iencode {
@@ -588,6 +621,8 @@ declare module tmind {
 		toArr: (includTime?: boolean) => number[];
 	}
 
+	export class Tuser extends tmind.IUser {}
+
 	export declare class TVerifi {
 		constructor(val: tmind.verifiAble, fullCheck?: boolean, ...rules: tmind.tVerifi.Irule[]);
 		/** 获取当前实例校验结果
@@ -600,39 +635,6 @@ declare module tmind {
 		static getRules(): tmind.IObj<string>;
 
 		isNum(opt: tmind.Irule): tmind.TVerifi;
-	}
-
-	/** 用户信息基类
-	 *
-	 */
-	export declare interface IUser {
-		/** 用户ID
-		 */
-		id: number,
-		/** 上级挂载对象ID
-		 */
-		pid: number,
-		/** 用户登录码
-		 */
-		code: string,
-		/** 非中文母语的用户名称
-		 */
-		name: string,
-		/** 用户中文名称
-		 */
-		namezh: string,
-		/** 用户昵称
-		 */
-		nickName: string
-		/** 用户昵称
-		 */
-		gender: number,
-		/** 头像地址
-		 */
-		avator: string,
-		/** 赋权值
-		 */
-		authStr: string
 	}
 
 	export function smpoo(): tmind.IsmpooInfo;

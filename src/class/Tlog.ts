@@ -1,6 +1,6 @@
 import tmind from '../types/index';
 // import { LOG_END, LOG_DIM } from '../enum/index';
-import { tdate } from '../package/tDate';
+import { tDate } from '../package/tDate';
 
 interface ILog {
 	// 日志发起者ID（可以是终端用户ID，或者用-1表示服务端自运行发起）
@@ -48,7 +48,7 @@ export const logger = (senderID: number, msg: string | Error, lEnd: tmind.tLog.L
 			// 日志维度
 			logDim: tmind.tLog.LOG_DIM.runtime,
 			// 日志产生日期
-			logAt: tdate().format('yyyy-mm-dd hh:mi:ss.ms'),
+			logAt: tDate().format('yyyy-mm-dd hh:mi:ss.ms'),
 			// 日志信息类型
 			msgType
 		};
