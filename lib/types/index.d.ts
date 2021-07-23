@@ -209,7 +209,7 @@ declare namespace tmind {
 	/** 用户信息基类
 	 *
 	 */
-	export declare interface IUser {
+	export declare interface IUserBase {
 		/** 用户ID
 		 */
 		id: number,
@@ -227,7 +227,7 @@ declare namespace tmind {
 		namezh: string,
 		/** 用户昵称
 		 */
-		nickName: string
+		nickName: string,
 		/** 用户昵称
 		 */
 		gender: number,
@@ -621,7 +621,35 @@ declare module tmind {
 		toArr: (includTime?: boolean) => number[];
 	}
 
-	export class Tuser extends tmind.IUser {}
+	export class Tuser extends tmind.IUserBase {
+		/** 用户ID
+		 */
+		public id: number;
+		/** 上级挂载对象ID
+		 */
+		 public pid: number;
+		/** 用户登录码
+		 */
+		 public code: string;
+		/** 非中文母语的用户名称
+		 */
+		 public name: string;
+		/** 用户中文名称
+		 */
+		 public namezh: string;
+		/** 用户昵称
+		 */
+		 public nickName: string;
+		/** 用户昵称
+		 */
+		 public gender: number;
+		/** 头像地址
+		 */
+		 public avator: string;
+		/** 赋权值
+		 */
+		 public authStr: string;
+	}
 
 	export declare class TVerifi {
 		constructor(val: tmind.verifiAble, fullCheck?: boolean, ...rules: tmind.tVerifi.Irule[]);

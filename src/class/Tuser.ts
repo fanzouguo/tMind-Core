@@ -1,6 +1,6 @@
-import type { IUser, nullLike } from '../types';
+import type { IUserBase, nullLike } from '../types';
 
-class Tuser implements IUser {
+class Tuser implements IUserBase {
 	id: number;
 	pid: number;
 	code: string;
@@ -10,7 +10,7 @@ class Tuser implements IUser {
 	gender: number;
 	avator: string;
 	authStr: string;
-	constructor(payload?: IUser | nullLike) {
+	constructor(payload?: IUserBase | nullLike) {
 		this.id = payload?.id || -1;
 		this.pid = payload?.pid || -1;
 		this.code = payload?.code || '';
