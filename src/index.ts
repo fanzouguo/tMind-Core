@@ -5,7 +5,7 @@ import { bline, techo as _techo_, tclear as __tclear__ } from './package/tEcho';
 // import { deepClone } from './baseType/tObj';
 import { companyInfo, encode, decode } from './package/tParse';
 import Tutil from './class/Tutil';
-import Tuser from './class/Tuser';
+import TUser from './class/Tuser';
 import { tDate as _tdate_ } from './package/tDate';
 import { getFirstLetter, groupByFirstLetter } from './package/tPinyin';
 import { getRules, check } from './package/tVerifi';
@@ -88,7 +88,7 @@ if (Tutil.inBrowser) {
 // };
 
 export const smpoo = companyInfo;
-export const TUser = Tuser;
+export const Tuser = TUser;
 export const TUtil = Tutil;
 export const tCheckType = _tCheckType_;
 export const tEcho = _techo_;
