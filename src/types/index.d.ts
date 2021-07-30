@@ -145,6 +145,10 @@ declare global {
 		 * @returns
 		 */
 		moveTo(fromIdx: number, destIdx: number, itemCount?: number, orderField: string): void;
+		/** uniCode 数组解析出字符串原文
+		 * @returns
+		 */
+		decodeToStr(): string
 	}
 
 	export interface Object extends Object {

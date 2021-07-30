@@ -72,6 +72,10 @@ Array.prototype.moveTo = function (fromIdx: number, destIdx: number, itemCount: 
 	arrMoveItem.call(this, this, fromIdx, destIdx, itemCount, orderField);
 };
 
+Array.prototype.decodeToStr = function (): string {
+	return decode.toStr(this, '');
+};
+
 if (Tutil.inBrowser) {
 	bline();
 	window.onerror = function (err, url, l) {	// eslint-disable-line
