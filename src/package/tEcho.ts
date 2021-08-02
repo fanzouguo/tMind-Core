@@ -26,7 +26,7 @@ const color: tmind.IObj<string[]> = {
 // 终端控制台配色
 const msgColor: tmind.IObj<string[]> = {
   INFO: ['信息', color.blueBG[0], color.blueBG[1], color.blue[0], color.blue[1], color.end[0]],
-  SUCC: ['成功', color.greenBG[0], color.greenBG[1], color.green[0], color.green[1], color.end[0]],
+  SUCC: ['成功', color.greenBG[0], color.greenBG[1], color.black[0], color.black[1], color.end[0]],
   WARN: ['警告', color.yellowBG[0], color.yellowBG[1], color.yellow[0], color.yellow[1], color.end[0]],
   ERR: ['错误', color.redBG[0], color.redBG[1], color.red[0], color.red[1], color.end[0]]
 };
@@ -34,7 +34,7 @@ const msgColor: tmind.IObj<string[]> = {
 // 浏览器控制台配色
 const msgColorBrowser: tmind.IObj<string[]> = {
   INFO: ['信息', color.blueBGLight[0], color.blueBGLight[1], color.black[0], color.black[1]],
-  SUCC: ['成功', color.greenBGLight[0], color.greenBGLight[1], color.green[0], color.green[1]],
+  SUCC: ['成功', color.greenBGLight[0], color.greenBGLight[1], color.black[0], color.black[1]],
   WARN: ['警告', color.yellowBGLight[0], color.yellowBGLight[1], color.black[0], color.black[1]],
   ERR: ['错误', color.redBGLight[0], color.redBGLight[1], color.red[0], color.red[1]]
 };
