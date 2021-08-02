@@ -45,6 +45,19 @@ const RULES: tmind.IObj<rullItem> = {
 	hasSpecial: {
 		title: '是否包含特殊字符',
 		func: (val: tmind.verifiAble, opt: tmind.tVerifi.Irule): boolean => (typeof val === 'string')
+	},
+	stringLen: {
+		title: '字符长度限定',
+		func: (val: tmind.verifiAble, opt: tmind.tVerifi.Irule): boolean => {
+			const _currLen = `${val}`.length;
+			if (typeof opt?.minLen !== 'undefined') {
+				return _currLen > opt.minLen;
+			} else if (typeof opt?.maxLen !== 'undefined') {
+				return _currLen < opt.maxLen;
+			} else {
+				return true;
+			}
+		}
 	}
 };
 
