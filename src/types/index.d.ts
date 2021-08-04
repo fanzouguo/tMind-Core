@@ -189,7 +189,7 @@ declare namespace tmind {
 	 */
 	export declare type verifiAble = string | number | boolean | nullLike;
 
-	export declare type VERIFI_RULE = 'isNum' | 'hasSpace' | 'hasSpecial';
+	export declare type VERIFI_RULE = 'isNum' | 'hasSpace' | 'hasSpecial' | 'maxOrMinLen';
 
 	/** 键值类型接口
 	 *  以键可以是任意字符串，值为T
