@@ -1,5 +1,7 @@
-import tmind from '../types/index';
+import tmind from '../types';
+import { ETYPE } from '../enum';
 import { tCheckType } from '../package/tCheckType';
+
 
 function testMoveUp(arr: tmind.IObj<any>[], fromIdx: number,  destIdx: number, itemCount: number, orderField: string): void {
 	const [a, b] = [destIdx, fromIdx];
@@ -62,7 +64,7 @@ function arrMoveItem<T> (arr: T[], fromIdx: number,  destIdx: number, itemCount:
  */
 function arrMoveItem(arr: tmind.IObj<any>[], fromIdx: number,  destIdx: number, itemCount: number, orderField: string): void {
 	const _tp = tCheckType(arr[0]);
-	if (_tp === tmind.ETYPE.object) {
+	if (_tp === ETYPE.object) {
 		if (fromIdx > destIdx) {
 			testMoveUp(arr, fromIdx,  destIdx, itemCount, orderField);
 		} else if (fromIdx < destIdx) {

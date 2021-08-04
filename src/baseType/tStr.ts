@@ -1,4 +1,4 @@
-import { IObj } from '../types/index';
+import type { IObj } from '../types';
 
 /** 返回字符串的长度，等效于 length
  */

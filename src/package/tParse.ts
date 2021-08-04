@@ -1,4 +1,4 @@
-import tmind from '../types/index'; /* eslint-disable-line */
+import type * as tmind from '../types';
 import { bline } from './tEcho';
 
 /** 将传入字符串编码为 uniCode 数组

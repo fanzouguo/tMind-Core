@@ -1,4 +1,4 @@
-import tmind from '../types/index';
+import type * as tmind from '../types';
 import Tutil from '../class/Tutil';
 import { numToRound } from '../baseType/tNum';
 

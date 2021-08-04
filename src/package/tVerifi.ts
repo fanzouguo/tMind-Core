@@ -1,4 +1,4 @@
-import tmind from '../types/index';
+import type * as tmind  from '../types';
 
 type rullItem = {
 	title: string,

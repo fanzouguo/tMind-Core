@@ -1,4 +1,4 @@
-import tmind from '../types/index';
+import type * as tmind from '../types/index';
 import { sortASC, sortDESC } from '../package/tSort';
 import { encode, decode } from '../package/tParse';
 

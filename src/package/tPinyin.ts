@@ -1,4 +1,4 @@
-import tmind from '../types/index';
+import type * as tmind from '../types';
 const EN_LETTER: string[] = 'abcdefghjklmnopqrstwxyz'.split('');
 const CH_LETTER: string[] = '阿八嚓哒妸发旮哈讥咔垃吗拏噢妑七呥扨它穵夕丫帀'.split('');
 
