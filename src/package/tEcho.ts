@@ -14,7 +14,7 @@ const color: tmind.IObj<string[]> = {
   red: ['\x1B[31m', '\x1B[39m'],
   blueBG: ['\x1B[44m', '\x1B[49m'],
   blueBGLight: ['\x1B[104m', '\x1B[49m'],
-  greenBG: ['\x1B[42m', '\x1B[49m'],
+  greenBG: ['\x1B[42;30m', '\x1B[49m'],
   greenBGLight: ['\x1B[102m', '\x1B[49m'],
   yellowBG: ['\x1B[43;30m', '\x1B[49m'],
   yellowBGLight: ['\x1B[103m', '\x1B[49m'],
@@ -26,7 +26,7 @@ const color: tmind.IObj<string[]> = {
 // 终端控制台配色
 const msgColor: tmind.IObj<string[]> = {
   INFO: ['信息', color.blueBG[0], color.blueBG[1], color.blue[0], color.blue[1], color.end[0]],
-  SUCC: ['成功', color.greenBG[0], color.greenBG[1], color.black[0], color.black[1], color.end[0]],
+  SUCC: ['成功', color.greenBG[0], color.greenBG[1], color.green[0], color.green[1], color.end[0]],
   WARN: ['警告', color.yellowBG[0], color.yellowBG[1], color.yellow[0], color.yellow[1], color.end[0]],
   ERR: ['错误', color.redBG[0], color.redBG[1], color.red[0], color.red[1], color.end[0]]
 };
