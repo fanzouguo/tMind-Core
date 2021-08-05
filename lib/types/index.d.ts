@@ -594,7 +594,15 @@ declare module tmind {
 
 	export function tCheckType(val: any): string;
 
+	/** 控制台打印替代
+	 *
+	 * @param msg 要输出的信息
+	 * @param title 标题
+	 * @param type 输出样式类型
+	 */
 	export function tEcho(msg: any, title?: string, type?: tmind.MSG_TYPE): void;
+	/** 控制台清除替代
+	 */
 	export function tClear(): void;
 
 	export function tDate(): typeof Tdate;
