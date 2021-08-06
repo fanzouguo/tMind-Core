@@ -4,13 +4,13 @@ import { arrInsert, arrMoveItem } from './baseType/tArr';
 import { bline, techo as _techo_, tclear as __tclear__ } from './package/tEcho';
 // import { deepClone } from './baseType/tObj';
 import { companyInfo, encode, decode } from './package/tParse';
-import Tutil from './class/Tutil';
-import Tuser from './class/Tuser';
+import * as TutilClass from './class/Tutil';
+import * as TuserClass from './class/Tuser';
 import { tDate as _tdate_ } from './package/tDate';
 import { getFirstLetter, groupByFirstLetter } from './package/tPinyin';
 import { getRules, check } from './package/tVerifi';
 import { tCheckType as _tCheckType_ } from './package/tCheckType';
-import Terr from './baseType/tErr';
+import * as TerrClass from './baseType/tErr';
 
 String.prototype.len = __len__;
 String.prototype.lenfrom0 = __lenfrom0__;
@@ -77,12 +77,13 @@ Array.prototype.decodeToStr = function (): string {
 	return decode.toStr(this, '');
 };
 
-if (Tutil.inBrowser) {
+const tU = TutilClass.default;
+if (tU.inBrowser) {
 	bline();
 	window.onerror = function (err, url, l) {	// eslint-disable-line
 		return false;
 	};
-} else if (Tutil.inSvr) {
+} else if (tU.inSvr) {
 	process.on('uncaughtException', function (err: Error): void {
 		_techo_(err, '未处理的异常', 'ERR');
 	});
@@ -92,40 +93,19 @@ if (Tutil.inBrowser) {
 // 	return deepClone.call(this, this);
 // };
 
-module.exports = {
-	Tuser,
-	Tutil,
-	Terr,
-	smpoo: companyInfo,
-	tCheckType: _tCheckType_,
-	tEcho: _techo_,
-	tDate: _tdate_,
-	tClear: __tclear__,
-	tPinyin: {
-		getFirstLetter,
-		groupByFirstLetter
-	},
-	tVerifi: {
-		getRules,
-		check
-	}
+export const smpoo = companyInfo;
+export const Tuser = TuserClass.default;
+export const Terr = TerrClass.default;
+export const Tutil = TutilClass.default;
+export const tCheckType = _tCheckType_;
+export const tEcho = _techo_;
+export const tDate = _tdate_;
+export const tClear = __tclear__;
+export const tPinyin = {
+	getFirstLetter,
+	groupByFirstLetter
 };
-
-export {};
-
-// export const smpoo = companyInfo;
-// export const Tuser = TUser;
-// export const TUtil = Tutil;
-// export const tCheckType = _tCheckType_;
-// export const tEcho = _techo_;
-// export const tDate = _tdate_;
-// export const tClear = __tclear__;
-// // export const Terr = Terr;
-// export const tPinyin = {
-// 	getFirstLetter,
-// 	groupByFirstLetter
-// };
-// export const tVerifi = {
-// 	getRules,
-// 	check
-// };
+export const tVerifi = {
+	getRules,
+	check
+};
