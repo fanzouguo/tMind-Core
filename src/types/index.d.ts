@@ -1,3 +1,5 @@
+import type { ERR_TYPE } from '../enum';
+
 /* eslint-disable no-unused-vars */
 declare global {
 	export interface String extends String {
@@ -665,6 +667,52 @@ declare module tmind {
 		 * @returns
 		 */
 		export function check(val: tmind.verifiAble, fullCheck?: boolean, ...rules: tmind.tVerifi.Irule[]): boolean;
+	}
+
+	/** 基于 tFrameV9平台定义的错误对象
+	 *
+	 */
+	export declare class Terr extends Error {
+		/** 基于 tFrameV9平台定义的错误码
+		 *
+		 */
+		public code: ERR_TYPE;
+		/** 初始化构造
+		 *
+		 * @param msg 异常信息文本
+		 */
+		constructor(msg: string);
+		/** 初始化构造
+		 *
+		 * @param err JS/TS的 Error 对象
+		 */
+		constructor(err: Error);
+		/** 初始化构造
+		 *
+		 * @param msg 异常信息文本
+		 * @param errCode 基于 tFrameV9平台定义的错误码
+		 */
+		constructor(msg: string, errCode: ERR_TYPE);
+		/** 初始化构造
+		 *
+		 * @param err JS/TS的 Error 对象
+		 * @param errCode 基于 tFrameV9平台定义的错误码
+		 */
+		constructor(err: Error, errCode: ERR_TYPE);
+		/** 初始化构造
+		 *
+		 * @param msg 异常信息文本
+		 * @param errCode 基于 tFrameV9平台定义的错误码
+		 * @param toConsole 是否输出到控制台
+		 */
+		constructor(msg: string, errCode: ERR_TYPE, toConsole: boolean);
+		/** 初始化构造
+		 *
+		 * @param err JS/TS的 Error 对象
+		 * @param errCode 基于 tFrameV9平台定义的错误码
+		 * @param toConsole 是否输出到控制台
+		 */
+		constructor(err: Error, errCode: ERR_TYPE, toConsole: boolean);
 	}
 }
 

@@ -5,11 +5,12 @@ import { bline, techo as _techo_, tclear as __tclear__ } from './package/tEcho';
 // import { deepClone } from './baseType/tObj';
 import { companyInfo, encode, decode } from './package/tParse';
 import Tutil from './class/Tutil';
-import TUser from './class/Tuser';
+import Tuser from './class/Tuser';
 import { tDate as _tdate_ } from './package/tDate';
 import { getFirstLetter, groupByFirstLetter } from './package/tPinyin';
 import { getRules, check } from './package/tVerifi';
 import { tCheckType as _tCheckType_ } from './package/tCheckType';
+import Terr from './baseType/tErr';
 
 String.prototype.len = __len__;
 String.prototype.lenfrom0 = __lenfrom0__;
@@ -91,18 +92,40 @@ if (Tutil.inBrowser) {
 // 	return deepClone.call(this, this);
 // };
 
-export const smpoo = companyInfo;
-export const Tuser = TUser;
-export const TUtil = Tutil;
-export const tCheckType = _tCheckType_;
-export const tEcho = _techo_;
-export const tDate = _tdate_;
-export const tClear = __tclear__;
-export const tPinyin = {
-	getFirstLetter,
-	groupByFirstLetter
+module.exports = {
+	Tuser,
+	Tutil,
+	Terr,
+	smpoo: companyInfo,
+	tCheckType: _tCheckType_,
+	tEcho: _techo_,
+	tDate: _tdate_,
+	tClear: __tclear__,
+	tPinyin: {
+		getFirstLetter,
+		groupByFirstLetter
+	},
+	tVerifi: {
+		getRules,
+		check
+	}
 };
-export const tVerifi = {
-	getRules,
-	check
-};
+
+export {};
+
+// export const smpoo = companyInfo;
+// export const Tuser = TUser;
+// export const TUtil = Tutil;
+// export const tCheckType = _tCheckType_;
+// export const tEcho = _techo_;
+// export const tDate = _tdate_;
+// export const tClear = __tclear__;
+// // export const Terr = Terr;
+// export const tPinyin = {
+// 	getFirstLetter,
+// 	groupByFirstLetter
+// };
+// export const tVerifi = {
+// 	getRules,
+// 	check
+// };
