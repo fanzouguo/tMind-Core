@@ -716,5 +716,6 @@ declare module tmind {
 	}
 }
 
+
 export = tmind;
 export {};
