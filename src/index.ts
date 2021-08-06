@@ -10,8 +10,6 @@ import { tDate as _tdate_ } from './package/tDate';
 import { getFirstLetter, groupByFirstLetter } from './package/tPinyin';
 import { getRules, check } from './package/tVerifi';
 import { tCheckType as _tCheckType_ } from './package/tCheckType';
-import * as TerrClass from './baseType/tErr';
-import { ERR_TYPE as errType } from './enum';
 
 String.prototype.len = __len__;
 String.prototype.lenfrom0 = __lenfrom0__;
@@ -95,10 +93,8 @@ if (tU.inBrowser) {
 // };
 
 // 枚举
-export const ERR_TYPE = errType;
 // 类
 export const Tuser = TuserClass.default;
-export const Terr = TerrClass.default;
 export const Tutil = TutilClass.default;
 // 函数
 export const smpoo = companyInfo;
