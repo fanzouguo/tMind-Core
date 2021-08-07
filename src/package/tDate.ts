@@ -512,31 +512,15 @@ export function tDate(): Tdate;
 export function tDate(val: string): Tdate;
 export function tDate(val: number): Tdate;
 export function tDate(y: number, m: number, d?: number | undefined, h?: number | undefined, mi?: number | undefined, s?: number | undefined, ms?: number | undefined): Tdate;
-export function tDate(val: null): Tdate;
-export function tDate(val?: unknown): Tdate {
-	const _tp = typeof val;
-	switch (_tp) {
-		case 'string':
-			return __checkDate__(new Date(val as string));
-		case 'number':
-			if (arguments.length > 1) {
-				const [a, b, c = 0, d = 0, e = 0, f = 0, g = 0] = arguments;
-				return __checkDate__(new Date(a, b, c, d, e, f, g));
-			} else {
-				return __checkDate__(new Date(val as number));
-			}
-		case 'undefined':
-			return new Tdate(new Date());
-		default:
-			if (Array.isArray(val) && (val.length >= 0 && val.length < 8)) {
-				// const [a, b, ...otherVal] = val;
-				// return __checkDate__(new Date(a, b, ...otherVal as number[]));
-				// @ts-ignore
-				return __checkDate__(new Date(...val));
-			} else if (val === null) {
-				return new Tdate(new Date());
-			} else {
-				return __checkDate__(new Date('invalid'));
-			}
+export function tDate(...val: any[]): Tdate {
+	const [a, b, c = 0, d = 0, e = 0, f = 0, g = 0] = val;
+	if (!a) {
+		return __checkDate__(new Date());
+	} else {
+		if (val.length > 1) {
+			return __checkDate__(new Date(a, b, c, d, e, f, g));
+		} else {
+			return __checkDate__(new Date(a));
+		}
 	}
 }

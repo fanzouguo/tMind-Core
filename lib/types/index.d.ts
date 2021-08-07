@@ -605,12 +605,32 @@ declare module tmind {
 	 */
 	export function tClear(): void;
 
+	/** 获取 Tdate 对象
+	 *
+	 */
 	export function tDate(): Tdate;
+	/** 获取 Tdate 对象
+	 *
+	 * @param val 代表时间日期的字符串
+	 */
 	export function tDate(val: string): Tdate;
+	/** 获取 Tdate 对象
+	 *
+	 * @param val 代表时间日期的时间戳数字
+	 */
 	export function tDate(val: number): Tdate;
+	/** 获取 Tdate 对象
+	 *
+	 * @param y 年
+	 * @param m 月
+	 * @param d 日
+	 * @param h 时
+	 * @param mi 分
+	 * @param s 秒
+	 * @param ms 毫秒
+	 */
 	export function tDate(y: number, m: number, d?: number | undefined, h?: number | undefined, mi?: number | undefined, s?: number | undefined, ms?: number | undefined): Tdate;
-	export function tDate(val: null): Tdate;
-	export function tDate(val?: unknown): Tdate;
+
 	export namespace tPinyin {
 		/** 依据传入中文数组的首字母分组
 		 *
