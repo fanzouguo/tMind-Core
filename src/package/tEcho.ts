@@ -56,9 +56,10 @@ export function techo(msg: any, title?: string, type?: tmind.MSG_TYPE): void {
     const _execer = (type && (((type === 'ERR') && console.error) || ((type === 'WARN') && console.warn) || console.log)) || console.log;
     _func(_execer, _currMsg);
   } else if (msg instanceof Error) {
-    _func(console.error, `${b} ${title || a} ${c} ${d} ${msg} ${e}`);
+    _func(console.error, `${b} ${title || a} ${c} ${d} ${msg.message} ${e}，详情如下：`);
+    console.error(msg);
   } else if (msgType === 'object') {
-    console.log(JSON.stringify(msg), null, 2);
+    console.log(msg);
   }
 }
 

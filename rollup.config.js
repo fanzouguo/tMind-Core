@@ -11,7 +11,7 @@ const { getPathSpec } = require('./.debug/getPath');
 const getDate = require('./.debug/getDate');
 const basePath = process.cwd();
 const banner = `/*!
-* tMind-Cli v${pkg.version}
+* tMind-Core v${pkg.version}
 * (c) 2021-2022  Smpoo soft Co. Shanghai China
 * Released under the MIT License.
 * Author: David
