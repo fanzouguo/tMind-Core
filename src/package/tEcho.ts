@@ -46,25 +46,33 @@ export function bline(): void {
 }
 
 export function techo(msg: any, title?: string, type?: tmind.MSG_TYPE): void {
-  const _currType = `${type}`.toUpperCase();
-  const _func: any = (execer: any, str: string) => execer(str);
-  const msgType = typeof msg;
-  const [a, b, c, d, e] = Tutil.inBrowser ? (msgColorBrowser[_currType] || ['', '', '', '', '']) : (msgColor[_currType] || ['', '', '', '', '']);
   /* eslint-disable no-console */
-  const _execer = (type && (((type === 'ERR') && console.error) || ((type === 'WARN') && console.warn) || console.log)) || console.log;
-  if (msgType === 'string') {
-    const _currMsg = `${b} ${title || a} ${c} ${d} ${msg} ${e}`;
-    _func(_execer, _currMsg);
-  } else if (msg instanceof Error) {
-    _func(console.error, `${b} ${title || a} ${c} ${d} ${msg?.message || ''} ${e}，详情如下：`);
-    console.error(msg);
-  } else if (msgType === 'object') {
-    if (type === 'ERR') {
-      _func(console.error, `${b} ${title || a} ${c} ${d} ${msg?.message || ''} ${e}，详情如下：`);
+  if (!title) {
+    if (msg instanceof Error) {
+      console.error(msg);
+    } else {
+      console.log(msg);
     }
-    _func(_execer, msg);
   } else {
-    _func(_execer, msg);
+    const _currType = `${type}`.toUpperCase();
+    const _func: any = (execer: any, str: string) => execer(str);
+    const msgType = typeof msg;
+    const [a, b, c, d, e] = Tutil.inBrowser ? (msgColorBrowser[_currType] || ['', '', '', '', '']) : (msgColor[_currType] || ['', '', '', '', '']);
+    const _execer = (type && (((type === 'ERR') && console.error) || ((type === 'WARN') && console.warn) || console.log)) || console.log;
+    if (msgType === 'string') {
+      const _currMsg = `${b} ${title || a} ${c} ${d} ${msg} ${e}`;
+      _func(_execer, _currMsg);
+    } else if (msg instanceof Error) {
+      _func(console.error, `${b} ${title || a} ${c} ${d} ${msg?.message || ''} ${e}，详情如下：`);
+      console.error(msg);
+    } else if (msgType === 'object') {
+      if (type === 'ERR') {
+        _func(console.error, `${b} ${title || a} ${c} ${d} ${msg?.message || ''} ${e}，详情如下：`);
+      }
+      _func(_execer, msg);
+    } else {
+      _func(_execer, msg);
+    }
   }
 }
 
