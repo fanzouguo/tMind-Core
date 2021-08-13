@@ -93,6 +93,16 @@ const __camelCase__ = function(): string {
 	return this.replace(/[-|_|\s+](\w)/g, (a, b) => b.toUpperCase());
 };
 
+/** 将小驼峰字符转换为中横线分隔法
+ * @returns
+ */
+const __splitCamelCase__ = function(): string {
+	// @ts-ignore
+	return this.replace(/[A-Z]/, ($1: string) => {
+		return `-${$1}`;
+	});
+};
+
 /** 将字符串实例转换为JSON对象格式，且忽略转换错误
  * @returns 输出绝对的JSON对象，若转换错误，则会添加 gotNull或gotWrong字段
  */
@@ -112,23 +122,39 @@ const __toObj__ = function(): IObj<any> {
   }
 };
 
+// /** 转码该字符串
+//  * @param splitStr 转码分隔符
+//  * @returns
+//  */
 // const __toUniCode__ = function(splitStr?: string): string {
 // 	// @ts-ignore
 // 	return encode.toUniCode(this).join(splitStr || '-');
 // };
 
+// /** 将代表微信昵称的本字符串进行转码
+//  * @returns
+//  */
 // const __wechatNick__ = function(): string {
 // 	// @ts-ignore
 // 	return encode.toUniCode(this).join('-');
 // };
 
+// /** 将代表转码后信息的字符串字面量转换为原字符串
+//  *
+//  * @param splitStr 字面量中代表分隔符的符号
+//  * @returns
+//  */
 // const __decodeToStr__ = function(splitStr?: string): string {
 // 	// @ts-ignore
 // 	return decode.toStr(this, splitStr || '-');
 // };
 
+// /** 将代表转码后的微信昵称的字符串字面量解码为微信昵称原文
+//  * @returns
+//  */
 // const __decodeWechatNick__ = function(): string {
-// 	return decode.wechatNick();
+// 	// @ts-ignore
+// 	return decode.wechatNick(`${this}`);
 // };
 
 // // 数字的进制转换（2，8， 10， 16,26）
@@ -143,7 +169,8 @@ export {
 	__like__,
 	__upFirst__,
 	__camelCase__,
-	__toObj__
+	__toObj__,
+	__splitCamelCase__
 	// __toUniCode__,
 	// __wechatNick__,
 	// __decodeToStr__,

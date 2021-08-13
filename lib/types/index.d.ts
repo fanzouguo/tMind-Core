@@ -39,6 +39,9 @@ declare global {
 		/** 将下划线、中括号或空格分隔的字符组合为小驼峰
 		 */
 		camelCase(): string;
+		/** 将小驼峰字符转换为中横线分隔法
+		 */
+		splitCamelCase(): string;
 		/** 转换为小驼峰
 		 */
 		toCamelCase(): string;
