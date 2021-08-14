@@ -41,7 +41,6 @@ const msgColorBrowser: tmind.IObj<string[]> = {
 
 export function bline(): void {
   /* eslint-disable no-console */
-  console.clear();
   console.log(String.fromCharCode(...(tcode.split('-').map(v => +v))));
 }
 
