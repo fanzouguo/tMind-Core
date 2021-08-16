@@ -128,7 +128,7 @@ declare global {
 		funcDiv(...item: number[]): number;
 	}
 
-	interface Array extends Array {
+	interface Array<T> extends Array<T> {
 		/** 对传入的数组，在指定索引位置之后插入值，该方法默认会改变原始数组
 		 * @param arr 要插入的原始数组
 		 * @param destIndex 要插入的索引位置，起始值为：0
@@ -140,14 +140,14 @@ declare global {
 		 *  该方法针对数组内元素的类型不同，处理方式亦不同。
 		 * 数组内元素为 JSON 对象的，会对 orderField指定的元素字段（默认为 orderIdx）按照新的排序刷新排序值，而不改变元素在数组内的实际位置
 		 * 数组内元素若是 JSON 对象之外的其他类型，则排序过程会直接调整元素在数组内顺序
-		 * @param arr 要进行元素移动的原始数组
 		 * @param fromIdx 要移动的元素在数组中的原始索引（索引从0开始计数），
 		 * 								若要移动的元素在数组中系连续多个，则此处代表这些元素中的最小索引
 		 * @param	 destIdx 本次要移动到的目标位置索引
 		 * @param	 itemCount 本次要移动的元素数量（若数量 > 1，则这些元素在原始位置中必须连续存在）
+		 * @param	 orderField
 		 * @returns
 		 */
-		moveTo(fromIdx: number, destIdx: number, itemCount?: number, orderField: string): void;
+		moveTo(fromIdx: number, destIdx: number, itemCount: number = 1, orderField: string): void;
 		/** uniCode 数组解析出字符串原文
 		 * @returns
 		 */
@@ -170,17 +170,20 @@ declare namespace tmind {
 	 *  以键可以是任意字符串，值为T
 	 */
 	interface IObj<T> {
+		[p: undefined]: undefined;
 		[index: string]: T;
 	}
 
-	interface IObjKt<K, T> {
-		[p: keyof K]: T;
+	/** 从第一个泛型中获取键名的限定范围，第二个泛型申明值类型
+	 */
+	type IObjKT<K, T> = {
+		[P in keyof K]: T;
 	}
 
 	/** 基础键值对
 	 *
 	 */
-	interface Ikv {
+	interface IKv {
 		id: number;
 		namezh: string;
 	}
@@ -196,7 +199,7 @@ declare namespace tmind {
 	/** 业务对象基类
 	 *
 	 */
-	interface IbaseBiz extends Ikv, ICodeName {
+	interface IBaseBiz extends IKv, ICodeName {
 		/** 记录ID
 		 *
 		 */
