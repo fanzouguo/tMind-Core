@@ -170,8 +170,7 @@ declare namespace tmind {
 	 *  以键可以是任意字符串，值为T
 	 */
 	interface IObj<T> {
-		[p: undefined]: undefined;
-		[index: string]: T;
+		[index?: string]: T;
 	}
 
 	/** 从第一个泛型中获取键名的限定范围，第二个泛型申明值类型
