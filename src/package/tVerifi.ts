@@ -1,9 +1,4 @@
-import type * as tmind  from '../types';
-
-type rullItem = {
-	title: string,
-	func: (val: tmind.verifiAble, opt: tmind.tVerifi.Irule) => boolean
-};
+import type * as tmind from '../types';
 
 // 默认校验参数
 // const DEFAULT_OPT: tmind.tVerifi.Irule = {
@@ -21,7 +16,7 @@ const pattern = {
 	specialLetter: `[\`~!@#$^&*()=|{}':;',\\[\\].<>《》/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]` // eslint-disable-line
 };
 
-const RULES: tmind.IObj<rullItem> = {
+const RULES: tmind.IObj<tmind.IRullItem> = {
 	isNum: {
 		title: '为纯数字',
 		func: (val: tmind.verifiAble, opt: tmind.tVerifi.Irule): boolean => {
@@ -106,8 +101,9 @@ class TVerifi implements tmind.TVerifi {
 	 * @returns
 	 */
 	static getRules = (): tmind.IObj<string> => {
-		const _obj: tmind.IObjKt<typeof RULES, string> = {};
-		const _arr = Object.keys(RULES);
+		// const _obj: tmind.IObjKt<typeof RULES, any> = {};
+		const _obj: tmind.IObj<string> = {};
+		const _arr: string[] = Object.keys(RULES);
 		for (const v of _arr) {
 			_obj[v] = RULES[v].title;
 		}
@@ -119,17 +115,16 @@ class TVerifi implements tmind.TVerifi {
 	}
 }
 
-
-	/** 获取系统支持的校验规则及规则别名的键值对（键值对中的规则别名仅为中性描述，不包含任何允许或禁止意向）
-	 */
-	export const getRules = TVerifi.getRules;
-	/** 执行有效性校验
-	 * @param val 要校验的值，支持校验的值类型为：（string | number | boolean | null | undefined）
-	 * @param fullCheck 链式校验过程中，是否强制全链遍历
-	 *  			若为 false，则任何一环校验失败，则立即终止校验
-	 * @param rules 校验规则组
-	 * @returns
-	 */
-	export function check(val: tmind.verifiAble, fullCheck?: boolean, ...rules: tmind.tVerifi.Irule[]): boolean {
-		return (new TVerifi(val, fullCheck, ...rules)).isOk;
-	}
+/** 获取系统支持的校验规则及规则别名的键值对（键值对中的规则别名仅为中性描述，不包含任何允许或禁止意向）
+ */
+export const getRules = TVerifi.getRules;
+/** 执行有效性校验
+ * @param val 要校验的值，支持校验的值类型为：（string | number | boolean | null | undefined）
+ * @param fullCheck 链式校验过程中，是否强制全链遍历
+ *  			若为 false，则任何一环校验失败，则立即终止校验
+ * @param rules 校验规则组
+ * @returns
+ */
+export function check(val: tmind.verifiAble, fullCheck?: boolean, ...rules: tmind.tVerifi.Irule[]): boolean {
+	return (new TVerifi(val, fullCheck, ...rules)).isOk;
+}

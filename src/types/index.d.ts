@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 declare global {
-	export interface String extends String {
+	interface String extends String {
 		/** 返回字符串的长度，等效于 length
 		 */
 		len(): number;
@@ -66,7 +66,7 @@ declare global {
 		decodeToWechatNick(): string;
 	}
 
-	export interface Number extends Number {
+	interface Number extends Number {
 		/** 将数字转换为货币显示
 		 * @param val 要转换的数字
 		 * @param typeStr 货币类型
@@ -128,7 +128,7 @@ declare global {
 		funcDiv(...item: number[]): number;
 	}
 
-	export interface Array extends Array {
+	interface Array extends Array {
 		/** 对传入的数组，在指定索引位置之后插入值，该方法默认会改变原始数组
 		 * @param arr 要插入的原始数组
 		 * @param destIndex 要插入的索引位置，起始值为：0
@@ -154,7 +154,7 @@ declare global {
 		decodeToStr(): string
 	}
 
-	export interface Object extends Object {
+	interface Object extends Object {
 		// /** 此处不做复杂逻辑的深拷贝，仅利用JSON.stringify方法简单返回结果
 		//  * 基于 tFrameV9框架的设计，仅对数据载荷的 JSON 对象进行深拷贝，该对象本身仅作为数据表示层。
 		//  *
@@ -165,58 +165,94 @@ declare global {
 	}
 }
 
-type IObj1<T> = {
-	[P in keyof T]: T[P];
-}
-
-type IObj2<T> = {
-	[P in keyof T]: any;
-}
-
 declare namespace tmind {
-	export declare type nullLike = null | undefined;
-
-	/** 全局输出信息类型
-	 */
-	export declare type MSG_TYPE = '' | 'INFO' | 'SUCC' | 'WARN' | 'ERR' | nullLike;
-
-	/** 可作为日期传参的代类型
-	 */
-	export declare type dateLike = string | number | number[] | Date | nullLike;
-
-	/** 可作为 Boolean 传参的类型
-	 */
-	export declare type boolLike = boolean | string | number | nullLike;
-
-	/** 支持校验的数据类型
-	 */
-	export declare type verifiAble = string | number | boolean | nullLike;
-
-	export declare type VERIFI_RULE = 'isNum' | 'hasSpace' | 'hasSpecial' | 'maxOrMinLen';
-
 	/** 键值类型接口
 	 *  以键可以是任意字符串，值为T
 	 */
-	export declare interface IObj<T> {
+	interface IObj<T> {
 		[index: string]: T;
 	}
 
-	/** 键值类型接口
-	 *  键为 T 的键，值为 (T 的值 或任意值)
-	 */
-	export declare type IObj<T> = IObj1<T> | IObj2<T>
-
-	/** 键值类型接口
-	 *  键为 K 的键，值为 T
-	 */
-	export declare type IObjKt<K, T> = {
-		[P in keyof K]: T;
+	interface IObjKt<K, T> {
+		[p: keyof K]: T;
 	}
+
+	/** 基础键值对
+	 *
+	 */
+	interface Ikv {
+		id: number;
+		namezh: string;
+	}
+
+	/** 基于 代码/名称 的键值对
+	 *
+	 */
+	interface ICodeName {
+		code: string;
+		namezh: string;
+	}
+
+	/** 业务对象基类
+	 *
+	 */
+	interface IbaseBiz extends Ikv, ICodeName {
+		/** 记录ID
+		 *
+		 */
+		id: number;
+		/** 从属主记录ID
+		 *	(!)勿用于业务逻辑中的关联关系
+		 */
+		pid: number;
+		/** 业务 code
+		 *
+		 */
+		code: string;
+		/** 业务名称
+		 *
+		 */
+		namezh: string;
+		/** 备注
+		 *
+		 */
+		memo: string;
+	}
+
+	type nullLike = null | undefined;
+
+	/** 全局输出信息类型
+	 */
+	type MSG_TYPE = '' | 'INFO' | 'SUCC' | 'WARN' | 'ERR' | nullLike;
+
+	/** 可作为日期传参的代类型
+	 */
+	type dateLike = string | number | number[] | Date | nullLike;
+
+	/** 可作为 Boolean 传参的类型
+	 */
+	type boolLike = boolean | string | number | nullLike;
+
+	/** 支持校验的数据类型
+	 */
+	type verifiAble = string | number | boolean | nullLike;
+
+	/** tFrameV9 所支持的校验规则类型
+	 *
+	 */
+	type VERIFI_RULE = 'isNum' | 'hasSpace' | 'hasSpecial' | 'maxOrMinLen';
+
+	/** 校验规则项定义
+	 */
+	type IRullItem = {
+		title: string,
+		func: (val: tmind.verifiAble, opt: tmind.tVerifi.Irule) => boolean
+	};
 
 	/** 用户信息基类
 	 *
 	 */
-	export declare interface IUserBase {
+	interface IUserBase {
 		/** 用户ID
 		 */
 		id: number,
@@ -248,7 +284,7 @@ declare namespace tmind {
 
 	/** 编码接口
 	 */
-	export interface Iencode {
+	interface Iencode {
 		/** 字符串转换为 unicode 数组
 		 * @param str 待转码的字符串
 		 */
@@ -260,7 +296,7 @@ declare namespace tmind {
 		wechatNick: (str: string) => string
 	}
 
-	export interface Idecode {
+	interface Idecode {
 		/** uniCode（字符/数字）数组解析出字符串原文
 		 * @param val 要解析的uniCode（字符/数字）数组
 		 * @param sep 传入参数中val的拼接字符串，默认为半角中横线
@@ -274,14 +310,14 @@ declare namespace tmind {
 		wechatNick: (val: string | number[]) => string
 	}
 
-	export interface Iparse {
+	interface Iparse {
 		/** 将字符串编码为 uniCode格式 */
 		encode: Iencode,
 		/** 将uniCode 格式信息解码回字符串 */
 		decode: Idecode
 	}
 
-	export interface Isort {
+	interface Isort {
 		/** 数组 sort 方法的升序回调函数
 		 *
 		 * @param a
@@ -298,7 +334,7 @@ declare namespace tmind {
 
 	/** tmind.smpoo 方法返回的深普信息格式
 	 */
-	export interface IsmpooInfo {
+	interface IsmpooInfo {
 		company: string,
 		appCopy: string,
 		webSite: string,
@@ -309,7 +345,7 @@ declare namespace tmind {
 declare module tmind {
 	/** tMind-Core 工具类
 	 */
-	export class Tutil {
+	class Tutil {
 		/** 判断当前运行环境是否为浏览器
 		 */
 		static inBrowser: boolean;
@@ -325,7 +361,7 @@ declare module tmind {
 		static decode: tmind.IObj<tmind.Idecode>;
 	}
 
-	export class Tdate {
+	class Tdate {
 		private val: Date;
 
 		/** 判断当前实例所代表的日期是否为闰年
@@ -544,7 +580,7 @@ declare module tmind {
 		toArr: (includTime?: boolean) => number[];
 	}
 
-	export class Tuser extends tmind.IUserBase {
+	class Tuser extends tmind.IUserBase {
 		/** 用户ID
 		 */
 		public id: number;
@@ -574,7 +610,7 @@ declare module tmind {
 		 public authStr: string;
 	}
 
-	export declare class TVerifi {
+	class TVerifi {
 		constructor(val: tmind.verifiAble, fullCheck?: boolean, ...rules: tmind.tVerifi.Irule[]);
 		/** 获取当前实例校验结果
 		 */
@@ -588,14 +624,14 @@ declare module tmind {
 		isNum(opt: tmind.Irule): tmind.TVerifi;
 	}
 
-	export function smpoo(): tmind.IsmpooInfo;
+	function smpoo(): tmind.IsmpooInfo;
 
-	export function sortASC(a: string, b: string): number;
-	export function sortASC(a: number, b: number): number;
-	export function sortDESC(a: string, b: string): number;
-	export function sortDESC(a: number, b: number): number;
+	function sortASC(a: string, b: string): number;
+	function sortASC(a: number, b: number): number;
+	function sortDESC(a: string, b: string): number;
+	function sortDESC(a: number, b: number): number;
 
-	export function tCheckType(val: any): string;
+	function tCheckType(val: any): string;
 
 	/** 控制台打印替代
 	 *
@@ -603,25 +639,25 @@ declare module tmind {
 	 * @param title 标题
 	 * @param type 输出样式类型
 	 */
-	export function tEcho(msg: any, title?: string, type?: tmind.MSG_TYPE): void;
+	function tEcho(msg: any, title?: string, type?: tmind.MSG_TYPE): void;
 	/** 控制台清除替代
 	 */
-	export function tClear(): void;
+	function tClear(): void;
 
 	/** 获取 Tdate 对象
 	 *
 	 */
-	export function tDate(): Tdate;
+	function tDate(): Tdate;
 	/** 获取 Tdate 对象
 	 *
 	 * @param val 代表时间日期的字符串
 	 */
-	export function tDate(val: string): Tdate;
+	function tDate(val: string): Tdate;
 	/** 获取 Tdate 对象
 	 *
 	 * @param val 代表时间日期的时间戳数字
 	 */
-	export function tDate(val: number): Tdate;
+	function tDate(val: number): Tdate;
 	/** 获取 Tdate 对象
 	 *
 	 * @param y 年
@@ -632,28 +668,28 @@ declare module tmind {
 	 * @param s 秒
 	 * @param ms 毫秒
 	 */
-	export function tDate(y: number, m: number, d?: number | undefined, h?: number | undefined, mi?: number | undefined, s?: number | undefined, ms?: number | undefined): Tdate;
+	function tDate(y: number, m: number, d?: number | undefined, h?: number | undefined, mi?: number | undefined, s?: number | undefined, ms?: number | undefined): Tdate;
 
-	export namespace tPinyin {
+	namespace tPinyin {
 		/** 依据传入中文数组的首字母分组
 		 *
 		 * @param arr 要进行分组的中文数组
 		 * @param fullLetter 若为True，则即时某个字母标签下没有匹配的文字，也返回空数组
 		 * @returns 按照26个英文字母分组的结果集
 		 */
-		export function groupByFirstLetter(arr: string[], fullLetter: boolean): tmind.IObj<string[]>;
+		function groupByFirstLetter(arr: string[], fullLetter: boolean): tmind.IObj<string[]>;
 
 		/** 获取传入文字的首字母
 		 * @param word 要获取首字母的字符串
 		 * @returns
 		 */
-		export function getFirstLetter(word: string): string;
+		function getFirstLetter(word: string): string;
 	}
 
-	export namespace tVerifi {
+	namespace tVerifi {
 		/** 校验参数
 		 */
-		export interface Irule {
+		interface Irule {
 			/** 支持的校验模版
 			 */
 			patten: tmind.VERIFI_RULE,
@@ -679,7 +715,7 @@ declare module tmind {
 		}
 		/** 获取系统支持的校验规则及规则别名的键值对（键值对中的规则别名仅为中性描述，不包含任何允许或禁止意向）
 		 */
-		export function getRules(): tmind.IObj<string>;
+		function getRules(): tmind.IObj<string>;
 		/** 执行有效性校验
 		 * @param val 要校验的值，支持校验的值类型为：（string | number | boolean | null | undefined）
 		 * @param fullCheck 链式校验过程中，是否强制全链遍历
@@ -687,7 +723,7 @@ declare module tmind {
 		 * @param rules 校验规则组
 		 * @returns
 		 */
-		export function check(val: tmind.verifiAble, fullCheck?: boolean, ...rules: tmind.tVerifi.Irule[]): boolean;
+		function check(val: tmind.verifiAble, fullCheck?: boolean, ...rules: tmind.tVerifi.Irule[]): boolean;
 	}
 }
 

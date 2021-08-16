@@ -2,7 +2,6 @@ import tmind from '../types';
 import { ETYPE } from '../enum';
 import { tCheckType } from '../package/tCheckType';
 
-
 function testMoveUp(arr: tmind.IObj<any>[], fromIdx: number,  destIdx: number, itemCount: number, orderField: string): void {
 	const [a, b] = [destIdx, fromIdx];
 	const [c, d] = [fromIdx, fromIdx + itemCount];
