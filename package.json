@@ -1,51 +1,82 @@
 {
-  "name": "tmind-core",
-  "version": "3.3.28",
-  "description": "This project is automatic created by tMind-Core for tFrameV9 of smpoo Co. in 2021-03-13 07:02:42.668",
+  "name": "tMind-Core",
+  "version": "1.0.1",
+  "description": ".",
   "private": false,
   "main": "lib/index.js",
-  "module": "lib/index.esm.js",
   "type": "commonjs",
-  "types": "lib/types/index.d.ts",
   "scripts": {
-    "clean": "shx rm -rf lib",
-    "prePkg": "yarn lint && yarn clean",
-    "pkg": "rollup -c rollup.config.js",
-    "dev": "yarn prePkg && cross-env NODE_ENV=dev yarn pkg -w",
-    "dev:debug": "nodemon --config ./nodemon.json --inspect-brk ./src/try.ts",
-    "build": "yarn prePkg && node ./.debug/preBuild.js && cross-env NODE_ENV=prod  yarn pkg && node ./.debug/postBuild.js",
-    "lint": "eslint src --ext .ts",
-    "test": "cross-env NODE_ENV=test && jest",
-    "test-c": "yarn test --coverage",
-    "try": "nodemon -w ./.debug/useage.js node ./.debug/tryConsole.js",
-    "doc": "node ./.debug/tryOutput.js"
+    "dev": "node ./.dev/dev.js",
+    "build": "cross-env NODE_ENV=prod && node ./.dev/index.js"
   },
+  "author": "fanzouguo",
+  "license": "MIT",
+  "keywords": [
+    "smpoo",
+    "tframe",
+    "tFrame",
+    "smpoo soft",
+    "深普",
+    "上海深普",
+    "上海深普软件",
+    "tMindCore",
+    "tMind-Core",
+    "tMind-Core"
+  ],
+  "homepage": "https://github.com/fanzouguo/tMind-Core#readme",
+  "dependencies": {
+    "tmind-core": "^3.3.28"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.14.6",
+    "@types/jest": "^26.0.22",
+    "@babel/plugin-external-helpers": "^7.12.13",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.14.5",
+    "@babel/plugin-transform-runtime": "^7.14.5",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-typescript": "^7.13.0",
+    "@babel/register": "^7.14.5",
+    "@babel/runtime": "^7.14.6",
+    "@babel/runtime-corejs2": "^7.13.9",
+    "@typescript-eslint/eslint-plugin": "^4.17.0",
+    "@typescript-eslint/parser": "^4.17.0",
+    "@types/ws": "^7.4.0",
+    "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.3",
+    "cssnano": "^5.0.7",
+    "eslint": "~6.8.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-if": "^3.0.0",
+    "gulp-notify": "^4.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-size": "^4.0.1",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "nodemon": "^2.0.7",
+    "rollup": "^2.56.2",
+    "shx": "^0.3.3",
+    "terser": "^5.7.1",
+    "ts-node": "^9.1.1",
+    "tsconfig-paths": "^3.10.1",
+    "typescript": "~4.2.2"
+  },
+  "createAt": "2021-08-19 17:45:52.406",
+  "lastBuild": "2021-08-19 17:45:52.406",
+  "types": "lib/types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git@github.com:fanzouguo/tMind-Core.git"
   },
-  "keywords": [
-    "Smpoo",
-    "tFrame"
-  ],
-  "author": "上海深普软件.Co.David",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/fanzouguo/tMind-Core/issues"
-  },
-  "homepage": "https://github.com/fanzouguo/tMind-Core#readme",
-  "dependencies": {
-    "core-js": "~3.9.1"
-  },
-  "devDependencies": {
-    "eslint": "~6.8.0",
-    "eslint-plugin-import": "~2.20.2",
-    "eslint-plugin-node": "~11.1.0",
-    "eslint-plugin-promise": "~4.2.1",
-    "eslint-plugin-standard": "~4.0.0",
-    "ts-node": "~9.1.1",
-    "typescript": "~4.2.2"
-  },
-  "createAt": "2021-03-13 07:02:42.668",
-  "lastBuild": "2021-08-17 07:16:24.852"
+  }
 }

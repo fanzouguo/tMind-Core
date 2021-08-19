@@ -342,6 +342,21 @@ declare namespace tmind {
 		webSite: string,
 		consoleStr: void
 	}
+
+	namespace dbRule {
+		/** 可提供的初始化语句的对象类型
+		 *
+		 */
+		declare type dbInitType = 'db' | 'table' | 'view' | 'procedure' | 'function' | 'trigger'
+		/** 数据库表操作类型
+		 *
+		 */
+		declare type dbTableOptType = 'SELECT' | 'INSERT' | 'UPDATE' | 'DELETE';
+		/** tFrame 平台支持的 DB 类型
+		 *
+		 */
+		declare type supportDbType = 'mysql' | 'postgre' | 'mongodb' | 'sqlite' | 'lowDb' | 'msSql' | 'oracle' | 'db2';
+	}
 }
 
 declare module tmind {
