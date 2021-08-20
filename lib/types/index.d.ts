@@ -392,11 +392,11 @@ declare namespace tmind {
 			/** 该记录是否已停用
 			 *
 			 */
-			stopped: boolean;
+			stopped: 0 | 1;
 			/** 该记录是否已标记删除
 			 *
 			 */
-			deleted: boolean;
+			deleted: 0 | 1;
 			/** 记录创建者ID
 			 *
 			 */
