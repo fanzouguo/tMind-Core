@@ -343,7 +343,10 @@ declare namespace tmind {
 		consoleStr: void
 	}
 
-	namespace dbRule {
+	/** DB规则
+	 *
+	 */
+	namespace IDbRule {
 		/** 可提供的初始化语句的对象类型
 		 *
 		 */
@@ -356,6 +359,71 @@ declare namespace tmind {
 		 *
 		 */
 		declare type supportDbType = 'mysql' | 'postgre' | 'mongodb' | 'sqlite' | 'lowDb' | 'msSql' | 'oracle' | 'db2';
+
+		/** 数据表记录基类
+		 *
+		 */
+		export declare interface IRecode extends IKv, ICodeName {
+			/** 记录ID
+			 *
+			 */
+			id: number;
+			/** 从属主记录ID
+			 *	(!)勿用于业务逻辑中的关联关系
+			*/
+			pid: number;
+			/** 业务 code
+			 *
+			 */
+			code: string;
+			/** 业务名称
+			 *
+			 */
+			namezh: string;
+			/** 备注
+			 *
+			 */
+			memo: string;
+			/** 当前审批进度，初始值为：1000
+			 * 若审批重启，则在最高位递增，
+			 * 如3000代表第三轮审批重启，2005代表第二轮的第5个审批节点
+			 */
+			approStep: number;
+			/** 该记录是否已停用
+			 *
+			 */
+			stopped: boolean;
+			/** 该记录是否已标记删除
+			 *
+			 */
+			deleted: boolean;
+			/** 记录创建者ID
+			 *
+			 */
+			createBy: number;
+			/** 修改者ID
+			 *
+			 */
+			changeBy: number;
+			/** 标记删除者ID
+			 *
+			 */
+			deleteBy: number;
+			/** 记录创建时间
+			 *
+			 */
+			createTime: string;
+			/** 最后创建时间
+			 *
+			 */
+			changeTime: string;
+			/** 标记删除日期
+			 *
+			 */
+			deleteTime: string;
+			tLeft: number;
+			tRight: number;
+		}
 	}
 }
 
@@ -744,6 +812,100 @@ declare module tmind {
 	}
 }
 
+declare module tConfig {
+	/** 支持的 SSL 文件类型
+	 */
+	export declare interface Icert {
+		key: string,
+		pem?: string,
+		ca?: string[],
+		cert?: string
+	}
+
+	/** 服务单元配置模型
+	 */
+	 export declare interface IconfUnit {
+		// 服务索引序号
+		id: number,
+		/** 服务端实例标识
+		 */
+		ident: string,
+		/** 服务显示名称
+		 */
+		namezh: string,
+		/** 服务描述信息
+		 */
+		memo: string,
+		/** 服务地址，配置管理器初始化时会自动根据 isDev ，从配置文件中该项的元组列表中判断有效的值
+		 */
+		addr: string,
+		/** 服务端口
+		 */
+		port: number,
+		/** 是否将本服务识别标识（ident）作为访问路由的一级前缀
+		 */
+		prefix?: boolean,
+		/** 本服务是否支持跨域
+		 */
+		corsed?: boolean,
+		/** 额外添加的跨域响应头
+		 */
+		appendCorsHeader: string[],
+		/** 禁用的 http 方法，
+		 */
+		disableMethods: string[],
+		/** 跨域白名单
+		 */
+		corsWhiteList: string[],
+		/** 计划任务定时器
+		 */
+		schedule: string,
+		/** 本服务实例是否访问主业务DB服务(true为是，false表示不访问)
+		 */
+		linkToDb: boolean,
+		[k: string]: any
+	}
+
+	/** 实例配置
+	 */
+	export declare interface IconfSvr {
+		/** 工程对应的平台蓝图根节点ID
+		 */
+		id: string,
+		/** 工程识别标识
+		 */
+		ident: string,
+		/** 工程名称
+		 */
+		namezh: string,
+		/** 工程级默认服务地址，适用于子服务非分布式部署时的默认值
+		 *  工程级服务地址，若是下属各子服务具备独立地址，则需在子服务配置文件中单独指明
+		 */
+		addr: string,
+		/** SSL 验证文件
+		 */
+		cert: Icert,
+		/** token 加盐码
+		 */
+		secretKey: string,
+		/** 工程版本号
+		 */
+		ver: string,
+		/** 是否为开发环境
+		 */
+		isDev: boolean,
+		/** 动态生成的日志服务连接地址
+		 */
+		loggerUrl: string,
+		/** 动态生成的数据库服务连接地址
+		 */
+		dbUrl: string,
+		/** 各服务单元的配置信息
+		 */
+		unit: tmind.IObj<IconfUnit>
+	}
+}
 
 export = tmind;
+export = tConfig;
 export {};
