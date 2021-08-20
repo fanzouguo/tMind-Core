@@ -425,6 +425,169 @@ declare namespace tmind {
 			tRight: number;
 		}
 	}
+
+	/** 服务端配置接口
+	 *
+	 */
+	namespace ISvrConf {
+		/** 支持的 SSL 文件类型
+		 */
+		declare interface IConfCert {
+			key: string,
+			pem?: string,
+			ca?: string[],
+			cert?: string
+		}
+
+		/** 服务单元配置模型
+		 */
+		declare interface IConfUnit {
+			// 服务索引序号
+			id: number,
+			/** 服务端实例标识
+			 */
+			ident: string,
+			/** 服务显示名称
+			 */
+			namezh: string,
+			/** 服务描述信息
+			 */
+			memo: string,
+			/** 服务地址，配置管理器初始化时会自动根据 isDev ，从配置文件中该项的元组列表中判断有效的值
+			 */
+			addr: string,
+			/** 服务端口
+			 */
+			port: number,
+			/** 是否将本服务识别标识（ident）作为访问路由的一级前缀
+			 */
+			prefix?: boolean,
+			/** 本服务是否支持跨域
+			 */
+			corsed?: boolean,
+			/** 额外添加的跨域响应头
+			 */
+			appendCorsHeader: string[],
+			/** 禁用的 http 方法，
+			 */
+			disableMethods: string[],
+			/** 跨域白名单
+			 */
+			corsWhiteList: string[],
+			/** 计划任务定时器
+			 */
+			schedule: string,
+			/** 本服务实例是否访问主业务DB服务(true为是，false表示不访问)
+			 */
+			linkToDb: boolean,
+			/** 微信小程序配置
+			 *
+			 */
+			weichat?: {
+				appId: string,
+				appSecret: string,
+			}
+		}
+
+		/** DB服务单元配置模型
+		 *
+		 */
+		declare interface IConfDbSvr extends IConfUnit {
+			/** 数据库类型
+			 *
+			 */
+			dbType: IDbRule.supportDbType,
+			/** 数据库地址
+			 *
+			 */
+			dbAddr: string,
+			/** 数据库端口
+			 *
+			 */
+			dbPort: number,
+			/** 数据库连接用户名
+			 *
+			 */
+			user: string,
+			/** 数据库连接密码
+			 *
+			 */
+			pwd: string,
+			/** 数据库连接池细则
+			 *
+			 */
+			defaultDbPool?: {
+				/** 池内最大连接数
+				 *
+				 */
+				maxConnCount: number,
+				/** 池内最少连接数
+				 *
+				 */
+				minConnCount: number
+			},
+			/** 字符集
+			 *
+			 */
+			charset?: string,
+			/** 排序规则
+			 *
+			 */
+			collate?: string,
+			/** 备份参数
+			 *
+			 */
+			backup: {
+				/** 备份文件目标文件夹路径
+				 *
+				 */
+				destPath: string,
+				/** 定时备份周期（基于 Cron表达式的字符串）
+				 *
+				 */
+				loopStr: string
+			}
+		}
+
+		/** 实例配置
+		 */
+		export declare interface IConfSvr {
+			/** 工程对应的平台蓝图根节点ID
+			 */
+			id: string,
+			/** 工程识别标识
+			 */
+			ident: string,
+			/** 工程名称
+			 */
+			namezh: string,
+			/** 工程级默认服务地址，适用于子服务非分布式部署时的默认值
+			 *  工程级服务地址，若是下属各子服务具备独立地址，则需在子服务配置文件中单独指明
+			 */
+			addr: string,
+			/** SSL 验证文件
+			 */
+			cert: IConfCert,
+			/** token 加盐码
+			 */
+			secretKey: string,
+			/** 工程版本号
+			 */
+			ver: string,
+			/** 是否为开发环境
+			 */
+			isDev: boolean,
+			/** 动态生成的日志服务连接地址
+			 */
+			loggerUrl: string,
+			/** 动态生成的数据库服务连接地址
+			 */
+			dbUrl: string,
+			/** 各服务单元的配置信息
+			 */
+			unit: tmind.IObj<IConfUnit>
+		}
+	}
 }
 
 declare module tmind {
@@ -812,100 +975,5 @@ declare module tmind {
 	}
 }
 
-declare module tConfig {
-	/** 支持的 SSL 文件类型
-	 */
-	export declare interface Icert {
-		key: string,
-		pem?: string,
-		ca?: string[],
-		cert?: string
-	}
-
-	/** 服务单元配置模型
-	 */
-	 export declare interface IconfUnit {
-		// 服务索引序号
-		id: number,
-		/** 服务端实例标识
-		 */
-		ident: string,
-		/** 服务显示名称
-		 */
-		namezh: string,
-		/** 服务描述信息
-		 */
-		memo: string,
-		/** 服务地址，配置管理器初始化时会自动根据 isDev ，从配置文件中该项的元组列表中判断有效的值
-		 */
-		addr: string,
-		/** 服务端口
-		 */
-		port: number,
-		/** 是否将本服务识别标识（ident）作为访问路由的一级前缀
-		 */
-		prefix?: boolean,
-		/** 本服务是否支持跨域
-		 */
-		corsed?: boolean,
-		/** 额外添加的跨域响应头
-		 */
-		appendCorsHeader: string[],
-		/** 禁用的 http 方法，
-		 */
-		disableMethods: string[],
-		/** 跨域白名单
-		 */
-		corsWhiteList: string[],
-		/** 计划任务定时器
-		 */
-		schedule: string,
-		/** 本服务实例是否访问主业务DB服务(true为是，false表示不访问)
-		 */
-		linkToDb: boolean,
-		[k: string]: any
-	}
-
-	/** 实例配置
-	 */
-	export declare interface IconfSvr {
-		/** 工程对应的平台蓝图根节点ID
-		 */
-		id: string,
-		/** 工程识别标识
-		 */
-		ident: string,
-		/** 工程名称
-		 */
-		namezh: string,
-		/** 工程级默认服务地址，适用于子服务非分布式部署时的默认值
-		 *  工程级服务地址，若是下属各子服务具备独立地址，则需在子服务配置文件中单独指明
-		 */
-		addr: string,
-		/** SSL 验证文件
-		 */
-		cert: Icert,
-		/** token 加盐码
-		 */
-		secretKey: string,
-		/** 工程版本号
-		 */
-		ver: string,
-		/** 是否为开发环境
-		 */
-		isDev: boolean,
-		/** 动态生成的日志服务连接地址
-		 */
-		loggerUrl: string,
-		/** 动态生成的数据库服务连接地址
-		 */
-		dbUrl: string,
-		/** 各服务单元的配置信息
-		 */
-		unit: tmind.IObj<IconfUnit>
-	}
-}
-
 export = tmind;
-export = tConfig;
 export {};
