@@ -5,7 +5,7 @@ const { babel } = require('@rollup/plugin-babel');
 const { terser } = require('rollup-plugin-terser');
 const tsPlugin = require('rollup-plugin-typescript2');
 const commonjs = require('rollup-plugin-commonjs');
-const pkg = require('./package.json');
+const pkg = require('../package.json');
 const isProd = (process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production');
 const { getPathSpec } = require('./.debug/getPath');
 const getDate = require('./.debug/getDate');
