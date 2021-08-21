@@ -409,6 +409,10 @@ declare namespace tmind {
 			 *
 			 */
 			deleteBy: number;
+			/** 停用者
+			 *
+			 */
+			stopBy: number;
 			/** 记录创建时间
 			 *
 			 */
@@ -417,6 +421,10 @@ declare namespace tmind {
 			 *
 			 */
 			changeTime: string;
+			/** 标记为停用的触发时间
+			 *
+			 */
+			stopTime: string;
 			/** 标记删除日期
 			 *
 			 */
