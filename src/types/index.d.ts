@@ -513,6 +513,10 @@ declare namespace tmind {
 			 *
 			 */
 			dbPort: number,
+			/** 数据空间/模式
+			 *
+			 */
+			pattern: string,
 			/** 数据库连接用户名
 			 *
 			 */
