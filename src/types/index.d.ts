@@ -350,19 +350,20 @@ declare namespace tmind {
 		/** 可提供的初始化语句的对象类型
 		 *
 		 */
-		declare type dbInitType = 'db' | 'table' | 'view' | 'procedure' | 'function' | 'trigger'
+		type dbInitType = 'db' | 'table' | 'view' | 'procedure' | 'function' | 'trigger';
 		/** 数据库表操作类型
 		 *
 		 */
-		declare type dbTableOptType = 'SELECT' | 'INSERT' | 'UPDATE' | 'DELETE';
+		type dbTableOptType = 'SELECT' | 'INSERT' | 'UPDATE' | 'DELETE';
 		/** tFrame 平台支持的 DB 类型
 		 *
 		 */
-		declare type supportDbType = 'mysql' | 'postgre' | 'mongodb' | 'sqlite' | 'lowDb' | 'msSql' | 'oracle' | 'db2';
+		type supportDbType = 'mysql' | 'postgre' | 'mongodb' | 'sqlite' | 'lowDb' | 'msSql' | 'oracle' | 'db2';
+		type supportColumnType = 'bit' | '';
 		/** tFrame 平台字段定义规范
 		 *
 		 */
-		declare interface IDbColumn {
+		interface IDbColumn {
 			/** 字段名称
 			 *
 			 */
@@ -378,7 +379,7 @@ declare namespace tmind {
 			/** 字段长度
 			 *
 			 */
-			length: number,
+			len: number,
 			/** 小数位数
 			 *
 			 */
@@ -390,17 +391,16 @@ declare namespace tmind {
 			/** 默认值
 			 *
 			 */
-			defaultVal: string | number | IObj<any>,
+			defaultVal: string | number | boolean | IObj<any>,
 			/** 字段说明
 			 *
 			 */
 			memo: string
 		}
-
 		/** 数据表记录基类
 		 *
 		 */
-		declare interface IRecode extends IKv, ICodeName {
+		interface IRecode extends IKv, ICodeName {
 			/** 记录ID
 			 *
 			 */
