@@ -359,11 +359,48 @@ declare namespace tmind {
 		 *
 		 */
 		declare type supportDbType = 'mysql' | 'postgre' | 'mongodb' | 'sqlite' | 'lowDb' | 'msSql' | 'oracle' | 'db2';
+		/** tFrame 平台字段定义规范
+		 *
+		 */
+		declare interface IDbColumn {
+			/** 字段名称
+			 *
+			 */
+			code: string,
+			/** 字段标签
+			 *
+			 */
+			namezh: string,
+			/** 字段类型
+			 *
+			 */
+			type: string,
+			/** 字段长度
+			 *
+			 */
+			length: number,
+			/** 小数位数
+			 *
+			 */
+			decimalLen: number,
+			/** 是否允许空
+			 *
+			 */
+			nullable: boolean,
+			/** 默认值
+			 *
+			 */
+			defaultVal: string | number | IObj<any>,
+			/** 字段说明
+			 *
+			 */
+			memo: string
+		}
 
 		/** 数据表记录基类
 		 *
 		 */
-		export declare interface IRecode extends IKv, ICodeName {
+		declare interface IRecode extends IKv, ICodeName {
 			/** 记录ID
 			 *
 			 */
@@ -497,6 +534,54 @@ declare namespace tmind {
 			}
 		}
 
+		declare interface IConfOrm {
+			/** ORM实体类型
+			 *
+			 */
+			type: 'dict' | 'master' | 'bill' | 'report' | 'setting'
+			/** ORM实体代码
+			 *
+			 */
+			code: string,
+			/** ORM实体名称
+			 *
+			 */
+			namezh: string,
+			/** 字段定义
+			 *
+			 */
+			columns: IDbRule.IDbColumn[],
+			/** 初始化默认记录
+			 *
+			 */
+			initValue: IObj<IBaseBiz>[],
+			/** 是否防止初始记录被变更
+			 *
+			 */
+			protectInitVal: boolean,
+			/** 记录代码编码规则
+			 *
+			 */
+			codeRole: (opt?: any) => string,
+			/** 是否采用物理删除
+			 *
+			 */
+			realDel: boolean
+			/** 表单推送映射
+			 *
+			 */
+			push: {
+				/** 单个推送定义的命名作为键，值为[原表要推送字段列表, 目标表接收字段列表（数组第一个元素为目标表名称）]
+				 *
+				 */
+				[k: string]: [string[], string[]]
+			},
+			/** 标准CRUD之外的扩展定义
+			 *
+			 */
+			extend: IObj<any>
+		}
+
 		/** DB服务单元配置模型
 		 *
 		 */
@@ -546,6 +631,10 @@ declare namespace tmind {
 			 *
 			 */
 			collate?: string,
+			/** 分页查询每页数量
+			 *
+			 */
+			pageCount: number,
 			/** 备份参数
 			 *
 			 */
@@ -846,28 +935,28 @@ declare module tmind {
 		public id: number;
 		/** 上级挂载对象ID
 		 */
-		 public pid: number;
+		public pid: number;
 		/** 用户登录码
 		 */
-		 public code: string;
+		public code: string;
 		/** 非中文母语的用户名称
 		 */
-		 public name: string;
+		public name: string;
 		/** 用户中文名称
 		 */
-		 public namezh: string;
+		public namezh: string;
 		/** 用户昵称
 		 */
-		 public nickName: string;
+		public nickName: string;
 		/** 用户昵称
 		 */
-		 public gender: number;
+		public gender: number;
 		/** 头像地址
 		 */
-		 public avator: string;
+		public avator: string;
 		/** 赋权值
 		 */
-		 public authStr: string;
+		public authStr: string;
 	}
 
 	class TVerifi {
@@ -988,4 +1077,4 @@ declare module tmind {
 }
 
 export = tmind;
-export {};
+export { };
