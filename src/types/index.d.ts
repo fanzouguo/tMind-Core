@@ -536,54 +536,6 @@ declare namespace tmind {
 			}
 		}
 
-		declare interface IConfOrm {
-			/** ORM实体类型
-			 *
-			 */
-			type: 'dict' | 'master' | 'bill' | 'report' | 'setting'
-			/** ORM实体代码
-			 *
-			 */
-			code: string,
-			/** ORM实体名称
-			 *
-			 */
-			namezh: string,
-			/** 字段定义
-			 *
-			 */
-			columns: IDbRule.IDbColumn[],
-			/** 初始化默认记录
-			 *
-			 */
-			initValue: IObj<IBaseBiz>[],
-			/** 是否防止初始记录被变更
-			 *
-			 */
-			protectInitVal: boolean,
-			/** 记录代码编码规则
-			 *
-			 */
-			codeRole: (opt?: any) => string,
-			/** 是否采用物理删除
-			 *
-			 */
-			realDel: boolean
-			/** 表单推送映射
-			 *
-			 */
-			push: {
-				/** 单个推送定义的命名作为键，值为[原表要推送字段列表, 目标表接收字段列表（数组第一个元素为目标表名称）]
-				 *
-				 */
-				[k: string]: [string[], string[]]
-			},
-			/** 标准CRUD之外的扩展定义
-			 *
-			 */
-			extend: IObj<any>
-		}
-
 		/** DB服务单元配置模型
 		 *
 		 */
@@ -600,10 +552,6 @@ declare namespace tmind {
 			 *
 			 */
 			dbPort: number,
-			/** 数据空间/模式
-			 *
-			 */
-			pattern: string,
 			/** 数据库连接用户名
 			 *
 			 */
@@ -650,6 +598,57 @@ declare namespace tmind {
 				 */
 				loopStr: string
 			}
+		}
+
+		/** ORM 实体配置规则
+		 *
+		 */
+		declare interface IConfOrm {
+			/** ORM实体类型
+			 *
+			 */
+			type: 'dict' | 'master' | 'bill' | 'report' | 'setting'
+			/** ORM实体代码
+			 *
+			 */
+			code: string,
+			/** ORM实体名称
+			 *
+			 */
+			namezh: string,
+			/** 字段定义
+			 *
+			 */
+			columns: IDbRule.IDbColumn[],
+			/** 初始化默认记录
+			 *
+			 */
+			initValue: IObj<IBaseBiz>[],
+			/** 是否防止初始记录被变更
+			 *
+			 */
+			protectInitVal: boolean,
+			/** 记录代码编码规则
+			 *
+			 */
+			codeRole: (opt?: any) => string,
+			/** 是否采用物理删除
+			 *
+			 */
+			realDel: boolean
+			/** 表单推送映射
+			 *
+			 */
+			push: {
+				/** 单个推送定义的命名作为键，值为[原表要推送字段列表, 目标表接收字段列表（数组第一个元素为目标表名称）]
+				 *
+				 */
+				[k: string]: [string[], string[]]
+			},
+			/** 标准CRUD之外的扩展定义
+			 *
+			 */
+			extend: IObj<any>
 		}
 
 		/** 实例配置
