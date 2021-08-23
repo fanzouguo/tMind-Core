@@ -359,7 +359,9 @@ declare namespace tmind {
 		 *
 		 */
 		type supportDbType = 'mysql' | 'postgre' | 'mongodb' | 'sqlite' | 'lowDb' | 'msSql' | 'oracle' | 'db2';
-		type supportColumnType = 'bit' | '';
+		/** tFrame 平台支持的DB字段数据类型（以postgresql为准）
+		 */
+		type supportColumnType = 'index' | 'bit' | 'varbit' | 'bool' | 'bytea' | 'char' | 'varchar' | 'text' | 'cidr' | 'inet' | 'macaddr' | 'macaddr8' | 'numeric' | 'timestamp' | 'date' | 'time' | 'float4' | 'float8' | ' int2' | ' int4' | ' int8' | 'json' | 'jsonb' | 'uuid';
 		/** tFrame 平台字段定义规范
 		 *
 		 */
